@@ -100,7 +100,8 @@ props.put(&quot;correlationID&quot;,n);
               <stringProp name="queryType">Callable Statement</stringProp>
               <stringProp name="query">DELETE FROM cardholder_verification_method WHERE token_ref_id=&apos;NotYetAssigned-D${correlationID}&apos;;
 DELETE FROM token_info WHERE token_ref_id=&apos;NotYetAssigned-D${correlationID}&apos;;
-DELETE FROM token_info WHERE token_ref_id=&apos;DTC1MC0000171740bf9605c539fe4c41834${correlationID}&apos;;</stringProp>
+DELETE FROM token_info WHERE token_ref_id=&apos;DTC1MC0000171740bf9605c539fe4c41834${correlationID}&apos;;
+</stringProp>
               <stringProp name="queryArguments"></stringProp>
               <stringProp name="queryArgumentsTypes"></stringProp>
               <stringProp name="variableNames"></stringProp>
@@ -371,32 +372,32 @@ if (!equalTokenStatus) {
 	FailureMessage = &quot;&apos;token_status&apos;: &quot; + tokenStatus + &quot;ms.&quot;;
 }
 
-Date tokenDigitizeDate = token.get(&quot;digitize_date&quot;);
-if (tokenDigitizeDate!=null) {
-	Failure = true;
-	FailureMessage = &quot;&apos;digitize_date&apos;: is not empty&quot;;
-}
-
-Date tokenStatusUpdate = token.get(&quot;token_status_update&quot;);
-if (tokenStatusUpdate==null) {
-	Failure = true;
-	FailureMessage = &quot;&apos;token_status_update&apos;: is empty&quot;;
-}
-
-long timeTokenStatusUpdate = tokenStatusUpdate.getTime();
-long timeNowDiff = new Date().getTime() - 3000;
-boolean equalTokenStatusUpdate = timeNowDiff &lt;= timeTokenStatusUpdate;
-if (!equalTokenStatusUpdate) {
-	Failure = true;
-	FailureMessage = &quot;&apos;token_status_update&apos;: &quot; + (new Date().getTime() - timeTokenStatusUpdate);
-}
-
 String cvmPanInternalID = cvm.get(&quot;pan_internal_id&quot;);
 String tokenPanInternalID = token.get(&quot;pan_internal_id&quot;);
 boolean equalTokenPanInternalID = tokenPanInternalID.equals(cvmPanInternalID);
 if (!equalTokenPanInternalID) {
 	Failure = true;
 	FailureMessage = &quot;&apos;pan_internal_id&apos;: &quot; + cvmPanInternalID + &quot; = &quot; + tokenPanInternalID;
+}
+
+Date tokenStatusUpdate = token.get(&quot;token_status_update&quot;);
+if (tokenStatusUpdate!=null) {
+	Failure = true;
+	FailureMessage = &quot;&apos;token_status_update&apos;: is not empty&quot;;
+}
+
+Date tokenDigitizeDate = token.get(&quot;digitize_date&quot;);
+if (tokenDigitizeDate==null) {
+	Failure = true;
+	FailureMessage = &quot;&apos;digitize_date&apos;: is empty&quot;;
+} else {
+	long timeTokenDigitizeDate = tokenDigitizeDate.getTime();
+	long timeNowDiff = new Date().getTime() - 1000;
+	boolean equalTokenDigitizeDate = timeNowDiff &lt;= timeTokenDigitizeDate;
+	if (!equalTokenDigitizeDate) {
+		Failure = true;
+		FailureMessage = &quot;&apos;digitize_date&apos;: &quot; + (new Date().getTime() - timeTokenDigitizeDate);
+	}	
 }
 </stringProp>
                 <stringProp name="BeanShellAssertion.filename"></stringProp>
@@ -573,16 +574,10 @@ if (tokenPanSource==null) {
 	FailureMessage = &quot;&apos;pan_source&apos;: is empty&quot;;
 }
 
-Date tokenDigitizeDate = token.get(&quot;digitize_date&quot;);
-if (tokenDigitizeDate==null) {
+String tokenPanInternalID = token.get(&quot;pan_internal_id&quot;);
+if (tokenPanInternalID==null) {
 	Failure = true;
-	FailureMessage = &quot;&apos;digitize_date&apos;: is empty&quot;;
-}
-
-Date tokenStatusUpdate = token.get(&quot;token_status_update&quot;);
-if (tokenStatusUpdate==null) {
-	Failure = true;
-	FailureMessage = &quot;&apos;token_status_update&apos;: is empty&quot;;
+	FailureMessage = &quot;&apos;pan_internal_id&apos;: is empty&quot;;
 }
 </stringProp>
                 <stringProp name="BeanShellAssertion.filename"></stringProp>
@@ -848,24 +843,10 @@ if (!equalTokenStatus) {
 	FailureMessage = &quot;&apos;token_status&apos;: &quot; + tokenStatus;
 }
 
-Date tokenDigitizeDate = token.get(&quot;digitize_date&quot;);
-if (tokenDigitizeDate==null) {
-	Failure = true;
-	FailureMessage = &quot;&apos;digitize_date&apos;: is empty&quot;;
-}
-
 Date tokenStatusUpdate = token.get(&quot;token_status_update&quot;);
 if (tokenStatusUpdate==null) {
 	Failure = true;
 	FailureMessage = &quot;&apos;token_status_update&apos;: is empty&quot;;
-}
-
-long timeTokenStatusUpdate = tokenStatusUpdate.getTime();
-long timeNowDiff = new Date().getTime() - 1000;
-boolean equalTokenStatusUpdate = timeNowDiff &lt;= timeTokenStatusUpdate;
-if (!equalTokenStatusUpdate) {
-	Failure = true;
-	FailureMessage = &quot;&apos;token_status_update&apos;: &quot; + (new Date().getTime() - timeTokenStatusUpdate) + &quot;ms.&quot;;
 }
 
 String tokenActiveTokenCount = token.get(&quot;active_token_count&quot;);
@@ -889,7 +870,7 @@ if (tokenPanInternalGuid==null) {
 boolean equalTokenPanInternalGuid = tokenPanInternalGuid.equals(&quot;CardID4&quot;);
 if (!equalTokenPanInternalGuid) {
 	Failure = true;
-	FailureMessage = &quot;&apos;pan_internal_guid&apos;: &quot; + tokenPanInternalID;
+	FailureMessage = &quot;&apos;pan_internal_guid&apos;: &quot; + tokenPanInternalGuid;
 }
 
 String tokenPanInternalID = token.get(&quot;pan_internal_id&quot;);
