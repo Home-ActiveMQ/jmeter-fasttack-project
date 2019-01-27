@@ -100,6 +100,20 @@ props.put(&quot;tokenReferenceID&quot;,n);
               <stringProp name="scriptLanguage">groovy</stringProp>
             </JSR223Sampler>
             <hashTree/>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="clear: token_info, cardholder_verification_method" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Callable Statement</stringProp>
+              <stringProp name="query">DELETE FROM cardholder_verification_method WHERE token_ref_id=&apos;DNITHE000${tokenReferenceID}&apos;;
+DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE000${tokenReferenceID}&apos;;
+</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable"></stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree/>
           </hashTree>
           <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller Get Cardholder Verification Methods" enabled="true">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
@@ -144,7 +158,7 @@ props.put(&quot;tokenReferenceID&quot;,n);
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">192.168.1.71</stringProp>
+              <stringProp name="HTTPSampler.domain">localhost</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -251,6 +265,45 @@ if (response.decision == &quot;DECLINED&quot;) {
               <stringProp name="variableNames"></stringProp>
             </JDBCSampler>
             <hashTree/>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="cardholderverificationmethods (CONFIRM_PROVISIONING) &lt;" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;CONFIRM_PROVISIONING&apos; ORDER BY id DESC LIMIT 1;
+</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">msg_history.confirm_provisioning</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">Object cvm = vars.getObject(&quot;cardholder_verification_method&quot;).get(0);
+Object history = vars.getObject(&quot;msg_history.confirm_provisioning&quot;).get(0);
+
+String cvmCorrelationId = cvm.get(&quot;correlation_id&quot;);
+String historyMsgRawIn = history.get(&quot;msg_raw_in&quot;);
+String historyMsgRawOut = history.get(&quot;msg_raw_out&quot;);
+
+boolean equalHistoryMsgRawIn = historyMsgRawIn.contains(cvmCorrelationId);
+boolean equalHistoryMsgRawOut = historyMsgRawOut.contains(&quot;code&lt;/name&gt;&lt;value&gt;0&lt;/value&gt;&lt;/code&quot;);
+if (!equalHistoryMsgRawIn) {
+	Failure = true;
+	FailureMessage = &quot;&apos;msg_raw_in&apos;: not found conversationId `&quot; + cvmCorrelationId;
+} else {
+	if (!equalHistoryMsgRawOut) {
+		Failure = true;
+		FailureMessage = &quot;&apos;error_code&apos;: &quot; + &quot;`&quot; + historyMsgRawOut + &quot;`&quot;;
+	}
+}
+</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
             <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="getCardHolderVerificationMethods &lt; token_info" enabled="true">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
@@ -300,7 +353,7 @@ if (tokenDigitizeDate==null) {
 }
 
 long timeDigitizeDate = tokenDigitizeDate.getTime();
-long timeNowDiff = new Date().getTime() - 1000;
+long timeNowDiff = new Date().getTime() - 3000;
 boolean equalDigitizeDate = timeNowDiff &lt;= timeDigitizeDate;
 if (!equalDigitizeDate) {
 	Failure = true;
@@ -314,7 +367,7 @@ if (tokenStatusUpdate==null) {
 }
 
 long timeTokenStatusUpdate = tokenStatusUpdate.getTime();
-long timeNowDiff = new Date().getTime() - 1000;
+long timeNowDiff = new Date().getTime() - 3000;
 boolean equalTokenStatusUpdate = timeNowDiff &lt;= timeTokenStatusUpdate;
 if (!equalTokenStatusUpdate) {
 	Failure = true;
@@ -372,7 +425,7 @@ if (!equalTokenStatusUpdate) {
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">192.168.1.71</stringProp>
+              <stringProp name="HTTPSampler.domain">localhost</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -424,6 +477,44 @@ if (!equalTokenStatusUpdate) {
               </XPathAssertion>
               <hashTree/>
             </hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="sendpasscode (SEND_OTP) &lt;" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;SEND_OTP&apos; ORDER BY id DESC LIMIT 1;</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">msg_history.send_otp</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">Object cvm = vars.getObject(&quot;cardholder_verification_method&quot;).get(0);
+Object history = vars.getObject(&quot;msg_history.send_otp&quot;).get(0);
+
+String cvmCorrelationId = cvm.get(&quot;correlation_id&quot;);
+String historyMsgRawIn = history.get(&quot;msg_raw_in&quot;);
+String historyMsgRawOut = history.get(&quot;msg_raw_out&quot;);
+
+boolean equalHistoryMsgRawIn = historyMsgRawIn.contains(cvmCorrelationId);
+boolean equalHistoryMsgRawOut = historyMsgRawOut.contains(&quot;code&gt;0&lt;/code&quot;);
+if (!equalHistoryMsgRawIn) {
+	Failure = true;
+	FailureMessage = &quot;&apos;msg_raw_in&apos;: not found conversationId `&quot; + cvmCorrelationId + &quot;`&quot;;
+} else {
+	if (!equalHistoryMsgRawOut) {
+		Failure = true;
+		FailureMessage = &quot;&apos;error_code&apos;: &quot; + &quot;`&quot; + historyMsgRawOut + &quot;`&quot;;
+	}
+}
+</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="sendpasscode (01)" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -462,7 +553,7 @@ if (!equalTokenStatusUpdate) {
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">192.168.1.71</stringProp>
+              <stringProp name="HTTPSampler.domain">localhost</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -556,7 +647,7 @@ if (!equalTokenStatusUpdate) {
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">192.168.1.71</stringProp>
+              <stringProp name="HTTPSampler.domain">localhost</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
@@ -607,6 +698,81 @@ if (!equalTokenStatusUpdate) {
                 <boolProp name="Assertion.assume_success">false</boolProp>
                 <intProp name="Assertion.test_type">16</intProp>
               </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="TOKEN_CREATED (CARD_TOKENIZED) &lt;" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;CARD_TOKENIZED&apos; ORDER BY id DESC LIMIT 1;</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">msg_history.card_tokenized</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">Object history = vars.getObject(&quot;msg_history.card_tokenized&quot;).get(0);
+
+String tokenRefId = &quot;DNITHE000${tokenReferenceID}&quot;;
+String historyMsgRawIn = history.get(&quot;msg_raw_in&quot;);
+String historyMsgRawOut = history.get(&quot;msg_raw_out&quot;);
+boolean equalHistoryMsgRawIn = historyMsgRawIn.contains(tokenRefId);
+boolean equalHistoryMsgRawOut = historyMsgRawOut.contains(&quot;code&gt;0&lt;/code&quot;);
+
+if (!equalHistoryMsgRawIn) {
+	Failure = true;
+	FailureMessage = &quot;&apos;msg_raw_in&apos;: not found tokenRefId `&quot; + tokenRefId + &quot;`&quot;;
+} else {
+	if (!equalHistoryMsgRawOut) {
+		Failure = true;
+		FailureMessage = &quot;&apos;error_code&apos;: &quot; + &quot;`&quot; + historyMsgRawOut + &quot;`&quot;;
+	}
+}
+</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="TOKEN_CREATED (SEND_NOTIFICATION_TO_CUSTOMER) &lt;" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;SEND_NOTIFICATION_TO_CUSTOMER&apos; ORDER BY id DESC LIMIT 1;
+</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">msg_history.send_notification_to_customer</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">Object history = vars.getObject(&quot;msg_history.send_notification_to_customer&quot;).get(0);
+
+String tokenRefId = &quot;DNITHE000${tokenReferenceID}&quot;;
+String historyMsgRawIn = history.get(&quot;msg_raw_in&quot;);
+String historyMsgRawOut = history.get(&quot;msg_raw_out&quot;);
+
+boolean equalHistoryMsgRawIn = historyMsgRawIn.contains(tokenRefId);
+boolean equalHistoryMsgRawOut = historyMsgRawOut.contains(&quot;code&gt;0&lt;/code&quot;);
+if (!equalHistoryMsgRawIn) {
+	Failure = true;
+	FailureMessage = &quot;&apos;msg_raw_in&apos;: not found tokenRefId `&quot; + tokenRefId + &quot;`&quot;;
+} else {
+	if (!equalHistoryMsgRawOut) {
+		Failure = true;
+		FailureMessage = &quot;&apos;error_code&apos;: &quot; + &quot;`&quot; + historyMsgRawOut + &quot;`&quot;;
+	}
+}
+</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
               <hashTree/>
             </hashTree>
             <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="TOKEN_CREATED &lt; token_info" enabled="true">
@@ -713,7 +879,7 @@ if (!equalTokenPanInternalID) {
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">192.168.1.71</stringProp>
+              <stringProp name="HTTPSampler.domain">localhost</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
@@ -764,6 +930,43 @@ if (!equalTokenPanInternalID) {
                 <boolProp name="Assertion.assume_success">false</boolProp>
                 <intProp name="Assertion.test_type">16</intProp>
               </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="TOKEN_STATUS_UPDATED (TOKEN_STATUS_UPDATED) &lt;" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;TOKEN_STATUS_UPDATED&apos; ORDER BY id DESC LIMIT 1;</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">msg_history.token_status_updated</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">Object history = vars.getObject(&quot;msg_history.token_status_updated&quot;).get(0);
+
+String tokenRefId = &quot;DNITHE000${tokenReferenceID}&quot;;
+String historyMsgRawIn = history.get(&quot;msg_raw_in&quot;);
+String historyMsgRawOut = history.get(&quot;msg_raw_out&quot;);
+
+boolean equalHistoryMsgRawIn = historyMsgRawIn.contains(tokenRefId);
+boolean equalHistoryMsgRawOut = historyMsgRawOut.contains(&quot;code&gt;0&lt;/code&quot;);
+if (!equalHistoryMsgRawIn) {
+	Failure = true;
+	FailureMessage = &quot;&apos;msg_raw_in&apos;: not found tokenRefId `&quot; + tokenRefId + &quot;`&quot;;
+} else {
+	if (!equalHistoryMsgRawOut) {
+		Failure = true;
+		FailureMessage = &quot;&apos;error_code&apos;: &quot; + &quot;`&quot; + historyMsgRawOut + &quot;`&quot;;
+	}
+}
+</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
               <hashTree/>
             </hashTree>
             <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="TOKEN_STATUS_UPDATED &lt; token_info" enabled="true">

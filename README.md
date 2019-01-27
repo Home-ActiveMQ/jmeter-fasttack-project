@@ -3,6 +3,11 @@
 Setting JDBC SQL Server Connection with JMeter
 ---
 
+* `Can JMeter be used to delete records from a database?` https://stackoverflow.com/questions/22021865/can-jmeter-be-used-to-delete-records-from-a-database
+  ```text
+  You must choose Callable Statement in JDBC Request as  delete from Stocks where StockIdent=1
+  ```
+
 * https://habr.com/ru/post/261483
 * `https://performancebasics.wordpress.com/2016/01/25/setting-up-a-jdbc-sql-server-connection-in-jmeter`
 * https://www.blazemeter.com/blog/how-to-retrieve-database-data-for-api-testing-with-jmeter
