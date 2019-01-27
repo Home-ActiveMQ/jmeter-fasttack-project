@@ -1,4 +1,15 @@
 
+* [(Fuse) ActiveMQ Tuning Guide](https://access.redhat.com/documentation/en-US/Fuse_ESB_Enterprise/7.1/html-single/ActiveMQ_Tuning_Guide/index.html)
+* [Monitor ActiveMQ metrics and performance](https://www.datadoghq.com/blog/monitor-activemq-metrics-performance)
+  * **(** [mail.google.com](https://mail.google.com/mail/u/0/#inbox/FMfcgxwBVDCvxfCPQXBQKwLsQgKnJzTn) **)**
+  * [Installing on Windows](https://app.datadoghq.com/signup/agent#windows) `skmets@gmail.com / a***n`
+    ```bash
+    msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="43badebfebd35f7401abc04748d758c9" HOSTNAME="my_hostname" TAGS="mytag1,mytag2"
+    ```
+* [Running Apache ActiveMQ and Hawtio in Standalone Mode](http://bennet-schulz.com/2016/07/apache-activemq-and-hawtio.html)
+  * **(** https://dzone.com/articles/running-apache-activemq-and-hawtio-in-standalone-m-1 **)**
+  * https://github.com/bennetelli/activemq-hawtio-standalone
+
 
 Setting JDBC SQL Server Connection with JMeter
 ---
