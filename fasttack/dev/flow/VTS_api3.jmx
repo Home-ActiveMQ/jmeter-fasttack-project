@@ -211,9 +211,9 @@ if (response.actionCode != &quot;00&quot; ) {
 }
 
 if (response.actionCode == &quot;00&quot; ) {
-	if (response.checkEligibility[1].identifier != &quot;1&quot; ) {
+	if (response.cardMetadataInfo.profileID==null) {
 		AssertionResult.setFailure(true)
-		AssertionResult.setFailureMessage(&quot;Failure response identifier &apos;&quot; + response.checkEligibility[1].identifier + &quot;&apos;&quot;);
+		AssertionResult.setFailureMessage(&quot;Failure response cardMetadataInfo.profileID: is empty&quot;);
 	}
 }
 </stringProp>
