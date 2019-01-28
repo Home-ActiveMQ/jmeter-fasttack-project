@@ -73,3 +73,6 @@ Setting JDBC SQL Server Connection with JMeter
 ---
 
 * `JMETER VS SOAPUI` https://octoperf.com/blog/2018/06/05/jmeter-vs-soapui/
+
+
+* `How to Use JMeter Assertions in Three Easy Steps` https://www.blazemeter.com/blog/how-use-jmeter-assertions-three-easy-steps
