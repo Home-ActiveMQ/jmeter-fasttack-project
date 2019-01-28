@@ -203,7 +203,7 @@ DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE000${tokenReferenceID}&apo
                 <stringProp name="parameters"></stringProp>
                 <stringProp name="filename"></stringProp>
                 <stringProp name="cacheKey">true</stringProp>
-                <stringProp name="script">def response =  new groovy.json.JsonSlurper().parse(prev.getResponseData())
+                <stringProp name="script">def response =  new groovy.json.JsonSlurper().parse(prev.getResponseData());
 
 if (response.actionCode != &quot;00&quot; ) {
 	AssertionResult.setFailure(true)
@@ -211,13 +211,47 @@ if (response.actionCode != &quot;00&quot; ) {
 }
 
 if (response.actionCode == &quot;00&quot; ) {
-	if (response.cardMetadataInfo.profileID==null) {
-		AssertionResult.setFailure(true)
-		AssertionResult.setFailureMessage(&quot;Failure response cardMetadataInfo.profileID: is empty&quot;);
+	def profileID = response.cardMetadataInfo.profileID;
+	if (profileID!=null) {
+		props.put(&quot;profileID&quot;, profileID);
+	} else {
+		props.put(&quot;profileID&quot;, &quot;###_NOT_FOUND_PROFILEID_###&quot;);
+//		AssertionResult.setFailure(true);
+//		AssertionResult.setFailureMessage(&quot;Failure response cardMetadataInfo.profileID: is empty&quot;);
 	}
 }
 </stringProp>
               </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="checkeligibility (GET_CARD_INFO_SHORT) &lt;" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;GET_CARD_INFO_SHORT&apos; ORDER BY id DESC LIMIT 1;</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">msg_history.get_card_info_short</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">Object history = vars.getObject(&quot;msg_history.get_card_info_short&quot;).get(0);
+
+String profileID = props.get(&quot;profileID&quot;);
+String historyMsgRawOut = history.get(&quot;msg_raw_out&quot;);
+
+boolean equalHistoryMsgRawOut = historyMsgRawOut.contains(&quot;productConfigID&gt;&quot; + profileID + &quot;&lt;/productConfigID&quot;);
+if (!equalHistoryMsgRawOut) {
+	Failure = true;
+	FailureMessage = &quot;&apos;msg_raw_out&apos;: not found productConfigID `&quot; + profileID + &quot;`&quot;;
+}
+</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
               <hashTree/>
             </hashTree>
           </hashTree>
