@@ -450,14 +450,14 @@ if (tokenDigitizeDate==null) {
 &quot;tokenType&quot;:&quot;EMBEDDED_SE&quot;,&#xd;
 &quot;secureElementId&quot;:&quot;041C426B5D3E80016326027385940040919A38F237E4520C&quot;,&#xd;
 &quot;accountPanSuffix&quot;:&quot;3579&quot;,&#xd;
-&quot;serviceRequestDateTime&quot;:&quot;2018-11-20T16:57:04.000Z&quot;,&#xd;
+&quot;serviceRequestDateTime&quot;:&quot;2018-11-20T16:57:04.231Z&quot;,&#xd;
 &quot;termsAndConditionsAssetId&quot;:&quot;d781f02e-28a5-4ab1-b1de-2aa39896f725&quot;,&#xd;
-&quot;termsAndConditionsAcceptedTimestamp&quot;:&quot;2018-11-20T16:57:13.000Z&quot;,&#xd;
+&quot;termsAndConditionsAcceptedTimestamp&quot;:&quot;2018-11-20T16:57:13.321Z&quot;,&#xd;
 &quot;productConfigurationId&quot;:&quot;AlfaMDH&quot;,&#xd;
 &quot;consumerLanguage&quot;:&quot;ru&quot;,&#xd;
 &quot;decision&quot;:&quot;REQUIRE_ADDITIONAL_AUTHENTICATION&quot;,&#xd;
 &quot;decisionMadeBy&quot;:&quot;AUTHORIZATION_REQUEST&quot;,&#xd;
-&quot;tokenActivatedDateTime&quot;:&quot;2018-11-20T16:57:51.000Z&quot;,&#xd;
+&quot;tokenActivatedDateTime&quot;:&quot;2018-11-20T16:57:51.123Z&quot;,&#xd;
 &quot;numberOfActivationAttempts&quot;:1,&#xd;
 &quot;numberOfActiveTokens&quot;:1&#xd;
 }</stringProp>

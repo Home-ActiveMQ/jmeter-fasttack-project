@@ -424,7 +424,7 @@ if (tokenDigitizeDate==null) {
 &quot;tokenUniqueReference&quot;:&quot;DTC1MC0000171740bf9605c539fe4c41834${correlationID}&quot;,&#xd;
 &quot;correlationId&quot;:&quot;D${correlationID}&quot;,&#xd;
 &quot;activationCode&quot;:&quot;172426&quot;,&#xd;
-&quot;expirationDateTime&quot;:&quot;2018-01-15T12:09:00.000Z&quot;,&#xd;
+&quot;expirationDateTime&quot;:&quot;2018-01-15T12:09:01.123Z&quot;,&#xd;
 &quot;activationMethod&quot;:{&#xd;
 &quot;type&quot;:&quot;TEXT_TO_CARDHOLDER_NUMBER&quot;,&#xd;
 &quot;value&quot;:&quot;*9999&quot;&#xd;
@@ -630,14 +630,14 @@ if (tokenPanInternalID==null) {
 &quot;tokenType&quot;:&quot;EMBEDDED_SE&quot;,&#xd;
 &quot;secureElementId&quot;:&quot;041C426B5D3E80016326027385940040919A38F237E4520C&quot;,&#xd;
 &quot;accountPanSuffix&quot;:&quot;3579&quot;,&#xd;
-&quot;serviceRequestDateTime&quot;:&quot;2018-11-20T16:57:04.000Z&quot;,&#xd;
+&quot;serviceRequestDateTime&quot;:&quot;2018-11-20T16:57:04.231Z&quot;,&#xd;
 &quot;termsAndConditionsAssetId&quot;:&quot;d781f02e-28a5-4ab1-b1de-2aa39896f725&quot;,&#xd;
-&quot;termsAndConditionsAcceptedTimestamp&quot;:&quot;2018-11-20T16:57:13.000Z&quot;,&#xd;
+&quot;termsAndConditionsAcceptedTimestamp&quot;:&quot;2018-11-20T16:57:13.321Z&quot;,&#xd;
 &quot;productConfigurationId&quot;:&quot;AlfaMDH&quot;,&#xd;
 &quot;consumerLanguage&quot;:&quot;ru&quot;,&#xd;
 &quot;decision&quot;:&quot;REQUIRE_ADDITIONAL_AUTHENTICATION&quot;,&#xd;
 &quot;decisionMadeBy&quot;:&quot;AUTHORIZATION_REQUEST&quot;,&#xd;
-&quot;tokenActivatedDateTime&quot;:&quot;2018-11-20T16:57:51.000Z&quot;,&#xd;
+&quot;tokenActivatedDateTime&quot;:&quot;2018-11-20T16:57:51.123Z&quot;,&#xd;
 &quot;numberOfActivationAttempts&quot;:1,&#xd;
 &quot;numberOfActiveTokens&quot;:1&#xd;
 }</stringProp>
