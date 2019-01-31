@@ -404,7 +404,7 @@ if (tokenDigitizeDate!=null) {
     &lt;/deviceInfo&gt;&#xd;
     &lt;otpMethodIdentifier&gt;${identifier}&lt;/otpMethodIdentifier&gt;&#xd;
     &lt;OTPCode&gt;363538&lt;/OTPCode&gt;&#xd;
-    &lt;OTPCodeExp&gt;2019-12-31T21:00:00.000Z&lt;/OTPCodeExp&gt;&#xd;
+    &lt;OTPCodeExp&gt;2019-12-31T21:11:22.123Z&lt;/OTPCodeExp&gt;&#xd;
     &lt;cardholderInfo&gt;&#xd;
         &lt;version&gt;ws1&lt;/version&gt;&#xd;
         &lt;encryptionKeyIndex&gt;1&lt;/encryptionKeyIndex&gt;&#xd;
@@ -532,7 +532,7 @@ if (!equalHistoryMsgRawIn) {
     &lt;/deviceInfo&gt;&#xd;
     &lt;otpMethodIdentifier&gt;12345&lt;/otpMethodIdentifier&gt;&#xd;
     &lt;OTPCode&gt;363538&lt;/OTPCode&gt;&#xd;
-    &lt;OTPCodeExp&gt;2019-12-31T21:00:00.000Z&lt;/OTPCodeExp&gt;&#xd;
+    &lt;OTPCodeExp&gt;2019-12-31T21:11:22.123Z&lt;/OTPCodeExp&gt;&#xd;
     &lt;cardholderInfo&gt;&#xd;
         &lt;version&gt;ws1&lt;/version&gt;&#xd;
         &lt;encryptionKeyIndex&gt;1&lt;/encryptionKeyIndex&gt;&#xd;
@@ -629,10 +629,10 @@ if (!equalHistoryMsgRawIn) {
 &#xd;
 &quot;termsAndConditions&quot;:{&#xd;
 &quot;id&quot;:&quot;73208cd0469c4e08a8b8b3c72b41ae13&quot;,&#xd;
-&quot;date&quot;:&quot;2018-03-19T10:44:46.000+0000&quot;&#xd;
+&quot;date&quot;:&quot;2018-03-19T10:44:46.321+0000&quot;&#xd;
 },&#xd;
 &#xd;
-&quot;dateTimeOfEvent&quot;:&quot;2018-03-19T10:44:47.000Z&quot;&#xd;
+&quot;dateTimeOfEvent&quot;:&quot;2018-03-19T10:44:47.123Z&quot;&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
@@ -872,7 +872,7 @@ if (tokenDigitizeDate==null) {
                     <stringProp name="Argument.value">{&#xd;
 &quot;messageReason&quot;:&quot;Internal Call to Activate Token&quot;,&#xd;
 &quot;messageReasonCode&quot;:&quot;3703&quot;,&#xd;
-&quot;dateTimeOfEvent&quot;:&quot;2018-05-26T08:15:00.000Z&quot;,&#xd;
+&quot;dateTimeOfEvent&quot;:&quot;2018-05-26T08:15:01.123Z&quot;,&#xd;
 &quot;panReferenceID&quot;:&quot;V-3017192484534844832253&quot;,&#xd;
 &quot;deviceID&quot;:&quot;oUL7aJtruSi4rUO_WyMe1oF3&quot;,&#xd;
 &quot;actionCode&quot;:&quot;00&quot;,&#xd;
