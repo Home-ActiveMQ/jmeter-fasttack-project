@@ -183,7 +183,7 @@ props.put(&apos;tokenReferenceID&apos;, line.toString());</stringProp>
             </HeaderManager>
             <hashTree/>
             <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
-              <stringProp name="DurationAssertion.duration">1200</stringProp>
+              <stringProp name="DurationAssertion.duration">12000</stringProp>
             </DurationAssertion>
             <hashTree/>
             <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
@@ -296,7 +296,7 @@ if (response.decision == &quot;DECLINED&quot;) {
               </HeaderManager>
               <hashTree/>
               <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
-                <stringProp name="DurationAssertion.duration">2500</stringProp>
+                <stringProp name="DurationAssertion.duration">25000</stringProp>
               </DurationAssertion>
               <hashTree/>
               <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
@@ -421,7 +421,7 @@ if (response.errorCode == &quot;INTERNAL_SERVICE_FAILURE&quot;){
               </HeaderManager>
               <hashTree/>
               <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
-                <stringProp name="DurationAssertion.duration">5000</stringProp>
+                <stringProp name="DurationAssertion.duration">50000</stringProp>
               </DurationAssertion>
               <hashTree/>
               <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
@@ -518,7 +518,7 @@ if (response.errorCode == &quot;INTERNAL_SERVICE_FAILURE&quot;){
               </HeaderManager>
               <hashTree/>
               <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
-                <stringProp name="DurationAssertion.duration">5000</stringProp>
+                <stringProp name="DurationAssertion.duration">50000</stringProp>
               </DurationAssertion>
               <hashTree/>
               <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
@@ -699,7 +699,7 @@ if (response.errorCode == &quot;INTERNAL_SERVICE_FAILURE&quot;){
             </HeaderManager>
             <hashTree/>
             <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
-              <stringProp name="DurationAssertion.duration">2500</stringProp>
+              <stringProp name="DurationAssertion.duration">25000</stringProp>
             </DurationAssertion>
             <hashTree/>
             <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
@@ -807,7 +807,7 @@ vars.put(&quot;conversationId&quot;,&quot;${__UUID()}&quot;); </stringProp>
               </HeaderManager>
               <hashTree/>
               <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
-                <stringProp name="DurationAssertion.duration">2500</stringProp>
+                <stringProp name="DurationAssertion.duration">25000</stringProp>
               </DurationAssertion>
               <hashTree/>
               <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="XPath Assertion" enabled="true">
@@ -901,7 +901,7 @@ vars.put(&quot;conversationId&quot;,&quot;${__UUID()}&quot;); </stringProp>
               </HeaderManager>
               <hashTree/>
               <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
-                <stringProp name="DurationAssertion.duration">5000</stringProp>
+                <stringProp name="DurationAssertion.duration">50000</stringProp>
               </DurationAssertion>
               <hashTree/>
               <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
@@ -970,7 +970,7 @@ vars.put(&quot;conversationId&quot;,&quot;${__UUID()}&quot;); </stringProp>
               </HeaderManager>
               <hashTree/>
               <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
-                <stringProp name="DurationAssertion.duration">5000</stringProp>
+                <stringProp name="DurationAssertion.duration">50000</stringProp>
               </DurationAssertion>
               <hashTree/>
               <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
