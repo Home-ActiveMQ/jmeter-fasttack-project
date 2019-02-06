@@ -1,0 +1,1769 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.0 r1840935">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="serverUrl" elementType="Argument">
+            <stringProp name="Argument.name">serverUrl</stringProp>
+            <stringProp name="Argument.value">192.168.1.113</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="start_time" elementType="Argument">
+            <stringProp name="Argument.name">start_time</stringProp>
+            <stringProp name="Argument.value">${__time(YMDHMS)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="testPlanUrl" elementType="Argument">
+            <stringProp name="Argument.name">testPlanUrl</stringProp>
+            <stringProp name="Argument.value">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="correlationIDFile" elementType="Argument">
+            <stringProp name="Argument.name">correlationIDFile</stringProp>
+            <stringProp name="Argument.value">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}\start_correlationID</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="tokenReferenceIDFile" elementType="Argument">
+            <stringProp name="Argument.name">tokenReferenceIDFile</stringProp>
+            <stringProp name="Argument.value">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}\start_tokenReferenceID</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="nmon_start_time" elementType="Argument">
+            <stringProp name="Argument.name">nmon_start_time</stringProp>
+            <stringProp name="Argument.value">${__time(yyyy-MM-dd&apos;T&apos;HH:mm:ss,)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="resultDir" elementType="Argument">
+            <stringProp name="Argument.name">resultDir</stringProp>
+            <stringProp name="Argument.value">${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}\results\\${__time(YMDHMS)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">3</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </SetupThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="ReadVariables" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">def line  
+new File(vars.get(&quot;correlationIDFile&quot;)).withReader { line = it.readLine() }
+props.put(&apos;correlationID&apos;, line.toString());
+
+new File(vars.get(&quot;tokenReferenceIDFile&quot;)).withReader { line = it.readLine() }
+props.put(&apos;tokenReferenceID&apos;, line.toString());</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group MDES" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">20</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">180</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.delayedStart">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <kg.apc.jmeter.timers.VariableThroughputTimer guiclass="kg.apc.jmeter.timers.VariableThroughputTimerGui" testclass="kg.apc.jmeter.timers.VariableThroughputTimer" testname="jp@gc - Throughput Shaping Timer" enabled="true">
+          <collectionProp name="load_profile">
+            <collectionProp name="-528330655">
+              <stringProp name="45747345">0.098</stringProp>
+              <stringProp name="45747345">0.098</stringProp>
+              <stringProp name="48873">180</stringProp>
+            </collectionProp>
+            <collectionProp name="-575069756">
+              <stringProp name="45747345">0.098</stringProp>
+              <stringProp name="47597142">2.354</stringProp>
+              <stringProp name="53430">600</stringProp>
+            </collectionProp>
+            <collectionProp name="1383698956">
+              <stringProp name="47597142">2.354</stringProp>
+              <stringProp name="47597142">2.354</stringProp>
+              <stringProp name="50547">300</stringProp>
+            </collectionProp>
+            <collectionProp name="1846728166">
+              <stringProp name="47597142">2.354</stringProp>
+              <stringProp name="1618568746">7.063 </stringProp>
+              <stringProp name="1572771">3600</stringProp>
+            </collectionProp>
+          </collectionProp>
+        </kg.apc.jmeter.timers.VariableThroughputTimer>
+        <hashTree/>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="1_MDES" enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">false</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="MDES_authorizeService" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+&quot;requestId&quot;:&quot;${requestID}&quot;,&#xd;
+&quot;services&quot;:[&#xd;
+&quot;DIGITIZATION&quot;&#xd;
+],&#xd;
+&quot;cardInfo&quot;:{&#xd;
+&quot;encryptedData&quot; : &quot;2887FB5238FD2EDDBB33D971A5169271EDDCE21CA79562B75B4072987CA8B7102CF2B227A730D2925A1EF105A54405B0D0271043D3D0520E916FD055C8D222796A80FFCD0ACC01DCF6A5DCCA1E3335697F02581838359CA73F19245648EDC8461213C12CC0E10B0E9CE9752363F1B2205F2162B9DE61E6E0833B232295357F2B941C7AF42E11EAFE524E37D3C70093913E2CA417F2D905DF87330F2E231B9BEF3203BB901D4196B2E5592CA3502E8D88EC06CFBAD59A4669F4AB810CF855ECC36396693145424C416E864B17BFA2CBAB335132FBDFB9FD394FB1CF321914AA933F2A21F82FD7AEDFEF392163775F21E56D1B1C757B715327080BD210453D6648FE70ADA66725985C3C4BC0EB95745BF775B60ADC5C61EE22934021C8D0DD151365A87AA21A92E8DC45747AF1B5F62F706D550832327E03DBEF0B005DD67E3F591A295197062800110B34A01B255AA1D7250691C684A386160A59CA08A984BFAEC3C9F7BCA93ED8FCF6F46453AB483B3EFAC88C3CAAF3CD2A95E7D0615F1CEE5C0DBADB7A97530B704FECAB0FFA6243EE20FA8D61834216C3A42CBE815E38E06C4F2CC7803DB236A05ED14E9BF7D21104B493F78BCFF7C361EFFAA41C8A4E99419D4ED8FA98385C6721458919BA5FAC34&quot;,&#xd;
+    &quot;publicKeyFingerprint&quot; : &quot;3e70356e5a17b769009bc099c2dcae4b6b82f482a3f59711715d683f7e6fd167&quot;,&#xd;
+    &quot;encryptedKey&quot; : &quot;AAD08D20380DC188FF0C36E7725D3C2158F6152A113D07E17DDE79326FA464FE2ECFAC2952B93FC8FD3F5DA618E01C97D2A5A4A159A537384D9AF7754923F9B9E363C8400434753C65747AA916D964E0E3A815B92DCFC605A8F9A4B53FE585B9D5DF5B9F09B07C7ECA10D8A25CD8AF6832001C00EFA8C0AA6B79907FC732AFA677DA47D80E778C960AB1C2741D44EAF25A1B434E327ECA186C93C45AED33FB3D047ADFB9C493A4417DC8645B8CFA731B98C0930752B3B5AC1BD8EC5C5B94B46BAA2AAF13F4BDF4E6B02ABFFD9E4EF8DBA6BBE65BAFDCF13ED9064A3FE680DBFFFAB45365C5920C6341C9B68C5053F68195860258710FCC0F9EC441D92CBA65BA&quot;,&#xd;
+    &quot;iv&quot; : &quot;33CC701395B23592B48326F67984D618&quot;,&#xd;
+    &quot;oaepHashingAlgorithm&quot; : &quot;SHA256&quot;&#xd;
+},&#xd;
+&quot;correlationId&quot;:&quot;D${correlationID}&quot;,&#xd;
+&quot;tokenRequestorId&quot;:&quot;51111130273&quot;,&#xd;
+&quot;walletId&quot;:&quot;103&quot;,&#xd;
+&quot;paymentAppInstanceId&quot;:&quot;041C426B5D3E80016326027385940040919A38F237E4520C&quot;,&#xd;
+&quot;deviceInfo&quot;:{&#xd;
+&quot;isoDeviceType&quot;:&quot;21&quot;,&#xd;
+&quot;formFactor&quot;:&quot;PHONE&quot;,&#xd;
+&quot;storageTechnology&quot;:&quot;SE&quot;,&#xd;
+&quot;paymentTypes&quot;:[&#xd;
+&quot;NFC&quot;,&#xd;
+&quot;DSRP&quot;&#xd;
+],&#xd;
+&quot;deviceName&quot;:&quot;iPhone&quot;&#xd;
+},&#xd;
+&quot;walletProviderDecisioningInfo&quot;:{&#xd;
+&quot;recommendationStandardVersion&quot;:&quot;1.0&quot;,&#xd;
+&quot;deviceScore&quot;:&quot;1&quot;,&#xd;
+&quot;accountScore&quot;:&quot;1&quot;,&#xd;
+&quot;recommendedDecision&quot;:&quot;REQUIRE_ADDITIONAL_AUTHENTICATION&quot;,&#xd;
+&quot;recommendationReasons&quot;:[&#xd;
+&quot;ACCOUNT_TOO_NEW&quot;,&#xd;
+&quot;TOO_MANY_RECENT_ATTEMPTS&quot;,&#xd;
+&quot;OUTSIDE_HOME_TERRITORY&quot;&#xd;
+]&#xd;
+},&#xd;
+&quot;activeTokenCount&quot;:&quot;0&quot;,&#xd;
+&quot;tokenType&quot;:&quot;CLOUD&quot;&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+            <stringProp name="HTTPSampler.port">8080</stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+            <stringProp name="HTTPSampler.path">/mcissuerapitest/issuerServices/1/0/authorizeService</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+            <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+              <stringProp name="DurationAssertion.duration">1200</stringProp>
+            </DurationAssertion>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">false</stringProp>
+              <stringProp name="script">n = Long.parseLong(props.get(&quot;correlationID&quot;)) + 1;
+props.put(&quot;correlationID&quot;,String.valueOf(n));
+vars.put(&quot;correlationID&quot;,String.valueOf(n)); 
+vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+//vars.put(&quot;requestIDs&quot;,vars.get(&quot;requestID&quot;)); 
+</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+              <stringProp name="cacheKey">false</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">def response =  new groovy.json.JsonSlurper().parse(prev.getResponseData())
+/*
+if (response.responseId != &quot;${requestIDs}&quot; ) {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The responseID and requestID values not matched: \&quot;${requestIDs}\&quot; and \&quot;&quot;+response.responseId+&quot;\&quot;&quot;);
+}
+*/
+/*
+if (response.cvcResponse = &quot;MATCH&quot;) {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The CVC code was not processed&quot;);
+}
+*/
+
+
+if (response.errorCode != null) {
+if (response.errorCode == &quot;INTERNAL_SERVICE_FAILURE&quot;){
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The internal error occured&quot;);
+} else {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Unknown error occured&quot;);
+}
+return;
+}
+
+
+if (response.decision == &quot;DECLINED&quot;) {
+
+	AssertionResult.setFailure(true);
+	AssertionResult.setFailureMessage(&quot;Something is wrong. The decision is *****DECLINED*****&quot;);
+}
+</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223Assertion>
+            <hashTree/>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Deliver Activation Code" enabled="true">
+            <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="MDES_deliverActivationCode" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+&quot;requestId&quot;:&quot;${requestID}&quot;,&#xd;
+&quot;tokenUniqueReference&quot;:&quot;DTC1MC0000171740bf9605c539fe4c41834${correlationID}&quot;,&#xd;
+&quot;correlationId&quot;:&quot;D${correlationID}&quot;,&#xd;
+&quot;activationCode&quot;:&quot;172426&quot;,&#xd;
+&quot;expirationDateTime&quot;:&quot;2018-01-15T12:09:00.000Z&quot;,&#xd;
+&quot;activationMethod&quot;:{&#xd;
+&quot;type&quot;:&quot;TEXT_TO_CARDHOLDER_NUMBER&quot;,&#xd;
+&quot;value&quot;:&quot;*9999&quot;&#xd;
+}&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8080</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/mcissuerapitest/issuerServices/1/0/deliverActivationCode</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+              <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+                <stringProp name="DurationAssertion.duration">2500</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+                <stringProp name="cacheKey">false</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">def response =  new groovy.json.JsonSlurper().parse(prev.getResponseData())
+/*
+if (response.responseId != &quot;${requestIDs}&quot; ) {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The responseID and requestID values not matched: \&quot;${requestIDs}\&quot; and \&quot;&quot;+response.responseId+&quot;\&quot;&quot;);
+}
+*/
+if (response.errorCode != null) {
+if (response.errorCode == &quot;INTERNAL_SERVICE_FAILURE&quot;){
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The internal error occured&quot;);
+	return;
+} else {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Unknown error occured&quot;);
+	return;
+}}</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Notify Service Activated" enabled="true">
+            <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="MDES_Notify_Service_Activated" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+&quot;requestId&quot;:&quot;${requestID}&quot;,&#xd;
+&quot;services&quot;:[&#xd;
+&quot;DIGITIZATION&quot;&#xd;
+],&#xd;
+&quot;cardAndToken&quot;:{&#xd;
+      &quot;panUniqueReference&quot;:&quot;FTC1MC0000171740e6ad4d1863304ca383c2af840bc89b78&quot;,&#xd;
+      &quot;tokenUniqueReference&quot;:&quot;DTC1MC0000171740bf9605c539fe4c41834${correlationID}&quot;,&#xd;
+      &quot;publicKeyFingerprint&quot;:&quot;3e70356e5a17b769009bc099c2dcae4b6b82f482a3f59711715d683f7e6fd167&quot;,&#xd;
+      &quot;encryptedKey&quot;:&quot;52d432625311c99571467f7d3b3bc9aae76e891bfa7e1a91b5bcb1e4926f66c7b8ff57cd19254dd3f7353d829892054a0a4bde550c19c9c893411519797cb05d28cdd24c4c76451e6c0c1f0b2933f0fafeea3119539a193b417cb37888cd404305f0cc137cb6ed5ff2813aa8fe1034fe2eb83d269551c848ede23183c5b577a7c531db418a7d1b5f9f39412553bf0501a51ee49ee10eb1d5ff03f4e755f3779c6d3aaaf3a82ccaeb2a87172a4311d0feed9a508ebe8ca57f83e01cbf468d0c7f6b2bc187cc018f2b2594fb893bb30933b9ed14c856ee0808101f2e492800adbbedcf06c78b42e58651c7a47a376c43088f566880122063be55859bcc4e41e481&quot;,&#xd;
+      &quot;oaepHashingAlgorithm&quot;:&quot;SHA256&quot;,&#xd;
+      &quot;iv&quot;:&quot;1911c7142309f8a02ba6e055c2724f0d&quot;,&#xd;
+      &quot;encryptedData&quot;:&quot;093a3764cb328a7f2552e78de6f2383563090e2c13442a826c20aeebc513aead223f066d1a7e4d83052ca5cadc90250257e7d2d35138dd952260ed680b8572631e48c1123c57b8146c079a7a81b8f56ed37d38643e7bbbc49538f9d1d2d3cf223609215a832a374a1b9d3fc445cf07764f470e2e80e3161fd87e1ebb46185a0560a17d2af2b5d91f5993d22fa4340c518be2f834beb37801507a9e37c6bf85b44f51d161c74a660e568e9dc65c051bbc6bfc89af4120216ab466df42b422bd86f1d51fd1df0a4cce7b8a80ac1c3faa22dc8b1f66daad7fb97c19f5b656a494d852150205ac6659a1d5f8bc4e00b159d4fa977b92deba9dfa9d9bae662fcf4645fc5148f5f69af4b3facd92a9ecb2a320&quot;&#xd;
+   },&#xd;
+&quot;deviceInfo&quot;:{&#xd;
+&quot;isoDeviceType&quot;:&quot;21&quot;,&#xd;
+&quot;formFactor&quot;:&quot;PHONE&quot;,&#xd;
+&quot;storageTechnology&quot;:&quot;SE&quot;,&#xd;
+&quot;paymentTypes&quot;:[&#xd;
+&quot;NFC&quot;,&#xd;
+&quot;DSRP&quot;&#xd;
+],&#xd;
+&quot;deviceName&quot;:&quot;iPhone&quot;&#xd;
+},&#xd;
+&quot;correlationId&quot;:&quot;D${correlationID}&quot;,&#xd;
+&quot;tokenRequestorId&quot;:&quot;51111130273&quot;,&#xd;
+&quot;walletId&quot;:&quot;103&quot;,&#xd;
+&quot;paymentAppInstanceId&quot;:&quot;041C426B5D3E80016326027385940040919A38F237E4520C&quot;,&#xd;
+&quot;tokenType&quot;:&quot;EMBEDDED_SE&quot;,&#xd;
+&quot;secureElementId&quot;:&quot;041C426B5D3E80016326027385940040919A38F237E4520C&quot;,&#xd;
+&quot;accountPanSuffix&quot;:&quot;3579&quot;,&#xd;
+&quot;serviceRequestDateTime&quot;:&quot;2018-11-20T16:57:04.000Z&quot;,&#xd;
+&quot;termsAndConditionsAssetId&quot;:&quot;d781f02e-28a5-4ab1-b1de-2aa39896f725&quot;,&#xd;
+&quot;termsAndConditionsAcceptedTimestamp&quot;:&quot;2018-11-20T16:57:13.000Z&quot;,&#xd;
+&quot;productConfigurationId&quot;:&quot;AlfaMDH&quot;,&#xd;
+&quot;consumerLanguage&quot;:&quot;ru&quot;,&#xd;
+&quot;decision&quot;:&quot;REQUIRE_ADDITIONAL_AUTHENTICATION&quot;,&#xd;
+&quot;decisionMadeBy&quot;:&quot;AUTHORIZATION_REQUEST&quot;,&#xd;
+&quot;tokenActivatedDateTime&quot;:&quot;2018-11-20T16:57:51.000Z&quot;,&#xd;
+&quot;numberOfActivationAttempts&quot;:1,&#xd;
+&quot;numberOfActiveTokens&quot;:1&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8080</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/mcissuerapitest/issuerServices/1/0/notifyServiceActivated</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+              <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">false</stringProp>
+                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+//vars.put(&quot;requestIDs&quot;,vars.get(&quot;requestID&quot;)); </stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+                <stringProp name="DurationAssertion.duration">5000</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+//vars.put(&quot;requestIDs&quot;,vars.get(&quot;requestID&quot;)); </stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+                <stringProp name="cacheKey">false</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">def response =  new groovy.json.JsonSlurper().parse(prev.getResponseData())
+/*
+if (response.responseId != &quot;${requestIDs}&quot; ) {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The responseID and requestID values not matched: \&quot;${requestIDs}\&quot; and \&quot;&quot;+response.responseId+&quot;\&quot;&quot;);
+}
+*/
+if (response.errorCode != null) {
+if (response.errorCode == &quot;INTERNAL_SERVICE_FAILURE&quot;){
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The internal error occured&quot;);
+	return;
+} else {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Some other error occured&quot;);
+	return;
+}
+}</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Notify Token Updated" enabled="true">
+            <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="MDES_Notify_Token_Updated" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+&quot;requestId&quot;:&quot;${requestID}&quot;,&#xd;
+&quot;tokens&quot;:[&#xd;
+{&#xd;
+&quot;tokenUniqueReference&quot;:&quot;DTC1MC0000171740bf9605c539fe4c41834${correlationID}&quot;,&#xd;
+&quot;status&quot;:&quot;INACTIVE&quot;,&#xd;
+&quot;suspendedBy&quot;:[&#xd;
+&quot;ISSUER&quot;&#xd;
+]&#xd;
+}&#xd;
+],&#xd;
+&quot;reasonCode&quot;:&quot;STATUS_UPDATE&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8080</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/mcissuerapitest/issuerServices/1/0/notifyTokenUpdated</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+              <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+                <stringProp name="DurationAssertion.duration">5000</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+//vars.put(&quot;requestIDs&quot;,vars.get(&quot;requestID&quot;)); </stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+                <stringProp name="cacheKey">false</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">def response =  new groovy.json.JsonSlurper().parse(prev.getResponseData())
+/*
+if (response.responseId != &quot;${requestIDs}&quot; ) {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The responseID and requestID values not matched: \&quot;${requestIDs}\&quot; and \&quot;&quot;+response.responseId+&quot;\&quot;&quot;);
+}
+*/
+if (response.errorCode != null) {
+if (response.errorCode == &quot;INTERNAL_SERVICE_FAILURE&quot;){
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The internal error occured&quot;);
+	return;
+} else {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Some other error occured&quot;);
+	return;
+}
+}</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.HitsPerSecondGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Hits per Second" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+          <longProp name="interval_grouping">1000</longProp>
+          <boolProp name="graph_aggregated">false</boolProp>
+          <stringProp name="include_sample_labels"></stringProp>
+          <stringProp name="exclude_sample_labels"></stringProp>
+          <stringProp name="start_offset"></stringProp>
+          <stringProp name="end_offset"></stringProp>
+          <boolProp name="include_checkbox_state">false</boolProp>
+          <boolProp name="exclude_checkbox_state">false</boolProp>
+        </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group VTS" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">5</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">60</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration">0</stringProp>
+        <stringProp name="ThreadGroup.delay">1</stringProp>
+        <boolProp name="ThreadGroup.delayedStart">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <kg.apc.jmeter.timers.VariableThroughputTimer guiclass="kg.apc.jmeter.timers.VariableThroughputTimerGui" testclass="kg.apc.jmeter.timers.VariableThroughputTimer" testname="jp@gc - Throughput Shaping Timer" enabled="true">
+          <collectionProp name="load_profile">
+            <collectionProp name="-596967135">
+              <stringProp name="45747160">0.039</stringProp>
+              <stringProp name="45747160">0.039</stringProp>
+              <stringProp name="48873">180</stringProp>
+            </collectionProp>
+            <collectionProp name="430368972">
+              <stringProp name="45747160">0.039</stringProp>
+              <stringProp name="45755833">0.942</stringProp>
+              <stringProp name="53430">600</stringProp>
+            </collectionProp>
+            <collectionProp name="1325730764">
+              <stringProp name="45755833">0.942</stringProp>
+              <stringProp name="45755833">0.942</stringProp>
+              <stringProp name="50547">300</stringProp>
+            </collectionProp>
+            <collectionProp name="696744105">
+              <stringProp name="45755833">0.942</stringProp>
+              <stringProp name="47601857">2.827</stringProp>
+              <stringProp name="1572771">3600</stringProp>
+            </collectionProp>
+          </collectionProp>
+        </kg.apc.jmeter.timers.VariableThroughputTimer>
+        <hashTree/>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="2_VTS" enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">false</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="VTS_getCardHolderVerificationMethods" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;&#xd;
+&lt;getCardHolderVerificationMethodsReq   xmlns=&quot;http://vnts.visa.com/tpcas/v1&quot;&gt;&#xd;
+  &lt;walletProviderMsgTracing&gt;&#xd;
+    &lt;tokenRequestorID&gt;40010030273&lt;/tokenRequestorID&gt;&#xd;
+    &lt;wpRequestId&gt;${__UUID}&lt;/wpRequestId&gt;&#xd;
+    &lt;wpConversationId&gt;${conversationId}&lt;/wpConversationId&gt;&#xd;
+  &lt;/walletProviderMsgTracing&gt;&#xd;
+  &lt;walletAccountID&gt;6Gt02SAokOGBxPoKPuP6yVpV&lt;/walletAccountID&gt;&#xd;
+  &lt;lifeCycleTraceID&gt;${tokenReferenceID}&lt;/lifeCycleTraceID&gt;&#xd;
+  &lt;tokenReferenceID&gt;DNITHE000${tokenReferenceID}&lt;/tokenReferenceID&gt;&#xd;
+  &lt;panReferenceID&gt;V-3017192484534844832252&lt;/panReferenceID&gt;&#xd;
+  &lt;token&gt;4491028330000422&lt;/token&gt;&#xd;
+  &lt;deviceInfo&gt;&#xd;
+    &lt;secureElementID&gt;04312E7B342C80014328036811932950DA075B1C4DC45F7C&lt;/secureElementID&gt;&#xd;
+    &lt;deviceType&gt;1&lt;/deviceType&gt;&#xd;
+    &lt;deviceNumber&gt;380507534412&lt;/deviceNumber&gt;&#xd;
+  &lt;/deviceInfo&gt;&#xd;
+  &lt;otpReason&gt;01&lt;/otpReason&gt;&#xd;
+  &lt;otpMaxReached&gt;false&lt;/otpMaxReached&gt;&#xd;
+  &lt;cardholderInfo&gt;&#xd;
+    &lt;version&gt;ws1&lt;/version&gt;&#xd;
+    &lt;encryptionKeyIndex&gt;1&lt;/encryptionKeyIndex&gt;&#xd;
+    &lt;encryptedData&gt;C246C268F4E6ECB4DD9E26AB00F5544687D1C48A3F7D4161ABD06678ED78EBD2&lt;/encryptedData&gt;&#xd;
+  &lt;/cardholderInfo&gt;&#xd;
+  &lt;extratag&gt;Value&lt;/extratag&gt;&#xd;
+&lt;/getCardHolderVerificationMethodsReq&gt; &#xd;
+</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+            <stringProp name="HTTPSampler.port">8080</stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+            <stringProp name="HTTPSampler.path">/vnts/cardholderverificationmethods/v1</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+            <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/xml</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">application/xml</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+              <stringProp name="DurationAssertion.duration">2500</stringProp>
+            </DurationAssertion>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">n = Long.parseLong(props.get(&quot;tokenReferenceID&quot;)) + 1;
+props.put(&quot;tokenReferenceID&quot;,String.valueOf(n));
+vars.put(&quot;tokenReferenceID&quot;,String.valueOf(n)); 
+
+vars.put(&quot;conversationId&quot;,&quot;${__UUID()}&quot;); </stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
+              <stringProp name="XPathExtractor.default"></stringProp>
+              <stringProp name="XPathExtractor.refname">identifier</stringProp>
+              <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
+              <stringProp name="XPathExtractor.xpathQuery">/getCardHolderVerificationMethodsRes/cardholderVerificationMethod[1]/identifier/text()</stringProp>
+              <boolProp name="XPathExtractor.validate">false</boolProp>
+              <boolProp name="XPathExtractor.tolerant">false</boolProp>
+              <boolProp name="XPathExtractor.namespace">false</boolProp>
+            </XPathExtractor>
+            <hashTree/>
+            <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="XPath Assertion" enabled="true">
+              <boolProp name="XPath.negate">false</boolProp>
+              <stringProp name="XPath.xpath">/getCardHolderVerificationMethodsRes/actionCode=&apos;00&apos;</stringProp>
+              <boolProp name="XPath.validate">false</boolProp>
+              <boolProp name="XPath.whitespace">false</boolProp>
+              <boolProp name="XPath.tolerant">false</boolProp>
+              <boolProp name="XPath.namespace">false</boolProp>
+            </XPathAssertion>
+            <hashTree/>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Send Pass Code" enabled="true">
+            <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="VTS_sendpasscode" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;&#xd;
+&lt;sendPasscodeReq xmlns=&quot;http://vnts.visa.com/tpcas/v1&quot;&gt;&#xd;
+    &lt;walletProviderMsgTracing&gt;&#xd;
+        &lt;tokenRequestorID&gt;40010030273&lt;/tokenRequestorID&gt;&#xd;
+        &lt;wpRequestId&gt;${__UUID}&lt;/wpRequestId&gt;&#xd;
+    &lt;wpConversationId&gt;${conversationId}&lt;/wpConversationId&gt;&#xd;
+    &lt;/walletProviderMsgTracing&gt;&#xd;
+  &lt;walletAccountID&gt;6Gt02SAokOGBxPoKPuP6yVpV&lt;/walletAccountID&gt;&#xd;
+  &lt;lifeCycleTraceID&gt;${tokenReferenceID}&lt;/lifeCycleTraceID&gt;&#xd;
+    &lt;tokenReferenceID&gt;DNITHE000${tokenReferenceID}&lt;/tokenReferenceID&gt;&#xd;
+    &lt;panReferenceID&gt;V-3017192484534844832252&lt;/panReferenceID&gt;&#xd;
+    &lt;token&gt;4491028330000422&lt;/token&gt;&#xd;
+    &lt;deviceInfo&gt;&#xd;
+    &lt;secureElementID&gt;04312E7B342C80014328036811932950DA075B1C4DC45F7C&lt;/secureElementID&gt;&#xd;
+    &lt;deviceType&gt;1&lt;/deviceType&gt;&#xd;
+    &lt;deviceNumber&gt;8630&lt;/deviceNumber&gt;&#xd;
+    &lt;deviceName&gt;Samsung Galaxy S&lt;/deviceName&gt;&#xd;
+    &lt;/deviceInfo&gt;&#xd;
+    &lt;otpMethodIdentifier&gt;${identifier}&lt;/otpMethodIdentifier&gt;&#xd;
+    &lt;OTPCode&gt;363538&lt;/OTPCode&gt;&#xd;
+    &lt;OTPCodeExp&gt;2019-12-31T21:00:00.000Z&lt;/OTPCodeExp&gt;&#xd;
+    &lt;cardholderInfo&gt;&#xd;
+        &lt;version&gt;ws1&lt;/version&gt;&#xd;
+        &lt;encryptionKeyIndex&gt;1&lt;/encryptionKeyIndex&gt;&#xd;
+        &lt;encryptedData&gt;C246C268F4E6ECB4DD9E26AB00F5544687D1C48A3F7D4161ABD06678ED78EBD2&lt;/encryptedData&gt;&#xd;
+    &lt;/cardholderInfo&gt;&#xd;
+&lt;/sendPasscodeReq&gt;&#xd;
+</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8080</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/vnts/sendpasscode/v1</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+              <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/xml</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/xml</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+                <stringProp name="DurationAssertion.duration">2500</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="XPath Assertion" enabled="true">
+                <boolProp name="XPath.negate">false</boolProp>
+                <stringProp name="XPath.xpath">/sendPasscodeRes/actionCode=&apos;00&apos;</stringProp>
+                <boolProp name="XPath.validate">false</boolProp>
+                <boolProp name="XPath.whitespace">false</boolProp>
+                <boolProp name="XPath.tolerant">false</boolProp>
+                <boolProp name="XPath.namespace">false</boolProp>
+              </XPathAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Create Notification" enabled="true">
+            <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="VTS_TOKEN_CREATED" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+&#xd;
+&quot;panReferenceID&quot;:&quot;V-3017192484534844832252&quot;,&#xd;
+&#xd;
+&quot;walletAccountEmailAddressHash&quot;:&quot;19F6683D83B8A5236E6A9599EB167D46E593ECBCF4717225415EB9F5A8256272&quot;,&#xd;
+&#xd;
+&quot;clientWalletAccountID&quot;:&quot;uGrOxzwW2ghVx1nuoC2Fnwko&quot;,&#xd;
+&#xd;
+&quot;panSource&quot;:&quot;KEY_ENTERED&quot;,&#xd;
+&#xd;
+&quot;encryptedData&quot;:&quot;eyJhbGciOiJSUzI1NiIsIml2IjoiIiwidGFnIjoiIiwiZW5jIjoiIiwidHlwIjoiSk9TRSIsImtpZCI6IiIsImNoYW5uZWxTZWN1cml0eUNvbnRleHQiOiIifQ.ZXlKaGJHY2lPaUpTVTBFeFh6VWlMQ0pwZGlJNklpSXNJblJoWnlJNklpSXNJbVZ1WXlJNklrRXhNamhIUTAwaUxDSjBlWEFpT2lKS1QxTkZJaXdpYTJsa0lqb2lSVTFPVVVjeVJqWlBXakJWVlRGWVFqSklOMGN4TTB0alpHWlVia1ZEWlZwV1NHNXZlbTVxTWtaRWMyMWhaMlIxVVNJc0ltTm9ZVzV1Wld4VFpXTjFjbWwwZVVOdmJuUmxlSFFpT2lKU1UwRmZVRXRKSWl3aWFXRjBJam9pTVRVeE9UTTRNalk0T0NKOS5uZ2VwcHZENEFtTFJkd2RyLUg0RWZVTmxVRk9wc19VekkwcUV2aWwzUkpzck5qbjU5ZDdhSEk3WXNfRmdpS2ZiMmNMaDBpd0N3eFhpMFZXcUsyc2E1N2tDaVBBaHluVXRfbWZxd044WWpKMXBIT0d5bk80eE51MHFydDVHVG16X0daN3ZuWmxrY3FnSmlCTWdHSXA5RnVCbzZuN21yaVNrUmNKMlRha2ZFWnNLQldBWmZrc0ZlQzNjVHVqUGZEaVJNLU5ndkpjOFZDREJYOF9PRGRrRWVRWXBnZ2xIN2ZVVjQ5S0gwQzRUR2dBWnlOcXFIcEVnU0lwcVRDaE1vYWFtVncwMWZhTm53bjRlQklPSVNCeGg0aDQwVFdiRUtnWTBjX1MwZFRoM25UZDdDUFk4NElWWmVOVDNLXzFhTWlxVGx1UjNtQnNEVmVpOHBRMTh3Y0w2VGcuamVtemFYSnNnVUg1TVFzUS5kYXdKVXJQaWxWSjJvcEFxT19JcWRRTFNqSnRxUGFrbU16MU5mVENjQ0FlbTdkNTR1bFhzMl9zYlQxRXZrNVdsLXdYM0hqeXltVllpenJ4S1p1d3hiYzZfWjZfbVJSVzJCMlBfN19zd1d1bmp0WFVFaTAxVGhobHc2OGNFdjBGa0FtNnpsYmRlZnprQWdfbFV6SWxHaHRaNmtPY1FRMGF2ZkVSUkJXc3hTb0g0ZW5RdGZYZG92UWRiTGg4VGYzTS1VbEZiQ0hMWGdsQUl3Z1htSDJNSnR2YnFEd2JsWU55TFlCcXoxVXVLY1hiam9DN01meVVraGJfcU1sMmhxYXFwbFExVmt3LU1mSEptQmxSdGRRMmJRMjhlSGNvR09DOFFjTUw5dVZqdnJEbVc5OTdoTU9PZEVMRXBySjVxa2R4czZ6SFV6SGFUR1FaLUYwRGpaYjJZRXNJYnZUUjU1TEM0MHAtcExlTkJhSFpZWllBQ0M1MkMweXBGRlQ0QXBaTEp6a01TT0dHY2g5MFhYNE43UUlQQW4tSmdvTDljU0Q0bHlRUGJ0WVdJOXI0NEtwaGpEYXZ3OGM3TG9tN0pfUE91dnZfM0RLWTZ1WmplMXJkb0FhWGJzdm9WZUwtOHRJLWpTcXpscXBocFVWNVBySDc2TXdnTTFTWmhJVDVSbHVTYmUxSUEtSWp2RndrbGUtYVVtTEVTb1ZpdUZyVGVTV3JYb0VaSnFRS3lqMnFaUWowM05CaTgyMTBWRkRSWHAxQVJyYTlobTBLMDctcFkzUml2U09ScUlEaVhYd3RadWM5RFFZWmpWYmNXR0MzVGY1eHBpV1hrTXpnYUk5RTd0OVBkS1kyZ0k3aFhvMGVDZF9EWElCN2F1X29vVmJQRDg0ZkpwZjkyTjRXcDYtQ2ctdnRvZWk4ak1FRWhSRDJic04xQkh3SGxMWENvS3Y2dnFfeW44OFpiOFpmTjZodG50M29vM2xqYk9HNzVtZDRjOTFVWjJ4SW43YVFfdFMwWmVER0psWHRZOVlRNDFiNWJESTFmcFRoUk81b3ROcTdWTmtrVmY4TklXaGJTM09MRjlEZElESmtNMW9kY21oSGNVTE1SQ0UtNndqZ0llek9fV3MxV01QY0lBczRrNHZ3WEtGQmo1YXZKOEYyNm9lYXRlUnhmSjZ3a1BQZ2RpVU5ZOGtic0d0SHpNX3ZJTWJ5akFWaGVIT1VHR18xeTd1ZFRjYzFOMVJfOUNxZFBTSEU3WERreER3LnNZbl9EcEpmUWhLV1NZaDRXMnZUQlE.POTsq4Xy13Au0pbHg9chI71uKUNOdwoD62hei-UhAKOyu4M-roCnoA5Rkh_J8MdKKefBqJouIy3uzqMKqBxpf3ECHPgnnyVZs5BpNOimOmYc1bPW1gfc7FwW2Xg01acH3a1KEZCYwEQJQgWaJQ8W9uHujlIgslKsurm_5b0jMLr1PkJVu9Mrtg5vG5BjEPw_IExaT0Axy3v5v1y1uToJj3uJ1CgdsSfe9QCuJatmv559JU3bbj_Db5Xy4F1WesBfgM5gBX_75_NsnNtIzRAxzjnGoazqVpAZfBzHgqnGNibddq-1pcxwHZPl4slo0AZNAazi8NWXdwm_rOy_YOTGqw&quot;,&#xd;
+&quot;deviceInfo&quot;:{&#xd;
+&quot;deviceID&quot;:&quot;oUL7aJtruSi4rUO_WyMe1oF3&quot;,&#xd;
+&quot;deviceLanguageCode&quot;:&quot;eng&quot;,&#xd;
+&quot;osType&quot;:&quot;ANDROID&quot;,&#xd;
+&quot;osVersion&quot;:&quot;5.1.1&quot;,&#xd;
+&quot;deviceType&quot;:&quot;MOBILEPHONE_OR_TABLET&quot;,&#xd;
+&quot;deviceManufacturer&quot;:&quot;samsung&quot;,&#xd;
+&quot;deviceBrand&quot;:&quot;samsung&quot;,&#xd;
+&quot;deviceModel&quot;:&quot;SM-J500FN&quot;,&#xd;
+&quot;deviceName&quot;:&quot;samsung - SM-J500FN&quot;,&#xd;
+&quot;deviceIPAddressV4&quot;:&quot;91.197.217.52&quot;,&#xd;
+&quot;tokenProtectionMethod&quot;:&quot;SOFTWARE&quot;&#xd;
+},&#xd;
+&#xd;
+&quot;messageReasonCode&quot;:&quot;3700&quot;,&#xd;
+&quot;actionCode&quot;:&quot;00&quot;,&#xd;
+&#xd;
+&quot;termsAndConditions&quot;:{&#xd;
+&quot;id&quot;:&quot;73208cd0469c4e08a8b8b3c72b41ae13&quot;,&#xd;
+&quot;date&quot;:&quot;2018-03-19T10:44:46.000+0000&quot;&#xd;
+},&#xd;
+&#xd;
+&quot;dateTimeOfEvent&quot;:&quot;2018-03-19T10:44:47.000Z&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8080</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/ft/vtis/tokenRequestors/40010030273/tokens/DNITHE000${tokenReferenceID}/tokenChanged?eventType=TOKEN_CREATED&amp;eventID=${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+              <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+                <stringProp name="DurationAssertion.duration">5000</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="49586">200</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message"></stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">16</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Notification - 3701" enabled="true">
+            <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="VTS_TOKEN_STATUS_UPDATED" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+&quot;messageReason&quot;:&quot;Internal Call to Activate Token&quot;,&#xd;
+&quot;messageReasonCode&quot;:&quot;3703&quot;,&#xd;
+&quot;dateTimeOfEvent&quot;:&quot;2018-05-26T08:15:00.000Z&quot;,&#xd;
+&quot;panReferenceID&quot;:&quot;V-3017192484534844832253&quot;,&#xd;
+&quot;deviceID&quot;:&quot;oUL7aJtruSi4rUO_WyMe1oF3&quot;,&#xd;
+&quot;actionCode&quot;:&quot;00&quot;,&#xd;
+&quot;encryptedData&quot;:&quot;eyJhbGciOiJSUzI1NiIsIml2IjoiIiwidGFnIjoiIiwiZW5jIjoiIiwidHlwIjoiSk9TRSIsImtpZCI6IiIsImNoYW5uZWxTZWN1cml0eUNvbnRleHQiOiIifQ.ZXlKaGJHY2lPaUpTVTBFeFh6VWlMQ0pwZGlJNklpSXNJblJoWnlJNklpSXNJbVZ1WXlJNklrRXhNamhIUTAwaUxDSjBlWEFpT2lKS1QxTkZJaXdpYTJsa0lqb2lSVTFPVVVjeVJqWlBXakJWVlRGWVFqSklOMGN4TTB0alpHWlVia1ZEWlZwV1NHNXZlbTVxTWtaRWMyMWhaMlIxVVNJc0ltTm9ZVzV1Wld4VFpXTjFjbWwwZVVOdmJuUmxlSFFpT2lKU1UwRmZVRXRKSWl3aWFXRjBJam9pTVRVeE9UWXpPVEl6TmlKOS5GVnQ5VXFRdGFCY2tlelVuT2VlWnpaT2JhS0tEbUVGNG1wOFBvaEN2bjZoNTZZUHRjVjVSeHZmVDlqa3dVQjVvY0pVam9rSmJsZDRXbk5qRnhURy1fNmtPZWpTTm9JYzRKMlI0STV6MUZObkhlM1VFcVM2OFlsY1V3WEpyWUI3aWRQeV9lX1pEaTcxZV9HVVJEY1o4OWo0eWxnNDg2bUhzOHdMajl5dGIwNlp0UVhBRmxrRm82aWdxRXVER01QVEY2VXVBX0txSDRacXdPX3NEdkRFdWwwamFhUTFKWDRhT2ZVajk0aHpOR1RyQmhyY3BjZTlPdWJHeDM3SjlGNGFjV2oyYmJmdk1nMWdjX0RLRmFIVXV3c1VwdzRsUkt2VTU2TUFDdldUTXZNT3V0S3V4bV9zY2VoM0lHRmxaWXBWa1ItV3NjdEFCVmdQTUFxMmxRLUR0QkEuRmcydThTZXBobDEyU1JJVi5fend6SGJTcWNWSHctYWVYamEtdlY0M3YwZDlDZXlCSGlDaU1Xdk14MlVoNGlxeTdHSXhCNnJaVXdDUHhTVTdua2Zuekk0V251VW9Qb25NTC1aaEtqVWtIb0hDVG1TVmwtTHI4N2s3TEdzM0o5WlliN2hVVTJVbVowa3BMM2U5RmtUOE5IUTJLdEs4Y2huUU9SbGZ0TEFvS2RXREFtTl9FaElhaS01Y1ZXNnhwNUhqYkhHRU91NTNtR2JfLWU3RUJpeXF3VEVNUjNqamhhUEprNmhiTVFSeTVWNmdMZ1VOS25yeU1SYnN0dVFRdFM4RHB4RXA5RmF1cnE2a3dhOE1YRmpBNHVhZVNFblY4LkxrelI3LVhDQlBqalJqcU95QjZ5c1E.SUnQpuFcO4SxlprObdrecbLA3_co9IMEWpw7nPUbXUsImNSIgLRQsNjMBO4mA_KyOlk7boPLqPoBWQzZk9Dnf2ii0t90dZyVZCITn7x6-iGldxrRmvXwBtwSnqmAiLPJRndJ3DRqtStK6VHY2Zf0eRoT4BZ5URpUKhLd_DcFJ4G9bZVImOBpLDsJWGyr9EjkRTjw3USJDWo_ZQwBnkVBhifiwadomszOy_ak7BJxFdNTIKLMKTPJCQD0cRJU1NExQm61LqBfGk2CpiSc4W7V969eZzv2YP7xqOIM826xVAcJxBgBJhgYOfYU18xXDmOAYWyHrzyPD0yvqJMtN1Kusw&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8080</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/ft/vtis/tokenRequestors/40010030273/tokens/DNITHE000${tokenReferenceID}/tokenChanged?eventType=TOKEN_STATUS_UPDATED&amp;eventID=${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+              <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+                <stringProp name="DurationAssertion.duration">5000</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="49586">200</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message"></stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">16</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.HitsPerSecondGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Hits per Second" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+          <longProp name="interval_grouping">1000</longProp>
+          <boolProp name="graph_aggregated">false</boolProp>
+          <stringProp name="include_sample_labels"></stringProp>
+          <stringProp name="exclude_sample_labels"></stringProp>
+          <stringProp name="start_offset"></stringProp>
+          <stringProp name="end_offset"></stringProp>
+          <boolProp name="include_checkbox_state">false</boolProp>
+          <boolProp name="exclude_checkbox_state">false</boolProp>
+        </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group InApp" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">5</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">120</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration">0</stringProp>
+        <stringProp name="ThreadGroup.delay">2</stringProp>
+        <boolProp name="ThreadGroup.delayedStart">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <kg.apc.jmeter.timers.VariableThroughputTimer guiclass="kg.apc.jmeter.timers.VariableThroughputTimerGui" testclass="kg.apc.jmeter.timers.VariableThroughputTimer" testname="jp@gc - Throughput Shaping Timer" enabled="true">
+          <collectionProp name="load_profile">
+            <collectionProp name="-566148671">
+              <stringProp name="45747221">0.058</stringProp>
+              <stringProp name="45747221">0.058</stringProp>
+              <stringProp name="48873">180</stringProp>
+            </collectionProp>
+            <collectionProp name="-141676907">
+              <stringProp name="45747221">0.058</stringProp>
+              <stringProp name="1475807">0.34</stringProp>
+              <stringProp name="53430">600</stringProp>
+            </collectionProp>
+            <collectionProp name="-755240564">
+              <stringProp name="1475807">0.34</stringProp>
+              <stringProp name="1475807">0.34</stringProp>
+              <stringProp name="50547">300</stringProp>
+            </collectionProp>
+            <collectionProp name="2000987792">
+              <stringProp name="1475807">0.34</stringProp>
+              <stringProp name="1505503">1.02</stringProp>
+              <stringProp name="1572771">3600</stringProp>
+            </collectionProp>
+          </collectionProp>
+        </kg.apc.jmeter.timers.VariableThroughputTimer>
+        <hashTree/>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="3_InApp" enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">false</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CreateInAppProvisioningDataRequest" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">&lt;CreateInAppProvisioningDataRequest&gt;&#xd;
+&lt;requestId&gt;${__UUID}&lt;/requestId&gt;&#xd;
+&lt;pan&gt;${__RandomString(16, 0123456789)}&lt;/pan&gt;&#xd;
+&lt;expiryMonth&gt;12&lt;/expiryMonth&gt;&#xd;
+&lt;expiryYear&gt;20&lt;/expiryYear&gt;&#xd;
+&lt;cardholderName&gt;FIRSTNAME LASTNAME&lt;/cardholderName&gt;&#xd;
+&lt;ips&gt;V&lt;/ips&gt;&#xd;
+&lt;nonce&gt;9c023092&lt;/nonce&gt;&#xd;
+&lt;nonceSignature&gt;4082f883ae62d0700c283e225ee9d286713ef74456ba1f07376cf17d71bf0be013f926d486619394060ced56030f41f84df916eaab5504e456a8530dc9c821f6ed3e3af62b5d8f3e4a22ca2018670fee4e&lt;/nonceSignature&gt;&#xd;
+&lt;certificates&gt;&#xd;
+&lt;certificate&gt;&#xd;
+MIIEEzCCA7igAwIBAgIIEvD9KtxTuV0wCgYIKoZIzj0EAwIwgYExOzA5BgNVBAMMMlRlc3QgQXBw&#xd;
+bGUgV29ybGR3aWRlIERldmVsb3BlcnMgUmVsYXRpb25zIENBIC0gRUNDMSAwHgYDVQQLDBdDZXJ0&#xd;
+aWZpY2F0aW9uIEF1dGhvcml0eTETMBEGA1UECgwKQXBwbGUgSW5jLjELMAkGA1UEBhMCVVMwHhcN&#xd;
+MTcwNTIwMDQxNTU3WhcNMTkwNjE5MDQxNTU3WjBtMTYwNAYDVQQDDC1lY2MtY3J5cHRvLXNlcnZp&#xd;
+Y2VzLWVuY2lwaGVybWVudF9VQzYtSW5NZW1vcnkxETAPBgNVBAsMCEFwcGxlUGF5MRMwEQYDVQQK&#xd;
+DApBcHBsZSBJbmMuMQswCQYDVQQGEwJVUzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABC4+XM9r&#xd;
+mrBL56IvP6zP3nPIfocVU5SjSBVAiolsoYo3TaxmmvO/YiD8hjdn9K9HUHxbwiH8ShmHTa85tAdO&#xd;
+PrijggIrMIICJzBPBggrBgEFBQcBAQRDMEEwPwYIKwYBBQUHMAGGM2h0dHA6Ly9vY3NwLXVhdC5j&#xd;
+b3JwLmFwcGxlLmNvbS9vY3NwMDQtdGVzdHd3ZHJjYWVjYzAdBgNVHQ4EFgQUrS6jy340wu3uQ2hO&#xd;
+JxEfzEkzOdAwDAYDVR0TAQH/BAIwADAfBgNVHSMEGDAWgBTW1tVa5f/9wnw0w0PevWh2XDapvjCC&#xd;
+AR0GA1UdIASCARQwggEQMIIBDAYJKoZIhvdjZAUBMIH+MIHDBggrBgEFBQcCAjCBtgyBs1JlbGlh&#xd;
+bmNlIG9uIHRoaXMgY2VydGlmaWNhdGUgYnkgYW55IHBhcnR5IGFzc3VtZXMgYWNjZXB0YW5jZSBv&#xd;
+ZiB0aGUgdGhlbiBhcHBsaWNhYmxlIHN0YW5kYXJkIHRlcm1zIGFuZCBjb25kaXRpb25zIG9mIHVz&#xd;
+ZSwgY2VydGlmaWNhdGUgcG9saWN5IGFuZCBjZXJ0aWZpY2F0aW9uIHByYWN0aWNlIHN0YXRlbWVu&#xd;
+dHMuMDYGCCsGAQUFBwIBFipodHRwOi8vd3d3LmFwcGxlLmNvbS9jZXJ0aWZpY2F0ZWF1dGhvcml0&#xd;
+eS8wQQYDVR0fBDowODA2oDSgMoYwaHR0cDovL2NybC11YXQuY29ycC5hcHBsZS5jb20vYXBwbGV3&#xd;
+d2RyY2FlY2MuY3JsMA4GA1UdDwEB/wQEAwIDKDASBgkqhkiG92NkBicBAf8EAgUAMAoGCCqGSM49&#xd;
+BAMCA0kAMEYCIQCMvUq2YUxY/RqTWE4FqsPTr9zGyilCunIU3FSobtep7gIhAN7Vdx3B0p7DTCqX&#xd;
+Hd05IPsZGLdIDG1NTxOk2Oj/N7GG&#xd;
+&lt;/certificate&gt;&#xd;
+&lt;certificate&gt;&#xd;
+MIIC5zCCAoygAwIBAgIIR1pCSszYnvcwCgYIKoZIzj0EAwIwZzEhMB8GA1UEAwwYVGVzdCBBcHBs&#xd;
+ZSBSb290IENBIC0gRUNDMSAwHgYDVQQLDBdDZXJ0aWZpY2F0aW9uIEF1dGhvcml0eTETMBEGA1UE&#xd;
+CgwKQXBwbGUgSW5jLjELMAkGA1UEBhMCVVMwHhcNMTQwMjA2MTYxODI5WhcNMjQwMjA0MTYxODI5&#xd;
+WjCBgTE7MDkGA1UEAwwyVGVzdCBBcHBsZSBXb3JsZHdpZGUgRGV2ZWxvcGVycyBSZWxhdGlvbnMg&#xd;
+Q0EgLSBFQ0MxIDAeBgNVBAsMF0NlcnRpZmljYXRpb24gQXV0aG9yaXR5MRMwEQYDVQQKDApBcHBs&#xd;
+ZSBJbmMuMQswCQYDVQQGEwJVUzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABDzb9Lsna4XrUdRw&#xd;
+Ijl36m9hTGhxQrW5Ls3wYr07kaZ/5tMOEG5jOBeHtI+x8YHmkgp0Ry43nmZTik3vosay+6ajggEF&#xd;
+MIIBATBUBggrBgEFBQcBAQRIMEYwRAYIKwYBBQUHMAGGOGh0dHA6Ly9vY3NwLXVhdC5jb3JwLmFw&#xd;
+cGxlLmNvbS9vY3NwMDQtdGVzdGFwcGxlcm9vdGNhZWNjMB0GA1UdDgQWBBTW1tVa5f/9wnw0w0Pe&#xd;
+vWh2XDapvjASBgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQYMBaAFNJH4sU0ccYQjZPuBEMf4RsP&#xd;
+4c0RMEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly9jcmwtdWF0LmNvcnAuYXBwbGUuY29tL3Rlc3Rh&#xd;
+cHBsZXJvb3RjYWVjYy5jcmwwDgYDVR0PAQH/BAQDAgEGMAoGCCqGSM49BAMCA0kAMEYCIQCd4eDj&#xd;
+SiTu55mDKWCaD7Tqe4hp86pJ1Fsw7SlPKmH+bQIhAJ5coaJ3uarz81Im19NGcrU45h1A8hNDTz55&#xd;
+QPEHujS5&#xd;
+&lt;/certificate&gt;&#xd;
+&lt;/certificates&gt;&#xd;
+&lt;/CreateInAppProvisioningDataRequest&gt;&#xd;
+&#xd;
+</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+            <stringProp name="HTTPSampler.port">8080</stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+            <stringProp name="HTTPSampler.path">/ft/uia/createInAppProvisioningData</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+            <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/xml</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">application/xml</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+              <stringProp name="DurationAssertion.duration">3000</stringProp>
+            </DurationAssertion>
+            <hashTree/>
+            <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="XPath Assertion" enabled="true">
+              <boolProp name="XPath.negate">false</boolProp>
+              <stringProp name="XPath.xpath">/CreateInAppProvisioningDataResponse/code=&apos;0&apos;</stringProp>
+              <boolProp name="XPath.validate">false</boolProp>
+              <boolProp name="XPath.whitespace">false</boolProp>
+              <boolProp name="XPath.tolerant">false</boolProp>
+              <boolProp name="XPath.namespace">false</boolProp>
+            </XPathAssertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.HitsPerSecondGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Hits per Second" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+          <longProp name="interval_grouping">1000</longProp>
+          <boolProp name="graph_aggregated">false</boolProp>
+          <stringProp name="include_sample_labels"></stringProp>
+          <stringProp name="exclude_sample_labels"></stringProp>
+          <stringProp name="start_offset"></stringProp>
+          <stringProp name="end_offset"></stringProp>
+          <boolProp name="include_checkbox_state">false</boolProp>
+          <boolProp name="exclude_checkbox_state">false</boolProp>
+        </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group Opaque" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <intProp name="LoopController.loops">-1</intProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">2</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">60</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration">0</stringProp>
+        <stringProp name="ThreadGroup.delay">3</stringProp>
+        <boolProp name="ThreadGroup.delayedStart">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <kg.apc.jmeter.timers.VariableThroughputTimer guiclass="kg.apc.jmeter.timers.VariableThroughputTimerGui" testclass="kg.apc.jmeter.timers.VariableThroughputTimer" testname="jp@gc - Throughput Shaping Timer" enabled="true">
+          <collectionProp name="load_profile">
+            <collectionProp name="-601520415">
+              <stringProp name="45747121">0.021</stringProp>
+              <stringProp name="45747121">0.021</stringProp>
+              <stringProp name="48873">180</stringProp>
+            </collectionProp>
+            <collectionProp name="-538836077">
+              <stringProp name="45747121">0.021</stringProp>
+              <stringProp name="45748113">0.131</stringProp>
+              <stringProp name="53430">600</stringProp>
+            </collectionProp>
+            <collectionProp name="517091948">
+              <stringProp name="45748113">0.131</stringProp>
+              <stringProp name="45748113">0.131</stringProp>
+              <stringProp name="50547">300</stringProp>
+            </collectionProp>
+            <collectionProp name="114981114">
+              <stringProp name="45748113">0.131</stringProp>
+              <stringProp name="45750223">0.393</stringProp>
+              <stringProp name="1572771">3600</stringProp>
+            </collectionProp>
+          </collectionProp>
+        </kg.apc.jmeter.timers.VariableThroughputTimer>
+        <hashTree/>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="4_Opaque" enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">false</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CreateOpaquePaymentCardRequest" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">&lt;CreateOpaquePaymentCardRequest&gt;&#xd;
+    &lt;requestId&gt;${__UUID}&lt;/requestId&gt;&#xd;
+    &lt;pan&gt;${__RandomString(16, 0123456789)}&lt;/pan&gt;&#xd;
+    &lt;expiryMonth&gt;12&lt;/expiryMonth&gt;&#xd;
+    &lt;expiryYear&gt;20&lt;/expiryYear&gt;&#xd;
+    &lt;country&gt;UA&lt;/country&gt;&#xd;
+    &lt;intent&gt;PUSH_PROV_MOBILE&lt;/intent&gt;&#xd;
+&lt;clientWalletProvider&gt;${__RandomString(10, 0123456789)}&lt;/clientWalletProvider&gt;&#xd;
+&lt;clientWalletAccountID&gt;${__RandomString(24, ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789)}&lt;/clientWalletAccountID&gt;&#xd;
+    &lt;isIDnV&gt;false&lt;/isIDnV&gt;&#xd;
+    &lt;cardholderName&gt;ELENA PREKRASNAYA&lt;/cardholderName&gt;&#xd;
+    &lt;ips&gt;V&lt;/ips&gt;&#xd;
+&lt;clientDeviceID&gt;${__RandomString(24, ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789)}&lt;/clientDeviceID&gt;&#xd;
+    &lt;clientAppID&gt;ALFAMOBILE&lt;/clientAppID&gt;&#xd;
+&lt;/CreateOpaquePaymentCardRequest&gt;&#xd;
+&#xd;
+</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+            <stringProp name="HTTPSampler.port">8080</stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+            <stringProp name="HTTPSampler.path">/ft/uia/createOpaquePaymentCard</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+            <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/xml</stringProp>
+                </elementProp>
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">application/xml</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+              <stringProp name="DurationAssertion.duration">3000</stringProp>
+            </DurationAssertion>
+            <hashTree/>
+            <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="XPath Assertion" enabled="true">
+              <boolProp name="XPath.negate">false</boolProp>
+              <stringProp name="XPath.xpath">/CreateOpaquePaymentCardResponse/code=&apos;0&apos;</stringProp>
+              <boolProp name="XPath.validate">false</boolProp>
+              <boolProp name="XPath.whitespace">false</boolProp>
+              <boolProp name="XPath.tolerant">false</boolProp>
+              <boolProp name="XPath.namespace">false</boolProp>
+            </XPathAssertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.HitsPerSecondGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Hits per Second" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+          <longProp name="interval_grouping">1000</longProp>
+          <boolProp name="graph_aggregated">false</boolProp>
+          <stringProp name="include_sample_labels"></stringProp>
+          <stringProp name="exclude_sample_labels"></stringProp>
+          <stringProp name="start_offset"></stringProp>
+          <stringProp name="end_offset"></stringProp>
+          <boolProp name="include_checkbox_state">false</boolProp>
+          <boolProp name="exclude_checkbox_state">false</boolProp>
+        </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
+        <hashTree/>
+      </hashTree>
+      <PostThreadGroup guiclass="PostThreadGroupGui" testclass="PostThreadGroup" testname="tearDown Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </PostThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="WriteVariables" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">FileWriter fstream = new FileWriter(vars.get(&quot;correlationIDFile&quot;),false); //Create New file with name &quot;subid&quot;
+BufferedWriter out = new BufferedWriter(fstream);
+out.write(props.get(&quot;correlationID&quot;));//write value of variable 1
+out.close();
+fstream.close();
+
+fstream = new FileWriter(vars.get(&quot;tokenReferenceIDFile&quot;),false); //Create New file with name &quot;subid&quot;
+out = new BufferedWriter(fstream);
+out.write(props.get(&quot;tokenReferenceID&quot;));//write value of variable 1
+out.close();
+fstream.close();</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+      </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree all" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">true</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <Summariser guiclass="SummariserGui" testclass="Summariser" testname="Generate Summary Results" enabled="true"/>
+      <hashTree/>
+      <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.HitsPerSecondGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Hits per Second" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+        <longProp name="interval_grouping">1000</longProp>
+        <boolProp name="graph_aggregated">false</boolProp>
+        <stringProp name="include_sample_labels"></stringProp>
+        <stringProp name="exclude_sample_labels"></stringProp>
+        <stringProp name="start_offset"></stringProp>
+        <stringProp name="end_offset"></stringProp>
+        <boolProp name="include_checkbox_state">false</boolProp>
+        <boolProp name="exclude_checkbox_state">false</boolProp>
+      </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
+      <hashTree/>
+      <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ResponseTimesOverTimeGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Response Times Over Time" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+        <longProp name="interval_grouping">500</longProp>
+        <boolProp name="graph_aggregated">false</boolProp>
+        <stringProp name="include_sample_labels"></stringProp>
+        <stringProp name="exclude_sample_labels"></stringProp>
+        <stringProp name="start_offset"></stringProp>
+        <stringProp name="end_offset"></stringProp>
+        <boolProp name="include_checkbox_state">false</boolProp>
+        <boolProp name="exclude_checkbox_state">false</boolProp>
+      </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="ErrorLog writter" enabled="true">
+        <boolProp name="ResultCollector.error_logging">true</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>true</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>true</responseData>
+            <samplerData>true</samplerData>
+            <xml>true</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>true</responseHeaders>
+            <requestHeaders>true</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <fileName>true</fileName>
+            <hostname>true</hostname>
+            <threadCounts>true</threadCounts>
+            <sampleCount>true</sampleCount>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename">${resultDir}/errrorLog_${start_time}.jtl</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Log writter" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>true</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename">${resultDir}/testLog_${start_time}.jtl</stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
