@@ -91,9 +91,9 @@ props.put(&apos;tokenReferenceID&apos;, line.toString());</stringProp>
       <hashTree>
         <kg.apc.jmeter.timers.VariableThroughputTimer guiclass="kg.apc.jmeter.timers.VariableThroughputTimerGui" testclass="kg.apc.jmeter.timers.VariableThroughputTimer" testname="jp@gc - Throughput Shaping Timer" enabled="true">
           <collectionProp name="load_profile">
-            <collectionProp name="-2011667291">
-              <stringProp name="49531">2.7</stringProp>
-              <stringProp name="49531">2.7</stringProp>
+            <collectionProp name="-1573389563">
+              <stringProp name="52411">5.4</stringProp>
+              <stringProp name="52411">5.4</stringProp>
               <stringProp name="1572771">3600</stringProp>
             </collectionProp>
           </collectionProp>

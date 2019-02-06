@@ -8,6 +8,5 @@ hs_err_pid*
 
 *.log
 backups
-
 results
 *.jtl
