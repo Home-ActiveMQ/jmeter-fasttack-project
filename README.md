@@ -76,3 +76,27 @@ Setting JDBC SQL Server Connection with JMeter
 
 
 * `How to Use JMeter Assertions in Three Easy Steps` https://www.blazemeter.com/blog/how-use-jmeter-assertions-three-easy-steps
+
+
+
+|   | windows  |
+|---|---|
+| serverUrl  | 192.168.1.113  |
+| start_time  | ${__time(YMDHMS)}  |
+| testPlanUrl  | ${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}  |
+| correlationIDFile  | ${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}\start_correlationID  |
+| tokenReferenceIDFile  | ${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}\start_tokenReferenceID  |
+| nmon_start_time  | ${__time(yyyy-MM-dd'T'HH:mm:ss,)}  |
+| resultDir  | ${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}\results\\${__time(YMDHMS)}  |
+
+
+|   | linux  |
+|---|---|
+| serverUrl  | 192.168.1.113  |
+| start_time  | ${__time(YMDHMS)}  |
+| testPlanUrl  | ${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}  |
+| correlationIDFile  | ${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}/conf/start_correlationId.conf  |
+| tokenReferenceIDFile  | ${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}/conf/start_tokenReferenceId.conf  |
+| nmon_start_time  | ${__time(yyyy-MM-dd'T'HH:mm:ss,)}  |
+| resultDir  | ${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}/results/${__time(YMDHMS)}  |
+
