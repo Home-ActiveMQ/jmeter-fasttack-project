@@ -84,13 +84,9 @@
               <stringProp name="cacheKey">true</stringProp>
               <stringProp name="filename"></stringProp>
               <stringProp name="parameters"></stringProp>
-              <stringProp name="script">if (props.get(&quot;correlationID&quot;) == null){
-props.put(&quot;correlationID&quot;, Long.parseLong(vars.get(&quot;correlationID&quot;))); 	
-}
-n = props.get(&quot;correlationID&quot;) + 1;
-vars.put(&quot;correlationID&quot;,String.valueOf(n)); 
-props.put(&quot;correlationID&quot;,n);
-
+              <stringProp name="script">n = Long.parseLong(props.get(&quot;correlationID&quot;)) + 1;
+props.put(&quot;correlationID&quot;,String.valueOf(n));
+vars.put(&quot;correlationID&quot;,String.valueOf(n));
 </stringProp>
               <stringProp name="scriptLanguage">groovy</stringProp>
             </JSR223Sampler>
@@ -392,7 +388,7 @@ if (tokenDigitizeDate==null) {
 	FailureMessage = &quot;&apos;digitize_date&apos;: is empty&quot;;
 } else {
 	long timeTokenDigitizeDate = tokenDigitizeDate.getTime();
-	long timeNowDiff = new Date().getTime() - 1000;
+	long timeNowDiff = new Date().getTime() - 5000; //TODO: max = 3sec.
 	boolean equalTokenDigitizeDate = timeNowDiff &lt;= timeTokenDigitizeDate;
 	if (!equalTokenDigitizeDate) {
 		Failure = true;
