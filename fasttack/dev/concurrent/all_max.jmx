@@ -91,10 +91,10 @@ props.put(&apos;tokenReferenceID&apos;, line.toString());</stringProp>
       <hashTree>
         <kg.apc.jmeter.timers.VariableThroughputTimer guiclass="kg.apc.jmeter.timers.VariableThroughputTimerGui" testclass="kg.apc.jmeter.timers.VariableThroughputTimer" testname="jp@gc - Throughput Shaping Timer" enabled="true">
           <collectionProp name="load_profile">
-            <collectionProp name="-2011667291">
+            <collectionProp name="1116920332">
               <stringProp name="49531">2.7</stringProp>
               <stringProp name="49531">2.7</stringProp>
-              <stringProp name="1572771">3600</stringProp>
+              <stringProp name="48755949">36000</stringProp>
             </collectionProp>
           </collectionProp>
         </kg.apc.jmeter.timers.VariableThroughputTimer>
@@ -620,10 +620,10 @@ if (response.errorCode == &quot;INTERNAL_SERVICE_FAILURE&quot;){
       <hashTree>
         <kg.apc.jmeter.timers.VariableThroughputTimer guiclass="kg.apc.jmeter.timers.VariableThroughputTimerGui" testclass="kg.apc.jmeter.timers.VariableThroughputTimer" testname="jp@gc - Throughput Shaping Timer" enabled="true">
           <collectionProp name="load_profile">
-            <collectionProp name="-2012513467">
+            <collectionProp name="1116074156">
               <stringProp name="49529">2.5</stringProp>
               <stringProp name="49529">2.5</stringProp>
-              <stringProp name="1572771">3600</stringProp>
+              <stringProp name="48755949">36000</stringProp>
             </collectionProp>
           </collectionProp>
         </kg.apc.jmeter.timers.VariableThroughputTimer>
@@ -1032,7 +1032,7 @@ vars.put(&quot;conversationId&quot;,&quot;${__UUID()}&quot;); </stringProp>
         </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
         <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group InApp" enabled="false">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group InApp" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
@@ -1126,7 +1126,7 @@ QPEHujS5&#xd;
             <stringProp name="HTTPSampler.port">8080</stringProp>
             <stringProp name="HTTPSampler.protocol">http</stringProp>
             <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-            <stringProp name="HTTPSampler.path">/ft/uia/createInAppProvisioningData</stringProp>
+            <stringProp name="HTTPSampler.path">/pushprovisioning-1.2.5-SNAPSHOT/createInAppProvisioningData</stringProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
