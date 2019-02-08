@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.0 r1840935">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan for VTS - GCVM - SPC - TCN - TN" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="VTS completed flow" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration">30</stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="correlationID" elementType="Argument">
+              <stringProp name="Argument.name">correlationID</stringProp>
+              <stringProp name="Argument.value">${__P(start_correlationID,)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="tokenReferenceID" elementType="Argument">
+              <stringProp name="Argument.name">tokenReferenceID</stringProp>
+              <stringProp name="Argument.value">${__P(start_tokenReferenceID,)}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller" enabled="true"/>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Accept</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="PostgreSQL Connection Configuration" enabled="true">
+            <boolProp name="autocommit">true</boolProp>
+            <stringProp name="checkQuery"></stringProp>
+            <stringProp name="connectionAge">5000</stringProp>
+            <stringProp name="dataSource">ft_al</stringProp>
+            <stringProp name="dbUrl">jdbc:postgresql://192.168.1.115:5432/ft_al</stringProp>
+            <stringProp name="driver">org.postgresql.Driver</stringProp>
+            <boolProp name="keepAlive">true</boolProp>
+            <stringProp name="password">ft</stringProp>
+            <stringProp name="poolMax">0</stringProp>
+            <stringProp name="timeout">10000</stringProp>
+            <stringProp name="transactionIsolation">DEFAULT</stringProp>
+            <stringProp name="trimInterval">60000</stringProp>
+            <stringProp name="username">ft</stringProp>
+          </JDBCDataSource>
+          <hashTree/>
+          <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="false">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="correlationID" elementType="Argument">
+                <stringProp name="Argument.name">correlationID</stringProp>
+                <stringProp name="Argument.value"></stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </Arguments>
+          <hashTree/>
+          <CriticalSectionController guiclass="CriticalSectionControllerGui" testclass="CriticalSectionController" testname="Critical Section Controller" enabled="true">
+            <stringProp name="CriticalSectionController.lockName">global_lock</stringProp>
+          </CriticalSectionController>
+          <hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="clear: token_info, cardholder_verification_method" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Callable Statement</stringProp>
+              <stringProp name="query">DELETE FROM cardholder_verification_method WHERE token_ref_id=&apos;DNITHE301736046984008715&apos;;
+DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE301736046984008715&apos;;
+</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable"></stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree/>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Create Notification" enabled="true">
+            <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TOKEN_CREATED" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;panReferenceID&quot;: &quot;V-3017192484534844832252&quot;,&#xd;
+  &quot;walletAccountEmailAddressHash&quot;: &quot;19F6683D83B8A5236E6A9599EB167D46E593ECBCF4717225415EB9F5A8256272&quot;,&#xd;
+  &quot;clientWalletAccountID&quot;: &quot;uGrOxzwW2ghVx1nuoC2Fnwko&quot;,&#xd;
+  &quot;panSource&quot;: &quot;KEY_ENTERED&quot;,&#xd;
+  &quot;encryptedData&quot;: &quot;eyJhbGciOiJSUzI1NiIsIml2IjoiIiwidGFnIjoiIiwiZW5jIjoiIiwidHlwIjoiSk9TRSIsImtpZCI6IiIsImNoYW5uZWxTZWN1cml0eUNvbnRleHQiOiIifQ.ZXlKaGJHY2lPaUpTVTBFeFh6VWlMQ0pwZGlJNklpSXNJblJoWnlJNklpSXNJbVZ1WXlJNklrRXhNamhIUTAwaUxDSjBlWEFpT2lKS1QxTkZJaXdpYTJsa0lqb2lSVTFPVVVjeVJqWlBXakJWVlRGWVFqSklOMGN4TTB0alpHWlVia1ZEWlZwV1NHNXZlbTVxTWtaRWMyMWhaMlIxVVNJc0ltTm9ZVzV1Wld4VFpXTjFjbWwwZVVOdmJuUmxlSFFpT2lKU1UwRmZVRXRKSWl3aWFXRjBJam9pTVRVeE9UTTRNalk0T0NKOS5uZ2VwcHZENEFtTFJkd2RyLUg0RWZVTmxVRk9wc19VekkwcUV2aWwzUkpzck5qbjU5ZDdhSEk3WXNfRmdpS2ZiMmNMaDBpd0N3eFhpMFZXcUsyc2E1N2tDaVBBaHluVXRfbWZxd044WWpKMXBIT0d5bk80eE51MHFydDVHVG16X0daN3ZuWmxrY3FnSmlCTWdHSXA5RnVCbzZuN21yaVNrUmNKMlRha2ZFWnNLQldBWmZrc0ZlQzNjVHVqUGZEaVJNLU5ndkpjOFZDREJYOF9PRGRrRWVRWXBnZ2xIN2ZVVjQ5S0gwQzRUR2dBWnlOcXFIcEVnU0lwcVRDaE1vYWFtVncwMWZhTm53bjRlQklPSVNCeGg0aDQwVFdiRUtnWTBjX1MwZFRoM25UZDdDUFk4NElWWmVOVDNLXzFhTWlxVGx1UjNtQnNEVmVpOHBRMTh3Y0w2VGcuamVtemFYSnNnVUg1TVFzUS5kYXdKVXJQaWxWSjJvcEFxT19JcWRRTFNqSnRxUGFrbU16MU5mVENjQ0FlbTdkNTR1bFhzMl9zYlQxRXZrNVdsLXdYM0hqeXltVllpenJ4S1p1d3hiYzZfWjZfbVJSVzJCMlBfN19zd1d1bmp0WFVFaTAxVGhobHc2OGNFdjBGa0FtNnpsYmRlZnprQWdfbFV6SWxHaHRaNmtPY1FRMGF2ZkVSUkJXc3hTb0g0ZW5RdGZYZG92UWRiTGg4VGYzTS1VbEZiQ0hMWGdsQUl3Z1htSDJNSnR2YnFEd2JsWU55TFlCcXoxVXVLY1hiam9DN01meVVraGJfcU1sMmhxYXFwbFExVmt3LU1mSEptQmxSdGRRMmJRMjhlSGNvR09DOFFjTUw5dVZqdnJEbVc5OTdoTU9PZEVMRXBySjVxa2R4czZ6SFV6SGFUR1FaLUYwRGpaYjJZRXNJYnZUUjU1TEM0MHAtcExlTkJhSFpZWllBQ0M1MkMweXBGRlQ0QXBaTEp6a01TT0dHY2g5MFhYNE43UUlQQW4tSmdvTDljU0Q0bHlRUGJ0WVdJOXI0NEtwaGpEYXZ3OGM3TG9tN0pfUE91dnZfM0RLWTZ1WmplMXJkb0FhWGJzdm9WZUwtOHRJLWpTcXpscXBocFVWNVBySDc2TXdnTTFTWmhJVDVSbHVTYmUxSUEtSWp2RndrbGUtYVVtTEVTb1ZpdUZyVGVTV3JYb0VaSnFRS3lqMnFaUWowM05CaTgyMTBWRkRSWHAxQVJyYTlobTBLMDctcFkzUml2U09ScUlEaVhYd3RadWM5RFFZWmpWYmNXR0MzVGY1eHBpV1hrTXpnYUk5RTd0OVBkS1kyZ0k3aFhvMGVDZF9EWElCN2F1X29vVmJQRDg0ZkpwZjkyTjRXcDYtQ2ctdnRvZWk4ak1FRWhSRDJic04xQkh3SGxMWENvS3Y2dnFfeW44OFpiOFpmTjZodG50M29vM2xqYk9HNzVtZDRjOTFVWjJ4SW43YVFfdFMwWmVER0psWHRZOVlRNDFiNWJESTFmcFRoUk81b3ROcTdWTmtrVmY4TklXaGJTM09MRjlEZElESmtNMW9kY21oSGNVTE1SQ0UtNndqZ0llek9fV3MxV01QY0lBczRrNHZ3WEtGQmo1YXZKOEYyNm9lYXRlUnhmSjZ3a1BQZ2RpVU5ZOGtic0d0SHpNX3ZJTWJ5akFWaGVIT1VHR18xeTd1ZFRjYzFOMVJfOUNxZFBTSEU3WERreER3LnNZbl9EcEpmUWhLV1NZaDRXMnZUQlE.POTsq4Xy13Au0pbHg9chI71uKUNOdwoD62hei-UhAKOyu4M-roCnoA5Rkh_J8MdKKefBqJouIy3uzqMKqBxpf3ECHPgnnyVZs5BpNOimOmYc1bPW1gfc7FwW2Xg01acH3a1KEZCYwEQJQgWaJQ8W9uHujlIgslKsurm_5b0jMLr1PkJVu9Mrtg5vG5BjEPw_IExaT0Axy3v5v1y1uToJj3uJ1CgdsSfe9QCuJatmv559JU3bbj_Db5Xy4F1WesBfgM5gBX_75_NsnNtIzRAxzjnGoazqVpAZfBzHgqnGNibddq-1pcxwHZPl4slo0AZNAazi8NWXdwm_rOy_YOTGqw&quot;,&#xd;
+  &quot;deviceInfo&quot;: {&#xd;
+    &quot;deviceID&quot;: &quot;oUL7aJtruSi4rUO_WyMe1oF3&quot;,&#xd;
+    &quot;deviceLanguageCode&quot;: &quot;eng&quot;,&#xd;
+    &quot;osType&quot;: &quot;ANDROID&quot;,&#xd;
+    &quot;osVersion&quot;: &quot;5.1.1&quot;,&#xd;
+    &quot;deviceType&quot;: &quot;MOBILEPHONE_OR_TABLET&quot;,&#xd;
+    &quot;deviceManufacturer&quot;: &quot;samsung&quot;,&#xd;
+    &quot;deviceBrand&quot;: &quot;samsung&quot;,&#xd;
+    &quot;deviceModel&quot;: &quot;SM-J500FN&quot;,&#xd;
+    &quot;deviceName&quot;: &quot;(test-1) samsung - SM-J500FN&quot;,&#xd;
+    &quot;deviceIPAddressV4&quot;: &quot;91.197.217.52&quot;,&#xd;
+    &quot;tokenProtectionMethod&quot;: &quot;SOFTWARE&quot;&#xd;
+  },&#xd;
+  &quot;messageReasonCode&quot;: &quot;3700&quot;,&#xd;
+  &quot;actionCode&quot;: &quot;00&quot;,&#xd;
+  &quot;termsAndConditions&quot;: {&#xd;
+    &quot;id&quot;: &quot;73208cd0469c4e08a8b8b3c72b41ae13&quot;,&#xd;
+    &quot;date&quot;: &quot;2018-03-19T10:44:46.321+0000&quot;&#xd;
+  },&#xd;
+  &quot;dateTimeOfEvent&quot;: &quot;2018-03-19T10:44:47.123Z&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">localhost</stringProp>
+              <stringProp name="HTTPSampler.port">8080</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">/visa-vtis-server-1.2.5-SNAPSHOT/tokenRequestors/40010030273/tokens/DNITHE301736046984008715/tokenChanged?eventType=TOKEN_CREATED&amp;eventID=01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+              <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+                <stringProp name="DurationAssertion.duration">10000</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="49586">200</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message"></stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">16</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="TOKEN_CREATED (CARD_TOKENIZED) &lt;" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;CARD_TOKENIZED&apos; ORDER BY id DESC LIMIT 1;</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">msg_history.card_tokenized</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">Object history = vars.getObject(&quot;msg_history.card_tokenized&quot;).get(0);
+
+String tokenRefId = &quot;DNITHE301736046984008715&quot;;
+String historyMsgRawIn = history.get(&quot;msg_raw_in&quot;);
+String historyMsgRawOut = history.get(&quot;msg_raw_out&quot;);
+boolean equalHistoryMsgRawIn = historyMsgRawIn.contains(tokenRefId);
+boolean equalHistoryMsgRawOut = historyMsgRawOut.contains(&quot;code&gt;0&lt;/code&quot;);
+
+if (!equalHistoryMsgRawIn) {
+	Failure = true;
+	FailureMessage = &quot;&apos;msg_raw_in&apos;: not found tokenRefId `&quot; + tokenRefId + &quot;`&quot;;
+} else {
+	if (!equalHistoryMsgRawOut) {
+		Failure = true;
+		FailureMessage = &quot;&apos;error_code&apos;: &quot; + &quot;`&quot; + historyMsgRawOut + &quot;`&quot;;
+	}
+}
+</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="TOKEN_CREATED (SEND_NOTIFICATION_TO_CUSTOMER) &lt;" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;SEND_NOTIFICATION_TO_CUSTOMER&apos; ORDER BY id DESC LIMIT 1;
+</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">msg_history.send_notification_to_customer</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">Object history = vars.getObject(&quot;msg_history.send_notification_to_customer&quot;).get(0);
+
+String tokenRefId = &quot;DNITHE301736046984008715&quot;;
+String historyMsgRawIn = history.get(&quot;msg_raw_in&quot;);
+String historyMsgRawOut = history.get(&quot;msg_raw_out&quot;);
+
+boolean equalHistoryMsgRawIn = historyMsgRawIn.contains(tokenRefId);
+boolean equalHistoryMsgRawOut = historyMsgRawOut.contains(&quot;code&gt;0&lt;/code&quot;);
+if (!equalHistoryMsgRawIn) {
+	Failure = true;
+	FailureMessage = &quot;&apos;msg_raw_in&apos;: not found tokenRefId `&quot; + tokenRefId + &quot;`&quot;;
+} else {
+	if (!equalHistoryMsgRawOut) {
+		Failure = true;
+		FailureMessage = &quot;&apos;error_code&apos;: &quot; + &quot;`&quot; + historyMsgRawOut + &quot;`&quot;;
+	}
+}
+</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="TOKEN_CREATED &lt; token_info" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT * FROM token_info WHERE token_ref_id=&apos;DNITHE301736046984008715&apos;;</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">token_info</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">int tokenSize = vars.getObject(&quot;token_info&quot;).size();
+if (!ResponseCode.equals(&quot;200&quot;) || tokenSize == 0) {
+	Failure = true;
+	FailureMessage = &quot;Count of rows: &quot; + tokenSize;
+}
+
+Object token = vars.getObject(&quot;token_info&quot;).get(0);
+
+String tokenRefId = token.get(&quot;token_ref_id&quot;);
+boolean equalTokenRefId = tokenRefId.equals(&quot;DNITHE301736046984008715&quot;);
+if (!equalTokenRefId) {
+	Failure = true;
+	FailureMessage = &quot;&apos;token_ref_id&apos;: &quot; + tokenRefId;
+}
+
+String tokenStatus = token.get(&quot;token_status&quot;);
+boolean equalTokenStatus = tokenStatus.equals(&quot;A&quot;);
+if (!equalTokenStatus) {
+	Failure = true;
+	FailureMessage = &quot;&apos;token_status&apos;: &quot; + tokenStatus;
+}
+
+String tokenActiveTokenCount = token.get(&quot;active_token_count&quot;);
+if (tokenActiveTokenCount==null) {
+	Failure = true;
+	FailureMessage = &quot;&apos;active_token_count&apos;: is empty&quot;;
+}
+
+String tokenTokenType = token.get(&quot;token_type&quot;);
+if (tokenTokenType==null) {
+	Failure = true;
+	FailureMessage = &quot;&apos;token_type&apos;: is empty&quot;;
+}
+
+String tokenPanSource = token.get(&quot;pan_source&quot;);
+if (tokenPanSource==null) {
+	Failure = true;
+	FailureMessage = &quot;&apos;pan_source&apos;: is empty&quot;;
+}
+
+String tokenPanInternalGuid = token.get(&quot;pan_internal_guid&quot;);
+if (tokenPanInternalGuid==null) {
+	Failure = true;
+	FailureMessage = &quot;&apos;pan_internal_guid&apos;: is empty&quot;;
+}
+
+boolean equalTokenPanInternalGuid = tokenPanInternalGuid.equals(&quot;CardID4&quot;);
+if (!equalTokenPanInternalGuid) {
+	Failure = true;
+	FailureMessage = &quot;&apos;pan_internal_guid&apos;: &quot; + tokenPanInternalID;
+}
+
+String tokenPanInternalID = token.get(&quot;pan_internal_id&quot;);
+boolean equalTokenPanInternalID = tokenPanInternalID.equals(&quot;CardID00000000000004&quot;);
+if (!equalTokenPanInternalID) {
+	Failure = true;
+	FailureMessage = &quot;&apos;pan_internal_id&apos;: &quot; + tokenPanInternalID;
+}
+
+Date tokenStatusUpdate = token.get(&quot;token_status_update&quot;);
+if (tokenStatusUpdate==null) {
+	Failure = true;
+	FailureMessage = &quot;&apos;token_status_update&apos;: is empty&quot;;
+}
+
+Date tokenDigitizeDate = token.get(&quot;digitize_date&quot;);
+if (tokenDigitizeDate==null) {
+	Failure = true;
+	FailureMessage = &quot;&apos;digitize_date&apos;: is empty&quot;;
+}
+</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <Summariser guiclass="SummariserGui" testclass="Summariser" testname="Generate Summary Results" enabled="true"/>
+        <hashTree/>
+        <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
