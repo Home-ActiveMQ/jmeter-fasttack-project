@@ -277,6 +277,11 @@ if (!equalHistoryMsgRawIn) {
 	Failure = true;
 	FailureMessage = &quot;&apos;msg_raw_in&apos;: not found requestID `&quot; + requestId + &quot;`&quot;;
 } else {
+	boolean equalInDeviceName = historyMsgRawIn.contains(&quot;\&quot;deviceName\&quot;:&quot;);
+	if (!equalInDeviceName) {
+		Failure = true;
+		FailureMessage = &quot;&apos;deviceName&apos;: &quot; + &quot;`&quot; + historyMsgRawIn + &quot;`&quot;;
+	}
 	if (!equalHistoryMsgRawOut) {
 		Failure = true;
 		FailureMessage = &quot;&apos;error_code&apos;: &quot; + &quot;`&quot; + historyMsgRawOut + &quot;`&quot;;
