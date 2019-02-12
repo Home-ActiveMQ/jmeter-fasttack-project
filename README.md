@@ -1,4 +1,12 @@
 
+JMeter Tutorial
+---
+* `JMeter User's Manual` https://jmeter.apache.org/usermanual  **(** https://sqa.stackexchange.com/questions/2546/where-can-i-find-good-jmeter-tutorials **)**
+* `jmeter_tutorial.pdf (full)` https://www.aaterminals.com.au/wp-content/uploads/2018/01/jmeter_tutorial.pdf
+* `JMeter best practices` http://index-of.es/Varios-2/JMeter-Tutorial.pdf
+
+
+
 * [(Fuse) ActiveMQ Tuning Guide](https://access.redhat.com/documentation/en-US/Fuse_ESB_Enterprise/7.1/html-single/ActiveMQ_Tuning_Guide/index.html)
 * [Monitor ActiveMQ metrics and performance](https://www.datadoghq.com/blog/monitor-activemq-metrics-performance)
   * **(** [mail.google.com](https://mail.google.com/mail/u/0/#inbox/FMfcgxwBVDCvxfCPQXBQKwLsQgKnJzTn) **)**
@@ -113,3 +121,16 @@ How to Run External Commands and Programs from JMeter
 | nmon_start_time  | ${__time(yyyy-MM-dd'T'HH:mm:ss,)}  |
 | resultDir  | ${__BeanShell(import org.apache.jmeter.services.FileServer; FileServer.getFileServer().getBaseDir();)}/results/${__time(YMDHMS)}  |
 
+
+JMeter Maven Test Automation
+---
+* `JMeter Maven Example` https://github.com/mlex/jmeter-maven-example
+* `How to Use the JMeter Maven Plugin` https://www.blazemeter.com/blog/how-use-jmeter-maven-plugin
+* http://www.testautomationguru.com/jmeter-continuous-performance-testing-jmeter-maven
+* https://www.atlassian.com/blog/archives/automated_performance_testing_using_jmeter_and_maven
+
+
+
+* `Building a Database Test Plan` https://jmeter.apache.org/usermanual/build-db-test-plan.html
+* `How to Retrieve Database Data for API Testing With JMeter` https://dzone.com/articles/how-to-retrieve-database-data-for-api-testing-with
+* `Debugging JDBC Sampler Results in JMeter` https://www.blazemeter.com/blog/debugging-jdbc-sampler-results-jmeter
