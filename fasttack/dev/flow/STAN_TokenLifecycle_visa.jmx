@@ -81,7 +81,7 @@
             <stringProp name="CriticalSectionController.lockName">global_lock</stringProp>
           </CriticalSectionController>
           <hashTree/>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Create Notification" enabled="true">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Deactivate (tokenLifecycle VISA)" enabled="true">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
