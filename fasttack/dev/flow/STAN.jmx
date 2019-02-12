@@ -81,7 +81,7 @@
             </collectionProp>
           </Arguments>
           <hashTree/>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Create Notification (VTS)" enabled="true">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Create Notification (VTS)" enabled="false">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
@@ -125,7 +125,7 @@ DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE301736046984008715&apos;;
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
             <hashTree/>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TOKEN_CREATED" enabled="false">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TOKEN_CREATED" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -850,7 +850,7 @@ if (response.code != null) {
             </SystemSampler>
             <hashTree/>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Update (VTS)" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Update (VTS)" enabled="true">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
@@ -861,7 +861,11 @@ if (response.code != null) {
               <stringProp name="queryType">Callable Statement</stringProp>
               <stringProp name="query">DELETE FROM cardholder_verification_method WHERE token_ref_id=&apos;DNITHE000302000000000001&apos;;
 DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE000302000000000001&apos;;
-INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_internal_guid, pan_ref_id, masked_pan, masked_token, token_expdate, lifecycle_trace_id, pan_source, active_token_count, token_type, token_status, digitize_date, token_status_update, customer_id, customer_phone, ips, client_wallet_account_id, bin, reminder_period, tokenization_path, wp_device_score, wp_account_score, wp_phonenumber_score, wp_reason_codes, clr_tokenization_standard_ver) VALUES (&apos;DNITHE000302000000000001&apos;, &apos;40010030273&apos;, &apos;CardID00000000000004&apos;, &apos;CardID4&apos;, &apos;V-3017192484534844832252&apos;, &apos;410232_0006&apos;, &apos;455136_0027&apos;, &apos;2023-12-31&apos;, &apos;302000000000001&apos;, &apos;K&apos;, &apos;1&apos;, &apos;H&apos;, &apos;I&apos;, &apos;2018-03-19 12:44:47.123000&apos;, &apos;2019-02-11 18:36:42.821000&apos;, &apos;C0000001&apos;, &apos;0631234567&apos;, &apos;V&apos;, &apos;uGrOxzwW2ghVx1nuoC2Fnwko&apos;, 410232, null, null, null, null, null, null, null);</stringProp>
+INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_internal_guid, pan_ref_id, masked_pan, masked_token, token_expdate, lifecycle_trace_id, pan_source, active_token_count, token_type, token_status, digitize_date, token_status_update, customer_id, customer_phone, ips, client_wallet_account_id, bin, reminder_period, tokenization_path, wp_device_score, wp_account_score, wp_phonenumber_score, wp_reason_codes, clr_tokenization_standard_ver) VALUES (&apos;DNITHE000302000000000001&apos;, &apos;40010030273&apos;, &apos;CardID1&apos;, &apos;CardID0000000004&apos;, &apos;V-3017192484534844832252&apos;, &apos;410232_0006&apos;, &apos;455136_0027&apos;, &apos;2023-12-31&apos;, &apos;302000000000001&apos;, &apos;K&apos;, &apos;1&apos;, &apos;H&apos;, &apos;D&apos;, &apos;2018-03-19 12:44:47.123000&apos;, &apos;2019-02-12 17:23:58.349000&apos;, &apos;C0000001&apos;, &apos;380503124439&apos;, &apos;V&apos;, &apos;uGrOxzwW2ghVx1nuoC2Fnwko&apos;, 410232, null, null, null, null, null, null, null);
+
+DELETE FROM cardholder_verification_method WHERE token_ref_id=&apos;DNITHE301736046984008715&apos;;
+DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE301736046984008715&apos;;
+INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_internal_guid, pan_ref_id, masked_pan, masked_token, token_expdate, lifecycle_trace_id, pan_source, active_token_count, token_type, token_status, digitize_date, token_status_update, customer_id, customer_phone, ips, client_wallet_account_id, bin, reminder_period, tokenization_path, wp_device_score, wp_account_score, wp_phonenumber_score, wp_reason_codes, clr_tokenization_standard_ver) VALUES (&apos;DNITHE301736046984008715&apos;, &apos;40010075001&apos;, &apos;CardID1&apos;, &apos;CardID0000000004&apos;, &apos;V-3017192484534844832252&apos;, &apos;423456_1111&apos;, &apos;455136_0027&apos;, &apos;2023-12-31&apos;, &apos;302000000000001&apos;, &apos;K&apos;, &apos;1&apos;, &apos;H&apos;, &apos;A&apos;, &apos;2018-03-19 12:44:47.123000&apos;, &apos;2019-02-12 17:23:58.349000&apos;, &apos;C0000001&apos;, &apos;380503124439&apos;, &apos;V&apos;, &apos;uGrOxzwW2ghVx1nuoC2Fnwko&apos;, 410232, null, null, null, null, null, null, null);</stringProp>
               <stringProp name="queryArguments"></stringProp>
               <stringProp name="queryArgumentsTypes"></stringProp>
               <stringProp name="variableNames"></stringProp>
@@ -960,7 +964,125 @@ INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_in
                 <intProp name="Assertion.test_type">16</intProp>
               </ResponseAssertion>
               <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">def response =  new groovy.json.JsonSlurper().parse(prev.getResponseData())
+
+if (response.requestId != &quot;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&quot; ) {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The responseID and requestID values not matched&quot;);
+}
+
+if (response.code != null) {
+	if (response.code != &quot;0&quot;){
+		AssertionResult.setFailure(true)
+		AssertionResult.setFailureMessage(&quot;The internal error occured&quot;);
+	}
+	return;
+}
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
             </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: bank-server.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/bank-server.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree/>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/core.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree/>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: bank-client.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="less ~/tools/wildfly-10.1.0/standalone/log/fasttack/bank-client.log" elementType="Argument">
+                    <stringProp name="Argument.name">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/bank-client.log</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/bank-client.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree/>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-client.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="less ~/tools/wildfly-10.1.0/standalone/log/fasttack/bank-client.log" elementType="Argument">
+                    <stringProp name="Argument.name">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/bank-client.log</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/visa-client.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree/>
           </hashTree>
         </hashTree>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
