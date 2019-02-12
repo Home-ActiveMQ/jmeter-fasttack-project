@@ -66,6 +66,15 @@ Setting JDBC SQL Server Connection with JMeter
     ```
 
 
+How to Run External Commands and Programs from JMeter
+---
+* `run sh script in jmeter` https://stackoverflow.com/questions/30596880/run-sh-script-in-jmeter
+                            https://www.blazemeter.com/blog/how-run-external-commands-and-programs-locally-and-remotely-jmeter
+* `How to execute jar from OS Process Sampler in Linux` https://stackoverflow.com/questions/38181399/how-to-execute-jar-from-os-process-sampler-in-linux
+* `How to Run External Commands and Programs Locally and Remotely from JMeter` https://www.blazemeter.com/blog/how-run-external-commands-and-programs-locally-and-remotely-jmeter
+
+
+
 * `https://www.blazemeter.com/blog/creating-and-testing-dates-in-jmeter-learn-how`
 * `https://stackoverflow.com/questions/27043029/jmeter-get-current-date-and-time/27048364`
 * `https://stackoverflow.com/questions/42364226/jmeter-how-to-get-current-date-and-time-in-seconds`
@@ -76,6 +85,10 @@ Setting JDBC SQL Server Connection with JMeter
 
 
 * `How to Use JMeter Assertions in Three Easy Steps` https://www.blazemeter.com/blog/how-use-jmeter-assertions-three-easy-steps
+
+
+* `how to empty or truncate a file in linux` http://www.lostsaloon.com/technology/how-to-empty-or-truncate-files-in-linux
+* `Просмотр текстовых файлов` http://www.linuxcookbook.ru/books/opensuse/sec.new.bash.view.html
 
 
 
