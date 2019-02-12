@@ -143,6 +143,7 @@ DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE000${tokenReferenceID}&apo
     &lt;secureElementID&gt;04312E7B342C80014328036811932950DA075B1C4DC45F7C&lt;/secureElementID&gt;&#xd;
     &lt;deviceType&gt;1&lt;/deviceType&gt;&#xd;
     &lt;deviceNumber&gt;380507534412&lt;/deviceNumber&gt;&#xd;
+    &lt;deviceName&gt;Samsung Galaxy S&lt;/deviceName&gt;&#xd;
   &lt;/deviceInfo&gt;&#xd;
   &lt;otpReason&gt;01&lt;/otpReason&gt;&#xd;
   &lt;otpMaxReached&gt;false&lt;/otpMaxReached&gt;&#xd;
@@ -292,6 +293,11 @@ if (!equalHistoryMsgRawIn) {
 	Failure = true;
 	FailureMessage = &quot;&apos;msg_raw_in&apos;: not found conversationId `&quot; + cvmCorrelationId;
 } else {
+	boolean equalInDeviceName = historyMsgRawIn.contains(&quot;\&quot;deviceName\&quot;:&quot;);
+	if (!equalInDeviceName) {
+		Failure = true;
+		FailureMessage = &quot;&apos;deviceName&apos;: &quot; + &quot;`&quot; + historyMsgRawIn + &quot;`&quot;;
+	}
 	if (!equalHistoryMsgRawOut) {
 		Failure = true;
 		FailureMessage = &quot;&apos;error_code&apos;: &quot; + &quot;`&quot; + historyMsgRawOut + &quot;`&quot;;
