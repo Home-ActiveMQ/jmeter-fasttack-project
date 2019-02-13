@@ -288,8 +288,134 @@ if (!equalHistoryMsgRawOut) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-api3-server.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-api3-server.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/core.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: bank-client.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/bank-client.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller Get Cardholder Verification Methods" enabled="true">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller Get Cardholder Verification Methods" enabled="false">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
@@ -544,8 +670,134 @@ if (tokenDigitizeDate!=null) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-api3-server.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-api3-server.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/core.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: bank-client.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/bank-client.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Send Pass Code" enabled="true">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Send Pass Code" enabled="false">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
@@ -655,6 +907,90 @@ if (response.actionCode != &quot;00&quot; ) {
 }
 </stringProp>
               </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-api3-server.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-api3-server.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/core.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
               <hashTree/>
             </hashTree>
             <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="sendpasscode (SEND_OTP) &lt;" enabled="true">
@@ -802,8 +1138,92 @@ if (response.actionCode != &quot;01&quot; ) {
               </JSR223Assertion>
               <hashTree/>
             </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-api3-server.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-api3-server.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/core.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Create Notification" enabled="true">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Create Notification" enabled="false">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
@@ -1095,8 +1515,134 @@ if (tokenDigitizeDate==null) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-api3-server.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-api3-server.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/core.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: bank-client.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/bank-client.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Notification - 3701" enabled="true">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Notification - 3701" enabled="false">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
@@ -1275,6 +1821,132 @@ if (tokenStatusUpdate==null) {
 	FailureMessage = &quot;&apos;token_status_update&apos;: is empty&quot;;
 }
 </stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-api3-server.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-api3-server.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/core.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: bank-client.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/bank-client.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
                 <stringProp name="BeanShellAssertion.filename"></stringProp>
                 <stringProp name="BeanShellAssertion.parameters"></stringProp>
                 <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
