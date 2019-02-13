@@ -7,7 +7,18 @@
       <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-        <collectionProp name="Arguments.arguments"/>
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="serverUrl" elementType="Argument">
+            <stringProp name="Argument.name">serverUrl</stringProp>
+            <stringProp name="Argument.value">localhost</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="logDir" elementType="Argument">
+            <stringProp name="Argument.name">logDir</stringProp>
+            <stringProp name="Argument.value">~/tools/wildfly-10.1.0/standalone/log/fasttack</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
       </elementProp>
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
@@ -129,7 +140,7 @@ DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE000${tokenReferenceID}&apo
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.value">{&#xd;
   &quot;tokenRequestorID&quot;: &quot;40010030273&quot;,&#xd;
-  &quot;tokenReferenceID&quot;: &quot;DNITHE301736046984008735&quot;,&#xd;
+  &quot;tokenReferenceID&quot;: &quot;DNITHE000${tokenReferenceID}&quot;,&#xd;
   &quot;panSource&quot;: &quot;KEY_ENTERED&quot;,&#xd;
   &quot;deviceInfo&quot;: {&#xd;
     &quot;deviceID&quot;: &quot;04312E7B342C80014328036811932950DA075B1C4DC45F7C&quot;,&#xd;
@@ -156,7 +167,7 @@ DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE000${tokenReferenceID}&apo
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">localhost</stringProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -194,8 +205,7 @@ DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE000${tokenReferenceID}&apo
                 <stringProp name="filename"></stringProp>
                 <stringProp name="cacheKey">true</stringProp>
                 <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
-
-</stringProp>
+//vars.put(&quot;requestID&quot;,&quot;${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}&quot;); </stringProp>
               </JSR223PreProcessor>
               <hashTree/>
               <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
@@ -299,7 +309,7 @@ if (!equalHistoryMsgRawOut) {
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">localhost</stringProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -337,8 +347,7 @@ if (!equalHistoryMsgRawOut) {
                 <stringProp name="filename"></stringProp>
                 <stringProp name="cacheKey">true</stringProp>
                 <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
-
-</stringProp>
+//vars.put(&quot;requestID&quot;,&quot;${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}&quot;); </stringProp>
               </JSR223PreProcessor>
               <hashTree/>
               <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
@@ -520,7 +529,7 @@ if (tokenDigitizeDate!=null) {
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">localhost</stringProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -558,8 +567,7 @@ if (tokenDigitizeDate!=null) {
                 <stringProp name="filename"></stringProp>
                 <stringProp name="cacheKey">true</stringProp>
                 <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
-
-</stringProp>
+//vars.put(&quot;requestID&quot;,&quot;${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}&quot;); </stringProp>
               </JSR223PreProcessor>
               <hashTree/>
               <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
@@ -641,7 +649,7 @@ if (!equalHistoryMsgRawIn) {
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">localhost</stringProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -750,11 +758,11 @@ if (response.actionCode != &quot;01&quot; ) {
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">localhost</stringProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/visa-api3-server-1.2.5-SNAPSHOT/tokenRequestors/40010030273/tokens/DNITHE000${tokenReferenceID}/tokenChanged?eventType=TOKEN_CREATED&amp;eventID=${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+              <stringProp name="HTTPSampler.path">/visa-api3-server-1.2.5-SNAPSHOT/tokenRequestors/40010030273/tokens/DNITHE000${tokenReferenceID}/tokenChanged?eventType=TOKEN_CREATED&amp;eventID=${requestID}</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -787,9 +795,8 @@ if (response.actionCode != &quot;01&quot; ) {
                 <stringProp name="parameters"></stringProp>
                 <stringProp name="filename"></stringProp>
                 <stringProp name="cacheKey">true</stringProp>
-                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
-
-</stringProp>
+                <stringProp name="script">//vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+vars.put(&quot;requestID&quot;,&quot;${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}&quot;);</stringProp>
               </JSR223PreProcessor>
               <hashTree/>
               <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
@@ -994,11 +1001,11 @@ if (tokenDigitizeDate==null) {
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">localhost</stringProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/visa-api3-server-1.2.5-SNAPSHOT/tokenRequestors/40010030273/tokens/DNITHE000${tokenReferenceID}/tokenChanged?eventType=TOKEN_STATUS_UPDATED&amp;eventID=${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+              <stringProp name="HTTPSampler.path">/visa-api3-server-1.2.5-SNAPSHOT/tokenRequestors/40010030273/tokens/DNITHE000${tokenReferenceID}/tokenChanged?eventType=TOKEN_STATUS_UPDATED&amp;eventID=${requestID}</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1031,9 +1038,8 @@ if (tokenDigitizeDate==null) {
                 <stringProp name="parameters"></stringProp>
                 <stringProp name="filename"></stringProp>
                 <stringProp name="cacheKey">true</stringProp>
-                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
-
-</stringProp>
+                <stringProp name="script">//vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+vars.put(&quot;requestID&quot;,&quot;${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}&quot;);</stringProp>
               </JSR223PreProcessor>
               <hashTree/>
               <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
