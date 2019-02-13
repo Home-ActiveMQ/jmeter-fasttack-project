@@ -393,7 +393,24 @@ if (tokenDigitizeDate==null) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
             <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="true">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
@@ -417,7 +434,24 @@ if (tokenDigitizeDate==null) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
             <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: bank-client.log" enabled="true">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
@@ -441,7 +475,24 @@ if (tokenDigitizeDate==null) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
           </hashTree>
           <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Activate (MDES)" enabled="true">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
@@ -632,7 +683,24 @@ if (!equalHistoryMsgRawIn) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
             <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="true">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
@@ -656,7 +724,24 @@ if (!equalHistoryMsgRawIn) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
             <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: mdes-client.log" enabled="true">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
@@ -680,7 +765,24 @@ if (!equalHistoryMsgRawIn) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
           </hashTree>
           <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Deactivate (VTS)" enabled="true">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
@@ -874,7 +976,24 @@ if (!equalHistoryMsgRawIn) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
             <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="true">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
@@ -898,7 +1017,24 @@ if (!equalHistoryMsgRawIn) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
             <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-client.log" enabled="true">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
@@ -922,7 +1058,24 @@ if (!equalHistoryMsgRawIn) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
           </hashTree>
           <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Update (MDES)" enabled="true">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
@@ -1057,7 +1210,7 @@ if (response.code != null) {
               </JSR223Assertion>
               <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="updateToken (GET_CARD_INFO_SHORT) &lt;" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="updateToken (GET_CARD_INFO_SHORT) ?" enabled="true">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
               <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;GET_CARD_INFO_SHORT&apos; ORDER BY id DESC LIMIT 1;</stringProp>
@@ -1094,7 +1247,7 @@ if (!equalHistoryMsgRawIn) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="updateToken (TOKEN_UPDATE) &lt;" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="updateToken (TOKEN_UPDATE) ?" enabled="true">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
               <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;TOKEN_UPDATE&apos; ORDER BY id DESC LIMIT 1;</stringProp>
@@ -1154,7 +1307,24 @@ if (!equalHistoryMsgRawIn) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
             <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="true">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
@@ -1178,7 +1348,24 @@ if (!equalHistoryMsgRawIn) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
             <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: bank-client.log" enabled="true">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
@@ -1202,7 +1389,24 @@ if (!equalHistoryMsgRawIn) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
             <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: mdes-client.log" enabled="true">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
@@ -1226,7 +1430,24 @@ if (!equalHistoryMsgRawIn) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
           </hashTree>
           <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Update (VTS)" enabled="true">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
@@ -1365,7 +1586,7 @@ if (response.code != null) {
               </JSR223Assertion>
               <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="updateToken (GET_CARD_INFO_SHORT) &lt;" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="updateToken (GET_CARD_INFO_SHORT) ?" enabled="true">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
               <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;GET_CARD_INFO_SHORT&apos; ORDER BY id DESC LIMIT 1;</stringProp>
@@ -1402,7 +1623,7 @@ if (!equalHistoryMsgRawIn) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="updateToken (TOKEN_UPDATE) &lt;" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="updateToken (TOKEN_UPDATE) ?" enabled="true">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
               <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;TOKEN_UPDATE&apos; ORDER BY id DESC LIMIT 1;</stringProp>
@@ -1462,7 +1683,24 @@ if (!equalHistoryMsgRawIn) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
             <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="true">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
@@ -1486,7 +1724,24 @@ if (!equalHistoryMsgRawIn) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
             <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: bank-client.log" enabled="true">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
@@ -1510,7 +1765,24 @@ if (!equalHistoryMsgRawIn) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
             <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-client.log" enabled="true">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
@@ -1534,7 +1806,24 @@ if (!equalHistoryMsgRawIn) {
               </elementProp>
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
-            <hashTree/>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
           </hashTree>
         </hashTree>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
