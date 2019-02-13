@@ -7,7 +7,18 @@
       <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-        <collectionProp name="Arguments.arguments"/>
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="serverUrl" elementType="Argument">
+            <stringProp name="Argument.name">serverUrl</stringProp>
+            <stringProp name="Argument.value">localhost</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="logDir" elementType="Argument">
+            <stringProp name="Argument.name">logDir</stringProp>
+            <stringProp name="Argument.value">~/tools/wildfly-10.1.0/standalone/log/fasttack</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
       </elementProp>
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
@@ -162,10 +173,10 @@ DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE301736046984008715&apos;;
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">localhost</stringProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
               <stringProp name="HTTPSampler.path">/visa-vtis-server-1.2.5-SNAPSHOT/tokenRequestors/40010030273/tokens/DNITHE301736046984008715/tokenChanged?eventType=TOKEN_CREATED&amp;eventID=01a3e0c5-d876-4fa0-a91e-56bb8c7e7bc6</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -383,7 +394,7 @@ if (tokenDigitizeDate==null) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/vtis-server.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/vtis-server.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -424,7 +435,7 @@ if (countStan != countStanResponse) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/core.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/core.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -465,7 +476,7 @@ if (countStan != countStanResponse) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/bank-client.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/bank-client.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -562,10 +573,10 @@ INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_in
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">localhost</stringProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
               <stringProp name="HTTPSampler.path">/bank-server-1.2.5-SNAPSHOT/tokenLifecycle</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -673,7 +684,7 @@ if (!equalHistoryMsgRawIn) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/bank-server.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/bank-server.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -714,7 +725,7 @@ if (countStan != countStanResponse) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/core.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/core.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -755,7 +766,7 @@ if (countStan != countStanResponse) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/mdes-client.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/mdes-client.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -851,10 +862,10 @@ INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_in
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">localhost</stringProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
               <stringProp name="HTTPSampler.path">/bank-server-1.2.5-SNAPSHOT/tokenLifecycle</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -966,7 +977,7 @@ if (!equalHistoryMsgRawIn) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/bank-server.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/bank-server.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1007,7 +1018,7 @@ if (countStan != countStanResponse) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/core.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/core.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1048,7 +1059,7 @@ if (countStan != countStanResponse) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/visa-client.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-client.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1145,10 +1156,10 @@ INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_in
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">localhost</stringProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
               <stringProp name="HTTPSampler.path">/bank-server-1.2.5-SNAPSHOT/tokenUpdate</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1297,7 +1308,7 @@ if (!equalHistoryMsgRawIn) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/bank-server.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/bank-server.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1338,7 +1349,7 @@ if (countStan != countStanResponse) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/core.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/core.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1379,7 +1390,7 @@ if (countStan != countStanResponse) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/bank-client.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/bank-client.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1420,7 +1431,7 @@ if (countStan != countStanResponse) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/mdes-client.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/mdes-client.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1521,10 +1532,10 @@ INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_in
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">localhost</stringProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
               <stringProp name="HTTPSampler.path">/bank-server-1.2.5-SNAPSHOT/tokenUpdate</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1673,7 +1684,7 @@ if (!equalHistoryMsgRawIn) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/bank-server.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/bank-server.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1714,7 +1725,7 @@ if (countStan != countStanResponse) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/core.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/core.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1755,7 +1766,7 @@ if (countStan != countStanResponse) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/bank-client.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/bank-client.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1796,7 +1807,7 @@ if (countStan != countStanResponse) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ~/tools/wildfly-10.1.0/standalone/log/fasttack/visa-client.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-client.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
