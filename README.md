@@ -4,7 +4,9 @@ JMeter Tutorial
 * `JMeter User's Manual` https://jmeter.apache.org/usermanual  **(** https://sqa.stackexchange.com/questions/2546/where-can-i-find-good-jmeter-tutorials **)**
 * `jmeter_tutorial.pdf (full)` https://www.aaterminals.com.au/wp-content/uploads/2018/01/jmeter_tutorial.pdf
 * `JMeter best practices` http://index-of.es/Varios-2/JMeter-Tutorial.pdf
+* `Учусь Apache Jmeter` https://riptutorial.com/Download/apache-jmeter-ru.pdf
 
+* `NobleProg - Apache JMeter Testing` https://training-course-material.com/training/Apache_JMeter_Testing
 
 
 * [(Fuse) ActiveMQ Tuning Guide](https://access.redhat.com/documentation/en-US/Fuse_ESB_Enterprise/7.1/html-single/ActiveMQ_Tuning_Guide/index.html)
@@ -17,6 +19,24 @@ JMeter Tutorial
 * [Running Apache ActiveMQ and Hawtio in Standalone Mode](http://bennet-schulz.com/2016/07/apache-activemq-and-hawtio.html)
   * **(** https://dzone.com/articles/running-apache-activemq-and-hawtio-in-standalone-m-1 **)**
   * https://github.com/bennetelli/activemq-hawtio-standalone
+
+
+BeanShell 
+---
+* `Simple Java Scripting` http://www.beanshell.org/manual/bshmanual.html
+* `Count the number of occurences of a string in response data` https://stackoverflow.com/questions/39573591/count-the-number-of-occurences-of-a-string-in-response-data **|** https://www.blazemeter.com/blog/how-to-work-with-strings-in-jmeter
+    ```java
+    import org.apache.commons.lang.StringUtils;
+    
+    String response = SampleResult.getResponseDataAsString();
+    int count = StringUtils.countMatches(response, "STAN");
+    ```
+
+
+
+OS_Process_Sampler
+---
+* http://jmeter.apache.org/usermanual/component_reference.html#OS_Process_Sampler
 
 
 Setting JDBC SQL Server Connection with JMeter
@@ -134,3 +154,8 @@ JMeter Maven Test Automation
 * `Building a Database Test Plan` https://jmeter.apache.org/usermanual/build-db-test-plan.html
 * `How to Retrieve Database Data for API Testing With JMeter` https://dzone.com/articles/how-to-retrieve-database-data-for-api-testing-with
 * `Debugging JDBC Sampler Results in JMeter` https://www.blazemeter.com/blog/debugging-jdbc-sampler-results-jmeter
+
+
+* https://www.ubik-ingenierie.com/blog/best-practice-using-jmeter-assertions
+* `Properties of Response Assertion in JMeter` https://jmetervn.com/2016/11/29/properties-of-response-assertion-in-jmeter
+* `JSR223 with Groovy: Variables (Part 1)` https://jmetervn.com/2016/12/05/jsr223-with-groovy-variables-part-1
