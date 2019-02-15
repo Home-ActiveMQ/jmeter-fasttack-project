@@ -1,5 +1,5 @@
 
-JMeter Tutorial
+JMeter Tutorial (или [SoapUI Maven Automation Example](https://github.com/Home-JUnitTest/soapui-maven-example))
 ---
 * `JMeter User's Manual` https://jmeter.apache.org/usermanual  **(** https://sqa.stackexchange.com/questions/2546/where-can-i-find-good-jmeter-tutorials **)**
 * `jmeter_tutorial.pdf (full)` https://www.aaterminals.com.au/wp-content/uploads/2018/01/jmeter_tutorial.pdf

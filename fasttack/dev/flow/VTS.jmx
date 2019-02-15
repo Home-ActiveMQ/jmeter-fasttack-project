@@ -126,7 +126,7 @@ DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE000${tokenReferenceID}&apo
             </JDBCSampler>
             <hashTree/>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller Get Cardholder Verification Methods" enabled="true">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller Get Cardholder Verification Methods" enabled="false">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
@@ -539,7 +539,7 @@ if (countStan != countStanResponse) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Send Pass Code" enabled="true">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Send Pass Code" enabled="false">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
@@ -970,7 +970,7 @@ if (countStan != countStanResponse) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Create Notification" enabled="true">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Create Notification" enabled="false">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
@@ -1390,7 +1390,7 @@ if (countStan != countStanResponse) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Notification - 3701" enabled="true">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Notification - 3701" enabled="false">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
@@ -1674,6 +1674,326 @@ if (countStan != countStanResponse) {
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
                     <stringProp name="Argument.value">less ${logDir}/bank-client.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Search" enabled="true">
+            <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="token_info:  DNITHE301736046984008739" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Callable Statement</stringProp>
+              <stringProp name="query">DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE301736046984008739&apos;;
+INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_internal_guid, pan_ref_id, masked_pan, masked_token, token_expdate, lifecycle_trace_id, pan_source, active_token_count, token_type, token_status, digitize_date, token_status_update, customer_id, customer_phone, ips, client_wallet_account_id, bin, reminder_period, tokenization_path, wp_device_score, wp_account_score, wp_phonenumber_score, wp_reason_codes, clr_tokenization_standard_ver, deleted_from_app) VALUES (&apos;DNITHE301736046984008739&apos;, &apos;40010030273&apos;, &apos;CardID00000000000004&apos;, &apos;CardID4&apos;, &apos;V-4200000000000000000090&apos;, &apos;410232_0006&apos;, &apos;455136_0027&apos;, &apos;2015-12-31&apos;, &apos;302000000000001&apos;, &apos;K&apos;, &apos;1&apos;, &apos;S&apos;, &apos;A&apos;, &apos;2015-04-03 17:01:18.123000&apos;, &apos;2015-04-03 17:01:18.123000&apos;, &apos;C0000001&apos;, &apos;0631234567&apos;, &apos;V&apos;, &apos;99E99E18984EB39C439FEBFBC6AC924C&apos;, null, null, null, null, null, null, null, null, null);</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable"></stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree/>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="truncate: fasttack *.logs" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">truncate -s 0 ${logDir}/*.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="tokenInfo" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">&lt;TokenInfoRequest&gt;&#xd;
+  &lt;requestId&gt;${requestID}&lt;/requestId&gt;&#xd;
+  &lt;tokenRefId&gt;DNITHE301736046984008739&lt;/tokenRefId&gt;&#xd;
+  &lt;tokenRequestorId&gt;40010030273&lt;/tokenRequestorId&gt;&#xd;
+  &lt;ips&gt;V&lt;/ips&gt;&#xd;
+  &lt;auditInfo&gt;&#xd;
+    &lt;userId&gt;operator&lt;/userId&gt;&#xd;
+    &lt;userName&gt;Testovenko&lt;/userName&gt;&#xd;
+  &lt;/auditInfo&gt;&#xd;
+&lt;/TokenInfoRequest&gt;</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8080</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+              <stringProp name="HTTPSampler.path">/bank-server-1.2.5-SNAPSHOT/tokenInfo</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+              <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Content-Type" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/xml</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/xml</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+                <stringProp name="DurationAssertion.duration">10000</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+
+</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="XPath Assertion" enabled="true">
+                <boolProp name="XPath.negate">false</boolProp>
+                <stringProp name="XPath.xpath">/TokenInfoResponse/code=&apos;0&apos;</stringProp>
+                <boolProp name="XPath.validate">false</boolProp>
+                <boolProp name="XPath.whitespace">false</boolProp>
+                <boolProp name="XPath.tolerant">false</boolProp>
+                <boolProp name="XPath.namespace">false</boolProp>
+              </XPathAssertion>
+              <hashTree/>
+            </hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="tokenInfo (DELETED_FROM_CONSUMER_APP) ?" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT * FROM token_history WHERE token_event_type=&apos;DELETED_FROM_CONSUMER_APP&apos; ORDER BY id DESC LIMIT 1;</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">token_history.delete_from_consumer_app</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="false">
+                <stringProp name="BeanShellAssertion.query">String requestId = vars.get(&quot;requestID&quot;);
+Object history = vars.getObject(&quot;token_history.delete_from_consumer_app&quot;).get(0);
+
+String historyMsgRawIn = history.get(&quot;msg_raw_in&quot;);
+String historyMsgRawOut = history.get(&quot;msg_raw_out&quot;);
+boolean equalHistoryMsgRawIn = historyMsgRawIn.contains(requestId);
+boolean equalHistoryMsgRawOut = historyMsgRawOut.contains(&quot;code&gt;0&lt;/code&quot;);
+
+if (!equalHistoryMsgRawIn) {
+	Failure = true;
+	FailureMessage = &quot;&apos;msg_raw_in&apos;: not found requestID `&quot; + requestId + &quot;`&quot;;
+} else {
+	if (!equalHistoryMsgRawOut) {
+		Failure = true;
+		FailureMessage = &quot;&apos;error_code&apos;: &quot; + &quot;`&quot; + historyMsgRawOut + &quot;`&quot;;
+	}
+}
+</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="tokenInfo &lt; token_info" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT * FROM token_info WHERE token_ref_id=&apos;DTC1MC0000171740bf9605c539fe4c418343322319&apos;;
+</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">token_info</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">int tokenSize = vars.getObject(&quot;token_info&quot;).size();
+if (!ResponseCode.equals(&quot;200&quot;) || tokenSize == 0) {
+	Failure = true;
+	FailureMessage = &quot;Count of rows: &quot; + tokenSize;
+}
+
+Object token = vars.getObject(&quot;token_info&quot;).get(0);
+
+String tokenStatus = token.get(&quot;token_status&quot;);
+boolean equalTokenStatus = tokenStatus.equals(&quot;I&quot;);
+if (!equalTokenStatus) {
+	Failure = true;
+	FailureMessage = &quot;&apos;token_status&apos;: &quot; + tokenStatus;
+}
+
+String tokenDeletedFromApp = token.get(&quot;deleted_from_app&quot;);
+if (tokenDeletedFromApp!=&quot;true&quot;) {
+	Failure = true;
+	FailureMessage = &quot;&apos;deleted_from_app&apos;: &quot; + tokenDeletedFromApp;
+}
+</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: bank-server.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/bank-server.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/core.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-client.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-client.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
