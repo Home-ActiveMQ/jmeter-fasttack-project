@@ -18,6 +18,11 @@
             <stringProp name="Argument.value">~/tools/wildfly-10.1.0/standalone/log/fasttack</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
+          <elementProp name="serverVer" elementType="Argument">
+            <stringProp name="Argument.name">serverVer</stringProp>
+            <stringProp name="Argument.value">1.4.1</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
         </collectionProp>
       </elementProp>
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
@@ -155,44 +160,48 @@ DELETE FROM token_info WHERE token_ref_id=&apos;DTC1MC0000171740bf9605c539fe4c41
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.value">{&#xd;
-&quot;requestId&quot;:&quot;${requestID}&quot;,&#xd;
-&quot;services&quot;:[&#xd;
-&quot;DIGITIZATION&quot;&#xd;
-],&#xd;
-&quot;cardInfo&quot;:{&#xd;
-&quot;encryptedData&quot; : &quot;2887FB5238FD2EDDBB33D971A5169271EDDCE21CA79562B75B4072987CA8B7102CF2B227A730D2925A1EF105A54405B0D0271043D3D0520E916FD055C8D222796A80FFCD0ACC01DCF6A5DCCA1E3335697F02581838359CA73F19245648EDC8461213C12CC0E10B0E9CE9752363F1B2205F2162B9DE61E6E0833B232295357F2B941C7AF42E11EAFE524E37D3C70093913E2CA417F2D905DF87330F2E231B9BEF3203BB901D4196B2E5592CA3502E8D88EC06CFBAD59A4669F4AB810CF855ECC36396693145424C416E864B17BFA2CBAB335132FBDFB9FD394FB1CF321914AA933F2A21F82FD7AEDFEF392163775F21E56D1B1C757B715327080BD210453D6648FE70ADA66725985C3C4BC0EB95745BF775B60ADC5C61EE22934021C8D0DD151365A87AA21A92E8DC45747AF1B5F62F706D550832327E03DBEF0B005DD67E3F591A295197062800110B34A01B255AA1D7250691C684A386160A59CA08A984BFAEC3C9F7BCA93ED8FCF6F46453AB483B3EFAC88C3CAAF3CD2A95E7D0615F1CEE5C0DBADB7A97530B704FECAB0FFA6243EE20FA8D61834216C3A42CBE815E38E06C4F2CC7803DB236A05ED14E9BF7D21104B493F78BCFF7C361EFFAA41C8A4E99419D4ED8FA98385C6721458919BA5FAC34&quot;,&#xd;
-    &quot;publicKeyFingerprint&quot; : &quot;3e70356e5a17b769009bc099c2dcae4b6b82f482a3f59711715d683f7e6fd167&quot;,&#xd;
-    &quot;encryptedKey&quot; : &quot;AAD08D20380DC188FF0C36E7725D3C2158F6152A113D07E17DDE79326FA464FE2ECFAC2952B93FC8FD3F5DA618E01C97D2A5A4A159A537384D9AF7754923F9B9E363C8400434753C65747AA916D964E0E3A815B92DCFC605A8F9A4B53FE585B9D5DF5B9F09B07C7ECA10D8A25CD8AF6832001C00EFA8C0AA6B79907FC732AFA677DA47D80E778C960AB1C2741D44EAF25A1B434E327ECA186C93C45AED33FB3D047ADFB9C493A4417DC8645B8CFA731B98C0930752B3B5AC1BD8EC5C5B94B46BAA2AAF13F4BDF4E6B02ABFFD9E4EF8DBA6BBE65BAFDCF13ED9064A3FE680DBFFFAB45365C5920C6341C9B68C5053F68195860258710FCC0F9EC441D92CBA65BA&quot;,&#xd;
-    &quot;iv&quot; : &quot;33CC701395B23592B48326F67984D618&quot;,&#xd;
-    &quot;oaepHashingAlgorithm&quot; : &quot;SHA256&quot;&#xd;
-},&#xd;
-&quot;correlationId&quot;:&quot;D${correlationID}&quot;,&#xd;
-&quot;tokenRequestorId&quot;:&quot;50110030273&quot;,&#xd;
-&quot;walletId&quot;:&quot;103&quot;,&#xd;
-&quot;paymentAppInstanceId&quot;:&quot;041C426B5D3E80016326027385940040919A38F237E4520C&quot;,&#xd;
-&quot;deviceInfo&quot;:{&#xd;
-&quot;isoDeviceType&quot;:&quot;21&quot;,&#xd;
-&quot;formFactor&quot;:&quot;PHONE&quot;,&#xd;
-&quot;storageTechnology&quot;:&quot;SE&quot;,&#xd;
-&quot;paymentTypes&quot;:[&#xd;
-&quot;NFC&quot;,&#xd;
-&quot;DSRP&quot;&#xd;
-],&#xd;
-&quot;deviceName&quot;:&quot;iPhone&quot;&#xd;
-},&#xd;
-&quot;walletProviderDecisioningInfo&quot;:{&#xd;
-&quot;recommendationStandardVersion&quot;:&quot;1.0&quot;,&#xd;
-&quot;deviceScore&quot;:&quot;1&quot;,&#xd;
-&quot;accountScore&quot;:&quot;1&quot;,&#xd;
-&quot;recommendedDecision&quot;:&quot;REQUIRE_ADDITIONAL_AUTHENTICATION&quot;,&#xd;
-&quot;recommendationReasons&quot;:[&#xd;
-&quot;ACCOUNT_TOO_NEW&quot;,&#xd;
-&quot;TOO_MANY_RECENT_ATTEMPTS&quot;,&#xd;
-&quot;OUTSIDE_HOME_TERRITORY&quot;&#xd;
-]&#xd;
-},&#xd;
-&quot;activeTokenCount&quot;:&quot;0&quot;,&#xd;
-&quot;tokenType&quot;:&quot;CLOUD&quot;&#xd;
+  &quot;requestId&quot;:&quot;${requestID}&quot;,&#xd;
+  &quot;services&quot;: [&#xd;
+    &quot;DIGITIZATION&quot;&#xd;
+  ],&#xd;
+  &quot;fundingAccountInfo&quot;: {&#xd;
+    &quot;encryptedPayload&quot;: {&#xd;
+      &quot;encryptedData&quot;: &quot;C27AAAAC68893881EAE3D9FB3B7D2BEC075A3420CCB2DF8F4E01AFC50F7EBFC7DFCDE352ECEF285F1D7E4C89DE293BB475E9BDD0F03228419A7711983BBB2A0D5ADE5FE11553CDE27B53D84AB26BBE103E60DF16B01336044EED54CF2F6D39A80C62161ED0815519445A06A2E5471024C5E6DF6A61A40951C4A7D93ABC29D3EDDAA80010C3D59FE6FB2C908AC2F36EE7D5ED142BB26D25ED8153DC8F21E7DB84D3D05A2DD363A55DAC38B1AAA5976BDE6C2A63422BA7970ABA93CEE53144ED6AD9ED7EBF788E87AA081154679C5F669CEEF7E84F6EF8E2B06D2721F039C75DFBB758D9F8F328578C3EB6045C1A686910E162F8DC7A0D206F2EF3FA649EB13CB80761286E3417D0248EDCB5D0262C09E7363A6946852496DA986463BA18B2A609185E021B2D5948EF94222E9E6C5234FAB7037C03644080F046672A94E8AA17C889CC478C2E156BE8FC360C91B0B0C3E4EA1FA731749B5D706403E07EDB5FF4D7299A6D9A61A4C8B5AF6A799A887A928E2CD2057875A194C571C1E9BA9CF14B40EC6CA0241546C59D082D42D535E2711F3638754D8F4F3C59BBDAF5EC6BC7D075515D8DCA9CB098BF442013EAFC0928A73D20E20060F96F23D7FBF1C1B3CE1DA42894D12C25D61B17741C1C3E55A05803CA8BFEB5EFD727F0BDAD521A10AD5AE233095D58E9467DEE2A3A5EBF82D6C72CF84366F8375380442CF33EE0B1790BCF79653ACEC28DBAF822341F8CCACE08403D651BA73FA89B3DC4EBD2870A63087C88591F83FFE1B3DFD36F82C5A44C110B286A5EC783BC0A3411AA9661E9BDA91B1333DAFEAC5E51345A0DD9E07A5CA451ABBB2CBF96854F29F48A89CB03944D2A90D32FC6D59C58571BDC12A88D779DB9E64C012F3A83B769344FA6101C745EF34DF7B52BCBB53F1951D18633681206855134AEE97E3211EC6F6DF525E770AF355291C5B54B01AFD7AA2E8D8920AE5481EE65D9E818508A6ED36D296D82A46EC145A18324FB94E0E77C15E97FBCE550FCB53923AF5FC200E1F4F5798DD8D6226996171AF47229EEA6BCF52CDDB7897DC7E0695CF7846F7F3C5BB8380ABFBF5CF679F7BEFB674B0077B3B5DD6CC14DF74B777FA5DB46C1B108C78E6848DFBEBE7BC5977D8F0A700C3EB46CA5079D22622D992B5A19C99BB935D8FA5637DF80FC15EC8FA1C269E9E6B1BE937F15EB24D8B4128513D087EDDC7CECFA72586469EEA0855A9838A12BFE13206E594C93991A5275FFADE5EB703D154EFCD49183589470&quot;,&#xd;
+      &quot;publicKeyFingerprint&quot;: &quot;3e70356e5a17b769009bc099c2dcae4b6b82f482a3f59711715d683f7e6fd167&quot;,&#xd;
+      &quot;encryptedKey&quot;: &quot;748254E104B40751545F53A11ACFFEDB50580B7E7ED77DC05E41981A60E8013825CCED44843B4B2956460B25E64EA7B7A05B195E6C5526FC00011383544C44162F3F0E5426217A25B957B294EEC121E17CFF958097BF9BB476DB13CB8EF97A6922640436EC8EAB7485241D3EF49F9CC1CD76ADB1B3C4533430B56C3D8D08777EFF7CB9ACDFF757622B4A5FF976501A5AC2741B82E50911637D24D07FBCD92FDFF4150115223DC3F61AA03A3C0206A5493746E6FE1D2E9B52AEA36B9F309856D36E3116B5CE20351BDA4368B46D5ACA01F9C69170A97661C30434C362EB2E2DBF906A2A86B76F89241C50480A244B57970D0621F77F0CA9F0153D525A7032F085&quot;,&#xd;
+      &quot;oaepHashingAlgorithm&quot;: &quot;SHA256&quot;,&#xd;
+      &quot;iv&quot;: &quot;4C768B2A9585B5E3AB619175BCC95182&quot;&#xd;
+    },&#xd;
+    &quot;panUniqueReference&quot;: &quot;FWSPMC000000000159f71f703d2141efaf04dd26803f922b&quot;&#xd;
+  },&#xd;
+  &quot;correlationId&quot;:&quot;D${correlationID}&quot;,&#xd;
+  &quot;tokenRequestorId&quot;: &quot;50110030273&quot;,&#xd;
+  &quot;walletId&quot;: &quot;103&quot;,&#xd;
+  &quot;paymentAppInstanceId&quot;: &quot;041C426B5D3E80016326027385940040919A38F237E4520C&quot;,&#xd;
+  &quot;accountIdHash&quot;: &quot;5ae9c9890b326bd23bfa9db9672298ae3b10a9388e56ec17a001e191f24572aa&quot;,&#xd;
+  &quot;activeTokenCount&quot;: &quot;0&quot;,&#xd;
+  &quot;deviceInfo&quot;: {&#xd;
+    &quot;isoDeviceType&quot;: &quot;21&quot;,&#xd;
+    &quot;formFactor&quot;: &quot;PHONE&quot;,&#xd;
+    &quot;storageTechnology&quot;: &quot;SE&quot;,&#xd;
+    &quot;paymentTypes&quot;: [&#xd;
+      &quot;NFC&quot;,&#xd;
+      &quot;DSRP&quot;&#xd;
+    ],&#xd;
+    &quot;deviceName&quot;: &quot;iPhone&quot;&#xd;
+  },&#xd;
+  &quot;walletProviderDecisioningInfo&quot;: {&#xd;
+    &quot;recommendationStandardVersion&quot;: &quot;1.0&quot;,&#xd;
+    &quot;deviceScore&quot;: &quot;1&quot;,&#xd;
+    &quot;accountScore&quot;: &quot;1&quot;,&#xd;
+    &quot;recommendedDecision&quot;: &quot;REQUIRE_ADDITIONAL_AUTHENTICATION&quot;,&#xd;
+    &quot;recommendationReasons&quot;: [&#xd;
+      &quot;ACCOUNT_TOO_NEW&quot;,&#xd;
+      &quot;TOO_MANY_RECENT_ATTEMPTS&quot;,&#xd;
+      &quot;OUTSIDE_HOME_TERRITORY&quot;&#xd;
+    ]&#xd;
+  },&#xd;
+  &quot;tokenType&quot;: &quot;CLOUD&quot;&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
@@ -202,7 +211,485 @@ DELETE FROM token_info WHERE token_ref_id=&apos;DTC1MC0000171740bf9605c539fe4c41
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-              <stringProp name="HTTPSampler.path">/mdes-server-1.4.2/authorizeService</stringProp>
+              <stringProp name="HTTPSampler.path">/mdes-api2-server-${serverVer}/authorizeService</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+              <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="false">
+                <stringProp name="DurationAssertion.duration">10000</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+
+</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">def response =  new groovy.json.JsonSlurper().parse(prev.getResponseData())
+
+if (response.responseId != &quot;${requestID}&quot; ) {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The responseID and requestID values not matched&quot;);
+}
+
+
+if (response.errorCode != null) {
+if (response.errorCode == &quot;INTERNAL_SERVICE_FAILURE&quot;){
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The internal error occured&quot;);
+} else {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Unknown error occured&quot;);
+}
+return;
+}
+
+
+if (response.decision == &quot;DECLINED&quot;) {
+
+	AssertionResult.setFailure(true);
+	AssertionResult.setFailureMessage(&quot;Something is wrong. The decision is *****DECLINED*****&quot;);
+}
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="authorizeService (-- CVV2 #1)" enabled="false">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;requestId&quot;:&quot;${requestID}&quot;,&#xd;
+  &quot;services&quot;: [&#xd;
+    &quot;DIGITIZATION&quot;&#xd;
+  ],&#xd;
+  &quot;fundingAccountInfo&quot;: {&#xd;
+    &quot;encryptedPayload&quot;: {&#xd;
+      &quot;encryptedData&quot;: &quot;42350E8E4519E1E4AD1452810E825F333DFB6EB074E03C4C1540FA7B42CEEC1EB2E21322C287B7E1E02EA55D66A2F49B9A569A241D237E11210E9CA9C409629538B2A54409103682C01AADB7AFF28550CD6086830540AB987A4391B76B068A95684A7CBCBC18E6AADC48ED336FE313D3C0283D3CA6FE11505E54070E020F5F7968936122167686C0782427B5B89AE5518AF6F7BBDD9E98AC7CD76A6FE1FC4B356E51C0BB218B1A5609E61DC3EA10C002DEEEEAD5D30C28117277EA940069A3D8E96CD64A62CEF841900B04D873767E1BCDE3AA80EC024B665941E63E38107F1FBAE2A98ADDDA01B8169603CEED06CD550AABC558AC71727DBFCB192D50CF37C94FFA6B205D727AE4E2502D4ACA78D5F5AE76241BC78CD0B4B33333AABE8F508EDDFC31348F7BD012D51B0DFCCE6A505012F37DC99E097C12CF6567AA0CBAF19D27FA8A1AF37E3FFDB55230264BCFF1ADEDBBD7C17B2BBAE607C65FA703487F3D2F4E5236095840A5C9B54CD3DDDD4BDBDB98E96F324C1BBAD96F2725D79B03853E595552AF58ACF8460838018E385BB4C8B5A74464B6F4F53D022A66C47EF2C0A67987F556214F345A5D14FAB8ADBBD0683264F63B52D96B245F6E61B23B7C4CAB837C6BACB0A7C0FD4E30ECC4C6E0EE4C4AE196161241FF567101FA0E8EC7315F8842B330FCA644EDC5388DB5FFCBA2B69368A261062700554D7D0ADCE3BD64252FEB84852793F390EC78B34863D00C13AFFFE1E3D53123001F19956FCACF1571151D020EB873F6A18DA1133E7C0998FAE1DB2F6E7D72AB2DB604CA7D1908AE87298AA263A76F5DB3D076F73E8B03FADE8461C6DD8C428004604A27B98A7B5CD880CF01B0160A74CC540242BC0C93556C88B44359A4308AAF0B1E685BBE522F76C9B1BB6346997BD4CB6231AF64079A0572AF6FB05364B9807DD8602644CE3B94B707A976F82ACD8E0060F932A46EC30DD4C5F273F91FCAC624207FA0FDD6E92149AE371F9F58BDFB7E02279E15605DDAA8C62366BB387BA7B16412D197FB1814C78EF64506C118513BA4D05F59093879B092BC1F7CA9AD318B98C09E168C89D1537926B4A9E69A8C18FF9A211C5A37C100871C9E1112068DCADD503CF24636881832F9793EB9FB07F5C954947E407922E94898C8BEE34C278013F3AD85D5546B207B3C1DEE87D39A0B468DD47A32C73077A89D9AE34090DCEBD18CC712B8A036F90DB54097551255244B286A9B1827F6B1C3B1908FA5AF5D957D47C1737BB8A07B548648F6E3324D8EF5ECC289C7EFD4BF1DEBC1A14055922D7678395A5D25EF606A5E931A2A8D23F83F1CB28FADF6715F37F42A10FD4F184C519902D9C7909EE22A1F2B3855B5926A7ECCA0083D8D3D29E6D240368B55C247DC24ACED0028&quot;,&#xd;
+      &quot;publicKeyFingerprint&quot;: &quot;67971c3f825da2739d9bacf6d22514aa74e170cc517f27cedc7613bf32e3ea85&quot;,&#xd;
+      &quot;encryptedKey&quot;: &quot;7656EE6B2B07AED80F9FA30A4104EFC2BAD67379D335768E27A5BA6AA08CAC5DFD9A113DC779A2DE5CE6C0C41DF5EEE382A71C3D1B5A6A9A84FE0B9ED3B1C260C578F7EE8DA72EB9025C9EDD10263ECC389AA42CB2383F1EDD1FEB3544B3EF39DBFF446C18D9C99E412554882011727E83A45FC5702720A71848F8E791FECBF4F87E11904091984135CB2A8184FD07B7C15CBCC8088B305F972F58D0437B122450F7DEBBEE58588378C29DB30ED83216FDEAB85E1ABD8109749F5646A3F42988A2126263B424ABFAABA881BFCF7640793CB2872108C24DA54E722073563BCC821521B827B0D0502E4A632179E7E6BC7985A45BB1B4830666BD055E06EAB20596&quot;,&#xd;
+      &quot;oaepHashingAlgorithm&quot;: &quot;SHA256&quot;,&#xd;
+      &quot;iv&quot;: &quot;941539AC21212AF97A9AB99FBB229251&quot;&#xd;
+    },&#xd;
+    &quot;panUniqueReference&quot;: &quot;FWSPMC000000000159f71f703d2141efaf04dd26803f922b&quot;&#xd;
+  },&#xd;
+  &quot;correlationId&quot;:&quot;D${correlationID}&quot;,&#xd;
+  &quot;tokenRequestorId&quot;: &quot;50110030273&quot;,&#xd;
+  &quot;walletId&quot;: &quot;103&quot;,&#xd;
+  &quot;paymentAppInstanceId&quot;: &quot;041C426B5D3E80016326027385940040919A38F237E4520C&quot;,&#xd;
+  &quot;accountIdHash&quot;: &quot;5ae9c9890b326bd23bfa9db9672298ae3b10a9388e56ec17a001e191f24572aa&quot;,&#xd;
+  &quot;activeTokenCount&quot;: &quot;0&quot;,&#xd;
+  &quot;deviceInfo&quot;: {&#xd;
+    &quot;isoDeviceType&quot;: &quot;21&quot;,&#xd;
+    &quot;formFactor&quot;: &quot;PHONE&quot;,&#xd;
+    &quot;storageTechnology&quot;: &quot;SE&quot;,&#xd;
+    &quot;paymentTypes&quot;: [&#xd;
+      &quot;NFC&quot;,&#xd;
+      &quot;DSRP&quot;&#xd;
+    ],&#xd;
+    &quot;deviceName&quot;: &quot;iPhone&quot;&#xd;
+  },&#xd;
+  &quot;walletProviderDecisioningInfo&quot;: {&#xd;
+    &quot;recommendationStandardVersion&quot;: &quot;1.0&quot;,&#xd;
+    &quot;deviceScore&quot;: &quot;1&quot;,&#xd;
+    &quot;accountScore&quot;: &quot;1&quot;,&#xd;
+    &quot;recommendedDecision&quot;: &quot;REQUIRE_ADDITIONAL_AUTHENTICATION&quot;,&#xd;
+    &quot;recommendationReasons&quot;: [&#xd;
+      &quot;ACCOUNT_TOO_NEW&quot;,&#xd;
+      &quot;TOO_MANY_RECENT_ATTEMPTS&quot;,&#xd;
+      &quot;OUTSIDE_HOME_TERRITORY&quot;&#xd;
+    ]&#xd;
+  },&#xd;
+  &quot;tokenType&quot;: &quot;CLOUD&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8080</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+              <stringProp name="HTTPSampler.path">/mdes-api2-server-${serverVer}/authorizeService</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+              <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="false">
+                <stringProp name="DurationAssertion.duration">10000</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+
+</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">def response =  new groovy.json.JsonSlurper().parse(prev.getResponseData())
+
+if (response.responseId != &quot;${requestID}&quot; ) {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The responseID and requestID values not matched&quot;);
+}
+
+
+if (response.errorCode != null) {
+if (response.errorCode == &quot;INTERNAL_SERVICE_FAILURE&quot;){
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The internal error occured&quot;);
+} else {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Unknown error occured&quot;);
+}
+return;
+}
+
+
+if (response.decision == &quot;DECLINED&quot;) {
+
+	AssertionResult.setFailure(true);
+	AssertionResult.setFailureMessage(&quot;Something is wrong. The decision is *****DECLINED*****&quot;);
+}
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="authorizeService (-- CVV2 #2)" enabled="false">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;requestId&quot;:&quot;${requestID}&quot;,&#xd;
+  &quot;services&quot;: [&#xd;
+    &quot;DIGITIZATION&quot;&#xd;
+  ],&#xd;
+  &quot;correlationId&quot;: &quot;D0000317608495&quot;,&#xd;
+  &quot;tokenRequestorId&quot;: &quot;50116989522&quot;,&#xd;
+  &quot;walletId&quot;: &quot;327&quot;,&#xd;
+  &quot;deviceInfo&quot;: {&#xd;
+    &quot;storageTechnology&quot;: &quot;SERVER&quot;,&#xd;
+    &quot;paymentTypes&quot;: [&#xd;
+      &quot;NFC&quot;,&#xd;
+      &quot;DSRP&quot;,&#xd;
+      &quot;ECOMMERCE&quot;&#xd;
+    ]&#xd;
+  },&#xd;
+  &quot;walletProviderDecisioningInfo&quot;: {&#xd;
+    &#xd;
+  },&#xd;
+  &quot;tokenType&quot;: &quot;CLOUD&quot;,&#xd;
+  &quot;fundingAccountInfo&quot;: {&#xd;
+    &quot;encryptedPayload&quot;: {&#xd;
+      &quot;encryptedData&quot;: &quot;42350E8E4519E1E4AD1452810E825F333DFB6EB074E03C4C1540FA7B42CEEC1EB2E21322C287B7E1E02EA55D66A2F49B9A569A241D237E11210E9CA9C409629538B2A54409103682C01AADB7AFF28550CD6086830540AB987A4391B76B068A95684A7CBCBC18E6AADC48ED336FE313D3C0283D3CA6FE11505E54070E020F5F7968936122167686C0782427B5B89AE5518AF6F7BBDD9E98AC7CD76A6FE1FC4B356E51C0BB218B1A5609E61DC3EA10C002DEEEEAD5D30C28117277EA940069A3D8E96CD64A62CEF841900B04D873767E1BCDE3AA80EC024B665941E63E38107F1FBAE2A98ADDDA01B8169603CEED06CD550AABC558AC71727DBFCB192D50CF37C94FFA6B205D727AE4E2502D4ACA78D5F5AE76241BC78CD0B4B33333AABE8F508EDDFC31348F7BD012D51B0DFCCE6A505012F37DC99E097C12CF6567AA0CBAF19D27FA8A1AF37E3FFDB55230264BCFF1ADEDBBD7C17B2BBAE607C65FA703487F3D2F4E5236095840A5C9B54CD3DDDD4BDBDB98E96F324C1BBAD96F2725D79B03853E595552AF58ACF8460838018E385BB4C8B5A74464B6F4F53D022A66C47EF2C0A67987F556214F345A5D14FAB8ADBBD0683264F63B52D96B245F6E61B23B7C4CAB837C6BACB0A7C0FD4E30ECC4C6E0EE4C4AE196161241FF567101FA0E8EC7315F8842B330FCA644EDC5388DB5FFCBA2B69368A261062700554D7D0ADCE3BD64252FEB84852793F390EC78B34863D00C13AFFFE1E3D53123001F19956FCACF1571151D020EB873F6A18DA1133E7C0998FAE1DB2F6E7D72AB2DB604CA7D1908AE87298AA263A76F5DB3D076F73E8B03FADE8461C6DD8C428004604A27B98A7B5CD880CF01B0160A74CC540242BC0C93556C88B44359A4308AAF0B1E685BBE522F76C9B1BB6346997BD4CB6231AF64079A0572AF6FB05364B9807DD8602644CE3B94B707A976F82ACD8E0060F932A46EC30DD4C5F273F91FCAC624207FA0FDD6E92149AE371F9F58BDFB7E02279E15605DDAA8C62366BB387BA7B16412D197FB1814C78EF64506C118513BA4D05F59093879B092BC1F7CA9AD318B98C09E168C89D1537926B4A9E69A8C18FF9A211C5A37C100871C9E1112068DCADD503CF24636881832F9793EB9FB07F5C954947E407922E94898C8BEE34C278013F3AD85D5546B207B3C1DEE87D39A0B468DD47A32C73077A89D9AE34090DCEBD18CC712B8A036F90DB54097551255244B286A9B1827F6B1C3B1908FA5AF5D957D47C1737BB8A07B548648F6E3324D8EF5ECC289C7EFD4BF1DEBC1A14055922D7678395A5D25EF606A5E931A2A8D23F83F1CB28FADF6715F37F42A10FD4F184C519902D9C7909EE22A1F2B3855B5926A7ECCA0083D8D3D29E6D240368B55C247DC24ACED0028&quot;,&#xd;
+      &quot;publicKeyFingerprint&quot;: &quot;67971c3f825da2739d9bacf6d22514aa74e170cc517f27cedc7613bf32e3ea85&quot;,&#xd;
+      &quot;encryptedKey&quot;: &quot;7656EE6B2B07AED80F9FA30A4104EFC2BAD67379D335768E27A5BA6AA08CAC5DFD9A113DC779A2DE5CE6C0C41DF5EEE382A71C3D1B5A6A9A84FE0B9ED3B1C260C578F7EE8DA72EB9025C9EDD10263ECC389AA42CB2383F1EDD1FEB3544B3EF39DBFF446C18D9C99E412554882011727E83A45FC5702720A71848F8E791FECBF4F87E11904091984135CB2A8184FD07B7C15CBCC8088B305F972F58D0437B122450F7DEBBEE58588378C29DB30ED83216FDEAB85E1ABD8109749F5646A3F42988A2126263B424ABFAABA881BFCF7640793CB2872108C24DA54E722073563BCC821521B827B0D0502E4A632179E7E6BC7985A45BB1B4830666BD055E06EAB20596&quot;,&#xd;
+      &quot;iv&quot;: &quot;941539AC21212AF97A9AB99FBB229251&quot;,&#xd;
+      &quot;oaepHashingAlgorithm&quot;: &quot;SHA256&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8080</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+              <stringProp name="HTTPSampler.path">/mdes-api2-server-${serverVer}/authorizeService</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+              <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="false">
+                <stringProp name="DurationAssertion.duration">10000</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+
+</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">def response =  new groovy.json.JsonSlurper().parse(prev.getResponseData())
+
+if (response.responseId != &quot;${requestID}&quot; ) {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The responseID and requestID values not matched&quot;);
+}
+
+
+if (response.errorCode != null) {
+if (response.errorCode == &quot;INTERNAL_SERVICE_FAILURE&quot;){
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The internal error occured&quot;);
+} else {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Unknown error occured&quot;);
+}
+return;
+}
+
+
+if (response.decision == &quot;DECLINED&quot;) {
+
+	AssertionResult.setFailure(true);
+	AssertionResult.setFailureMessage(&quot;Something is wrong. The decision is *****DECLINED*****&quot;);
+}
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="authorizeService (--CVV2 #3.1 incorrect cvc_resp)" enabled="false">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;requestId&quot;:&quot;${requestID}&quot;,&#xd;
+  &quot;services&quot;: [&#xd;
+    &quot;DIGITIZATION&quot;&#xd;
+  ],&#xd;
+  &quot;correlationId&quot;: &quot;D0000317608495&quot;,&#xd;
+  &quot;tokenRequestorId&quot;: &quot;50116989522&quot;,&#xd;
+  &quot;walletId&quot;: &quot;327&quot;,&#xd;
+  &quot;deviceInfo&quot;: {&#xd;
+    &quot;storageTechnology&quot;: &quot;SERVER&quot;,&#xd;
+    &quot;paymentTypes&quot;: [&#xd;
+      &quot;NFC&quot;,&#xd;
+      &quot;DSRP&quot;,&#xd;
+      &quot;ECOMMERCE&quot;&#xd;
+    ]&#xd;
+  },&#xd;
+  &quot;walletProviderDecisioningInfo&quot;: {&#xd;
+    &#xd;
+  },&#xd;
+  &quot;tokenType&quot;: &quot;CLOUD&quot;,&#xd;
+  &quot;fundingAccountInfo&quot;: {&#xd;
+    &quot;encryptedPayload&quot;: {&#xd;
+      &quot;encryptedData&quot;: &quot;42350E8E4519E1E4AD1452810E825F333DFB6EB074E03C4C1540FA7B42CEEC1EB2E21322C287B7E1E02EA55D66A2F49B9A569A241D237E11210E9CA9C409629538B2A54409103682C01AADB7AFF28550CD6086830540AB987A4391B76B068A95684A7CBCBC18E6AADC48ED336FE313D3C0283D3CA6FE11505E54070E020F5F7968936122167686C0782427B5B89AE5518AF6F7BBDD9E98AC7CD76A6FE1FC4B356E51C0BB218B1A5609E61DC3EA10C002DEEEEAD5D30C28117277EA940069A3D8E96CD64A62CEF841900B04D873767E1BCDE3AA80EC024B665941E63E38107F1FBAE2A98ADDDA01B8169603CEED06CD550AABC558AC71727DBFCB192D50CF37C94FFA6B205D727AE4E2502D4ACA78D5F5AE76241BC78CD0B4B33333AABE8F508EDDFC31348F7BD012D51B0DFCCE6A505012F37DC99E097C12CF6567AA0CBAF19D27FA8A1AF37E3FFDB55230264BCFF1ADEDBBD7C17B2BBAE607C65FA703487F3D2F4E5236095840A5C9B54CD3DDDD4BDBDB98E96F324C1BBAD96F2725D79B03853E595552AF58ACF8460838018E385BB4C8B5A74464B6F4F53D022A66C47EF2C0A67987F556214F345A5D14FAB8ADBBD0683264F63B52D96B245F6E61B23B7C4CAB837C6BACB0A7C0FD4E30ECC4C6E0EE4C4AE196161241FF567101FA0E8EC7315F8842B330FCA644EDC5388DB5FFCBA2B69368A261062700554D7D0ADCE3BD64252FEB84852793F390EC78B34863D00C13AFFFE1E3D53123001F19956FCACF1571151D020EB873F6A18DA1133E7C0998FAE1DB2F6E7D72AB2DB604CA7D1908AE87298AA263A76F5DB3D076F73E8B03FADE8461C6DD8C428004604A27B98A7B5CD880CF01B0160A74CC540242BC0C93556C88B44359A4308AAF0B1E685BBE522F76C9B1BB6346997BD4CB6231AF64079A0572AF6FB05364B9807DD8602644CE3B94B707A976F82ACD8E0060F932A46EC30DD4C5F273F91FCAC624207FA0FDD6E92149AE371F9F58BDFB7E02279E15605DDAA8C62366BB387BA7B16412D197FB1814C78EF64506C118513BA4D05F59093879B092BC1F7CA9AD318B98C09E168C89D1537926B4A9E69A8C18FF9A211C5A37C100871C9E1112068DCADD503CF24636881832F9793EB9FB07F5C954947E407922E94898C8BEE34C278013F3AD85D5546B207B3C1DEE87D39A0B468DD47A32C73077A89D9AE34090DCEBD18CC712B8A036F90DB54097551255244B286A9B1827F6B1C3B1908FA5AF5D957D47C1737BB8A07B548648F6E3324D8EF5ECC289C7EFD4BF1DEBC1A14055922D7678395A5D25EF606A5E931A2A8D23F83F1CB28FADF6715F37F42A10FD4F184C519902D9C7909EE22A1F2B3855B5926A7ECCA0083D8D3D29E6D240368B55C247DC24ACED0028&quot;,&#xd;
+      &quot;publicKeyFingerprint&quot;: &quot;67971c3f825da2739d9bacf6d22514aa74e170cc517f27cedc7613bf32e3ea85&quot;,&#xd;
+      &quot;encryptedKey&quot;: &quot;7656EE6B2B07AED80F9FA30A4104EFC2BAD67379D335768E27A5BA6AA08CAC5DFD9A113DC779A2DE5CE6C0C41DF5EEE382A71C3D1B5A6A9A84FE0B9ED3B1C260C578F7EE8DA72EB9025C9EDD10263ECC389AA42CB2383F1EDD1FEB3544B3EF39DBFF446C18D9C99E412554882011727E83A45FC5702720A71848F8E791FECBF4F87E11904091984135CB2A8184FD07B7C15CBCC8088B305F972F58D0437B122450F7DEBBEE58588378C29DB30ED83216FDEAB85E1ABD8109749F5646A3F42988A2126263B424ABFAABA881BFCF7640793CB2872108C24DA54E722073563BCC821521B827B0D0502E4A632179E7E6BC7985A45BB1B4830666BD055E06EAB20596&quot;,&#xd;
+      &quot;iv&quot;: &quot;941539AC21212AF97A9AB99FBB229251&quot;,&#xd;
+      &quot;oaepHashingAlgorithm&quot;: &quot;SHA256&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8080</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+              <stringProp name="HTTPSampler.path">/mdes-api2-server-${serverVer}/authorizeService</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+              <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="false">
+                <stringProp name="DurationAssertion.duration">10000</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+
+</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">def response =  new groovy.json.JsonSlurper().parse(prev.getResponseData())
+
+if (response.responseId != &quot;${requestID}&quot; ) {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The responseID and requestID values not matched&quot;);
+}
+
+
+if (response.errorCode != null) {
+if (response.errorCode == &quot;INTERNAL_SERVICE_FAILURE&quot;){
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;The internal error occured&quot;);
+} else {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Unknown error occured&quot;);
+}
+return;
+}
+
+
+if (response.decision == &quot;DECLINED&quot;) {
+
+	AssertionResult.setFailure(true);
+	AssertionResult.setFailureMessage(&quot;Something is wrong. The decision is *****DECLINED*****&quot;);
+}
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="authorizeService (--CVV2 #3.2 incorrect cvc_resp)" enabled="false">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;requestId&quot;:&quot;${requestID}&quot;,&#xd;
+  &quot;services&quot;: [&#xd;
+    &quot;DIGITIZATION&quot;&#xd;
+  ],&#xd;
+  &quot;correlationId&quot;: &quot;D0000317608495&quot;,&#xd;
+  &quot;tokenRequestorId&quot;: &quot;50116989522&quot;,&#xd;
+  &quot;walletId&quot;: &quot;327&quot;,&#xd;
+  &quot;deviceInfo&quot;: {&#xd;
+    &quot;storageTechnology&quot;: &quot;SERVER&quot;,&#xd;
+    &quot;paymentTypes&quot;: [&#xd;
+      &quot;NFC&quot;,&#xd;
+      &quot;DSRP&quot;,&#xd;
+      &quot;ECOMMERCE&quot;&#xd;
+    ]&#xd;
+  },&#xd;
+  &quot;walletProviderDecisioningInfo&quot;: {&#xd;
+    &#xd;
+  },&#xd;
+  &quot;tokenType&quot;: &quot;CLOUD&quot;,&#xd;
+  &quot;fundingAccountInfo&quot;: {&#xd;
+    &quot;encryptedPayload&quot;: {&#xd;
+      &quot;encryptedData&quot;: &quot;42350E8E4519E1E4AD1452810E825F333DFB6EB074E03C4C1540FA7B42CEEC1EB2E21322C287B7E1E02EA55D66A2F49B9A569A241D237E11210E9CA9C409629538B2A54409103682C01AADB7AFF28550CD6086830540AB987A4391B76B068A95684A7CBCBC18E6AADC48ED336FE313D3C0283D3CA6FE11505E54070E020F5F7968936122167686C0782427B5B89AE5518AF6F7BBDD9E98AC7CD76A6FE1FC4B356E51C0BB218B1A5609E61DC3EA10C002DEEEEAD5D30C28117277EA940069A3D8E96CD64A62CEF841900B04D873767E1BCDE3AA80EC024B665941E63E38107F1FBAE2A98ADDDA01B8169603CEED06CD550AABC558AC71727DBFCB192D50CF37C94FFA6B205D727AE4E2502D4ACA78D5F5AE76241BC78CD0B4B33333AABE8F508EDDFC31348F7BD012D51B0DFCCE6A505012F37DC99E097C12CF6567AA0CBAF19D27FA8A1AF37E3FFDB55230264BCFF1ADEDBBD7C17B2BBAE607C65FA703487F3D2F4E5236095840A5C9B54CD3DDDD4BDBDB98E96F324C1BBAD96F2725D79B03853E595552AF58ACF8460838018E385BB4C8B5A74464B6F4F53D022A66C47EF2C0A67987F556214F345A5D14FAB8ADBBD0683264F63B52D96B245F6E61B23B7C4CAB837C6BACB0A7C0FD4E30ECC4C6E0EE4C4AE196161241FF567101FA0E8EC7315F8842B330FCA644EDC5388DB5FFCBA2B69368A261062700554D7D0ADCE3BD64252FEB84852793F390EC78B34863D00C13AFFFE1E3D53123001F19956FCACF1571151D020EB873F6A18DA1133E7C0998FAE1DB2F6E7D72AB2DB604CA7D1908AE87298AA263A76F5DB3D076F73E8B03FADE8461C6DD8C428004604A27B98A7B5CD880CF01B0160A74CC540242BC0C93556C88B44359A4308AAF0B1E685BBE522F76C9B1BB6346997BD4CB6231AF64079A0572AF6FB05364B9807DD8602644CE3B94B707A976F82ACD8E0060F932A46EC30DD4C5F273F91FCAC624207FA0FDD6E92149AE371F9F58BDFB7E02279E15605DDAA8C62366BB387BA7B16412D197FB1814C78EF64506C118513BA4D05F59093879B092BC1F7CA9AD318B98C09E168C89D1537926B4A9E69A8C18FF9A211C5A37C100871C9E1112068DCADD503CF24636881832F9793EB9FB07F5C954947E407922E94898C8BEE34C278013F3AD85D5546B207B3C1DEE87D39A0B468DD47A32C73077A89D9AE34090DCEBD18CC712B8A036F90DB54097551255244B286A9B1827F6B1C3B1908FA5AF5D957D47C1737BB8A07B548648F6E3324D8EF5ECC289C7EFD4BF1DEBC1A14055922D7678395A5D25EF606A5E931A2A8D23F83F1CB28FADF6715F37F42A10FD4F184C519902D9C7909EE22A1F2B3855B5926A7ECCA0083D8D3D29E6D240368B55C247DC24ACED0028&quot;,&#xd;
+      &quot;publicKeyFingerprint&quot;: &quot;67971c3f825da2739d9bacf6d22514aa74e170cc517f27cedc7613bf32e3ea85&quot;,&#xd;
+      &quot;encryptedKey&quot;: &quot;7656EE6B2B07AED80F9FA30A4104EFC2BAD67379D335768E27A5BA6AA08CAC5DFD9A113DC779A2DE5CE6C0C41DF5EEE382A71C3D1B5A6A9A84FE0B9ED3B1C260C578F7EE8DA72EB9025C9EDD10263ECC389AA42CB2383F1EDD1FEB3544B3EF39DBFF446C18D9C99E412554882011727E83A45FC5702720A71848F8E791FECBF4F87E11904091984135CB2A8184FD07B7C15CBCC8088B305F972F58D0437B122450F7DEBBEE58588378C29DB30ED83216FDEAB85E1ABD8109749F5646A3F42988A2126263B424ABFAABA881BFCF7640793CB2872108C24DA54E722073563BCC821521B827B0D0502E4A632179E7E6BC7985A45BB1B4830666BD055E06EAB20596&quot;,&#xd;
+      &quot;iv&quot;: &quot;941539AC21212AF97A9AB99FBB229251&quot;,&#xd;
+      &quot;oaepHashingAlgorithm&quot;: &quot;SHA256&quot;&#xd;
+    }&#xd;
+  }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8080</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+              <stringProp name="HTTPSampler.path">/mdes-api2-server-${serverVer}/authorizeService</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -612,7 +1099,7 @@ if (countStan != countStanResponse) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Deliver Activation Code" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Deliver Activation Code" enabled="true">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
@@ -649,15 +1136,15 @@ if (countStan != countStanResponse) {
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.value">{&#xd;
-&quot;requestId&quot;:&quot;${requestID}&quot;,&#xd;
-&quot;tokenUniqueReference&quot;:&quot;DTC1MC0000171740bf9605c539fe4c41834${correlationID}&quot;,&#xd;
-&quot;correlationId&quot;:&quot;D${correlationID}&quot;,&#xd;
-&quot;activationCode&quot;:&quot;172426&quot;,&#xd;
-&quot;expirationDateTime&quot;:&quot;2018-01-15T12:09:01.123Z&quot;,&#xd;
-&quot;activationMethod&quot;:{&#xd;
-&quot;type&quot;:&quot;TEXT_TO_CARDHOLDER_NUMBER&quot;,&#xd;
-&quot;value&quot;:&quot;*9999&quot;&#xd;
-}&#xd;
+  &quot;requestId&quot;: &quot;${requestID}&quot;,&#xd;
+  &quot;tokenUniqueReference&quot;: &quot;DTC1MC0000171740bf9605c539fe4c41834${correlationID}&quot;,&#xd;
+  &quot;correlationId&quot;: &quot;D${correlationID}&quot;,&#xd;
+  &quot;activationCode&quot;: &quot;172426&quot;,&#xd;
+  &quot;expirationDateTime&quot;: &quot;2018-01-15T12:09:01.123Z&quot;,&#xd;
+  &quot;activationMethod&quot;: {&#xd;
+    &quot;type&quot;: &quot;TEXT_TO_CARDHOLDER_NUMBER&quot;,&#xd;
+    &quot;value&quot;: &quot;*9999&quot;&#xd;
+  }&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
@@ -667,7 +1154,7 @@ if (countStan != countStanResponse) {
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-              <stringProp name="HTTPSampler.path">/mdes-server-1.2.5-SNAPSHOT/deliverActivationCode</stringProp>
+              <stringProp name="HTTPSampler.path">/mdes-api2-server-${serverVer}/deliverActivationCode</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -979,46 +1466,49 @@ if (countStan != countStanResponse) {
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.value">{&#xd;
-&quot;requestId&quot;:&quot;${requestID}&quot;,&#xd;
-&quot;services&quot;:[&#xd;
-&quot;DIGITIZATION&quot;&#xd;
-],&#xd;
-&quot;cardAndToken&quot;:{&#xd;
-      &quot;panUniqueReference&quot;:&quot;FTC1MC0000171740e6ad4d1863304ca383c2af840bc89b78&quot;,&#xd;
-      &quot;tokenUniqueReference&quot;:&quot;DTC1MC0000171740bf9605c539fe4c41834${correlationID}&quot;,&#xd;
-      &quot;publicKeyFingerprint&quot;:&quot;3e70356e5a17b769009bc099c2dcae4b6b82f482a3f59711715d683f7e6fd167&quot;,&#xd;
-      &quot;encryptedKey&quot;:&quot;52d432625311c99571467f7d3b3bc9aae76e891bfa7e1a91b5bcb1e4926f66c7b8ff57cd19254dd3f7353d829892054a0a4bde550c19c9c893411519797cb05d28cdd24c4c76451e6c0c1f0b2933f0fafeea3119539a193b417cb37888cd404305f0cc137cb6ed5ff2813aa8fe1034fe2eb83d269551c848ede23183c5b577a7c531db418a7d1b5f9f39412553bf0501a51ee49ee10eb1d5ff03f4e755f3779c6d3aaaf3a82ccaeb2a87172a4311d0feed9a508ebe8ca57f83e01cbf468d0c7f6b2bc187cc018f2b2594fb893bb30933b9ed14c856ee0808101f2e492800adbbedcf06c78b42e58651c7a47a376c43088f566880122063be55859bcc4e41e481&quot;,&#xd;
-      &quot;oaepHashingAlgorithm&quot;:&quot;SHA256&quot;,&#xd;
-      &quot;iv&quot;:&quot;1911c7142309f8a02ba6e055c2724f0d&quot;,&#xd;
-      &quot;encryptedData&quot;:&quot;093a3764cb328a7f2552e78de6f2383563090e2c13442a826c20aeebc513aead223f066d1a7e4d83052ca5cadc90250257e7d2d35138dd952260ed680b8572631e48c1123c57b8146c079a7a81b8f56ed37d38643e7bbbc49538f9d1d2d3cf223609215a832a374a1b9d3fc445cf07764f470e2e80e3161fd87e1ebb46185a0560a17d2af2b5d91f5993d22fa4340c518be2f834beb37801507a9e37c6bf85b44f51d161c74a660e568e9dc65c051bbc6bfc89af4120216ab466df42b422bd86f1d51fd1df0a4cce7b8a80ac1c3faa22dc8b1f66daad7fb97c19f5b656a494d852150205ac6659a1d5f8bc4e00b159d4fa977b92deba9dfa9d9bae662fcf4645fc5148f5f69af4b3facd92a9ecb2a320&quot;&#xd;
-   },&#xd;
-&quot;deviceInfo&quot;:{&#xd;
-&quot;isoDeviceType&quot;:&quot;21&quot;,&#xd;
-&quot;formFactor&quot;:&quot;PHONE&quot;,&#xd;
-&quot;storageTechnology&quot;:&quot;SE&quot;,&#xd;
-&quot;paymentTypes&quot;:[&#xd;
-&quot;NFC&quot;,&#xd;
-&quot;DSRP&quot;&#xd;
-],&#xd;
-&quot;deviceName&quot;:&quot;iPhone&quot;&#xd;
-},&#xd;
-&quot;correlationId&quot;:&quot;D${correlationID}&quot;,&#xd;
-&quot;tokenRequestorId&quot;:&quot;50110030273&quot;,&#xd;
-&quot;walletId&quot;:&quot;103&quot;,&#xd;
-&quot;paymentAppInstanceId&quot;:&quot;041C426B5D3E80016326027385940040919A38F237E4520C&quot;,&#xd;
-&quot;tokenType&quot;:&quot;EMBEDDED_SE&quot;,&#xd;
-&quot;secureElementId&quot;:&quot;041C426B5D3E80016326027385940040919A38F237E4520C&quot;,&#xd;
-&quot;accountPanSuffix&quot;:&quot;3579&quot;,&#xd;
-&quot;serviceRequestDateTime&quot;:&quot;2018-11-20T16:57:04.231Z&quot;,&#xd;
-&quot;termsAndConditionsAssetId&quot;:&quot;d781f02e-28a5-4ab1-b1de-2aa39896f725&quot;,&#xd;
-&quot;termsAndConditionsAcceptedTimestamp&quot;:&quot;2018-11-20T16:57:13.321Z&quot;,&#xd;
-&quot;productConfigurationId&quot;:&quot;AlfaMDH&quot;,&#xd;
-&quot;consumerLanguage&quot;:&quot;ru&quot;,&#xd;
-&quot;decision&quot;:&quot;REQUIRE_ADDITIONAL_AUTHENTICATION&quot;,&#xd;
-&quot;decisionMadeBy&quot;:&quot;AUTHORIZATION_REQUEST&quot;,&#xd;
-&quot;tokenActivatedDateTime&quot;:&quot;2018-11-20T16:57:51.123Z&quot;,&#xd;
-&quot;numberOfActivationAttempts&quot;:1,&#xd;
-&quot;numberOfActiveTokens&quot;:1&#xd;
+  &quot;requestId&quot;: &quot;${requestID}&quot;,&#xd;
+  &quot;services&quot;: [&#xd;
+    &quot;DIGITIZATION&quot;&#xd;
+  ],&#xd;
+  &quot;fundingAccountInfo&quot;: {&#xd;
+    &quot;encryptedPayload&quot;: {&#xd;
+      &quot;encryptedData&quot;: &quot;ED134C924DACD5A465470BF48DEF9E38FAFA04DA209712F854F9C5DECFF1EC4AA9D212B476F9FC86AAFD93C17088104446369D1E783B5E948EF6C31833A7ECC38A5B99445485655A6B3D62E0A488AA0992A21057D04551BEEA9BFD952B6EA810D0D8E93731C8FEB6E4F76BC2EDFCA82DD606A7187E1E80B7F0FC9BA9BF8AA30C263F71FC53064E849948EF76C0978F23D4A908536A562B9AEDF353C50D404EA2485C08B3025467E0A736F06CA9282B6A4B44714F3CFBEA4647C79D917108219389C32A8F9101F4C4FFC65F843C96BA7C22BC3ED9C2D7B452B96C6D22DDEA57F863FF0977EEE74F473CD212FEED8FC8D84197C7370280A2DBC88909D67E44BC8EF91CF6AEE65DC82A5CCE9697BF40352A443CAFD7D7ECD0CDA954717C9CD6B92E73A14692360A2DB12DFD0500A256C272F3B25726D9F8DD79B832C4CB2059C7E00BC3BBB6C3A258FB4760EAFAD64AD2B9F737E88F35DFC3539A09E513497904C3C8C6AB9E5401FDFAEC600E14371031490CA6E75565D216F1C223F40F1FF7C94EE3C2AB13BA8AE0931CE1E142F92295286DAC817B38BD38EAFBC3E60EAC37C16DB4F3FCC0655CCAA1CFA7A856E6F26B6B7C831CAD306287FB9130635E5651C4F7A4DF31050EC7A234E3611E91925783B80B6B0FE52870411CFCA4553C2E73554536D7913CB69D3592DBC4C0BC656C1693714154520DBB9A73E1D93B93EDB061B29ADFAAE16B0EF9E542E7D5A8AAF0EA8D56A101000DE2B8C545EC85C82DF72CBBFDC53431D37B29EB25DCFD2617F3E6A0B992FA46FF4CB2FD58481240D8046AF80C01DF502447FAFE09A7739B8208D1EC613308876737A2B1AE7F47C2158F72139C85F96D758A9BD4849448AA74644F1271092B579D32EE98635D6AE3BE0DD6BFEBBA64F24540F7B4264587704EC3F1E551AA8CEB5C04B28517F5F4B84C065C03EBC0B046F1A52DBA711409CA4856F084BE184C6A77768AC15882E8C470D3E97AD48EB8A49799CC47ADCFA620F3AFCDE17815B0288C10F26CFB90817BC942F3B8BB6CAEB945A126680D642DF2F1F2B2EAB1DE75CBBD79FA02B79CF2E5DB85EB145679E2299636A5E259E6BEB5B653BAC90E860442E28F4B5986EC111D229C5891FA0C20C78CD2B33670C950E3B4BC1F76308292676EF4C7A8CA08B1D63C12EFBD5782254B479D68D9849AB6781C7D6D1B8BB7B073790B94DD16079053588D835C6C4048497A8B731D3702B1FE0FDC05B885850C8A4F7E5B07367D260716E74B23D47E20BAA81D03D90E09181DE86F1296021310A23DF835F9BC2232034220660CF878D1A8449E3330590D68E9343EA7AD5DAAED99142F84CB315B2E2A50CEFB97991980B54FF7D7A22AC386437E8F4A79C2A0AEACFD715DC2F4D2D9BD3EC87F72AF6372B6E4DAE4291698DEDC20CAE2FE3DFF7FABDAA68AB38B90BC6EA2AC70DE&quot;,&#xd;
+      &quot;publicKeyFingerprint&quot;: &quot;3e70356e5a17b769009bc099c2dcae4b6b82f482a3f59711715d683f7e6fd167&quot;,&#xd;
+      &quot;encryptedKey&quot;: &quot;B72A5C212CE14DC122BB95D9B9D80F0FC8CD8F10C42B7B7B6001609184C33DFB8A7F19E40FE9C3F469D795013ADE82ADAC3C23364ED8CD21B2A8750F77388F9D05A79BE4D0080172D33899C9439271ADE61053196853572D248B61FBF3E47326601B45E5E538300D9273EE45391FA6568165B2098D8B6CD0F4F7A8453E554F7DF37F7D341D06B02713059218F07CAC69A5037E7676478DBEFC461C6C4C9DA80AF904505CF017635825C477BF34E29030C077BFC9ACFAB686EBD6B6BB1476802E40079A62B9D6BD38DB9F6917703C7641B0B67D409B4A88EB55B06DF71D6B211D8879452CF4A1056F789940C4A8E3D08205C305A788F3FB215F5B309B39379E1E&quot;,&#xd;
+      &quot;oaepHashingAlgorithm&quot;: &quot;SHA256&quot;,&#xd;
+      &quot;iv&quot;: &quot;B106A8D0D6476541949751B05FCFD4CE&quot;&#xd;
+    },&#xd;
+    &quot;tokenUniqueReference&quot;: &quot;DTC1MC0000171740bf9605c539fe4c41834${correlationID}&quot;,&#xd;
+    &quot;panUniqueReference&quot;: &quot;FTC1MC0000171740e6ad4d1863304ca383c2af840bc89b78&quot;&#xd;
+  },&#xd;
+  &quot;deviceInfo&quot;: {&#xd;
+    &quot;isoDeviceType&quot;: &quot;21&quot;,&#xd;
+    &quot;formFactor&quot;: &quot;PHONE&quot;,&#xd;
+    &quot;storageTechnology&quot;: &quot;SE&quot;,&#xd;
+    &quot;paymentTypes&quot;: [&#xd;
+      &quot;NFC&quot;,&#xd;
+      &quot;DSRP&quot;&#xd;
+    ],&#xd;
+    &quot;deviceName&quot;: &quot;iPhone&quot;&#xd;
+  },&#xd;
+  &quot;correlationId&quot;: &quot;D${correlationID}&quot;,&#xd;
+  &quot;tokenRequestorId&quot;: &quot;50110030273&quot;,&#xd;
+  &quot;walletId&quot;: &quot;103&quot;,&#xd;
+  &quot;paymentAppInstanceId&quot;: &quot;041C426B5D3E80016326027385940040919A38F237E4520C&quot;,&#xd;
+  &quot;tokenType&quot;: &quot;EMBEDDED_SE&quot;,&#xd;
+  &quot;secureElementId&quot;: &quot;041C426B5D3E80016326027385940040919A38F237E4520C&quot;,&#xd;
+  &quot;accountPanSuffix&quot;: &quot;3579&quot;,&#xd;
+  &quot;serviceRequestDateTime&quot;: &quot;2018-11-20T16:57:04.231Z&quot;,&#xd;
+  &quot;termsAndConditionsAssetId&quot;: &quot;d781f02e-28a5-4ab1-b1de-2aa39896f725&quot;,&#xd;
+  &quot;termsAndConditionsAcceptedTimestamp&quot;: &quot;2018-11-20T16:57:13.321Z&quot;,&#xd;
+  &quot;productConfigurationId&quot;: &quot;AlfaMDH&quot;,&#xd;
+  &quot;consumerLanguage&quot;: &quot;ru&quot;,&#xd;
+  &quot;decision&quot;: &quot;REQUIRE_ADDITIONAL_AUTHENTICATION&quot;,&#xd;
+  &quot;decisionMadeBy&quot;: &quot;AUTHORIZATION_REQUEST&quot;,&#xd;
+  &quot;tokenActivatedDateTime&quot;: &quot;2018-11-20T16:57:51.123Z&quot;,&#xd;
+  &quot;numberOfActivationAttempts&quot;: 1,&#xd;
+  &quot;numberOfActiveTokens&quot;: 1,&#xd;
+  &quot;tokenAssuranceLevel&quot;: 1&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
@@ -1028,7 +1518,7 @@ if (countStan != countStanResponse) {
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-              <stringProp name="HTTPSampler.path">/mdes-server-1.2.5-SNAPSHOT/notifyServiceActivated</stringProp>
+              <stringProp name="HTTPSampler.path">/mdes-api2-server-${serverVer}/notifyServiceActivated</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1446,7 +1936,7 @@ if (countStan != countStanResponse) {
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-              <stringProp name="HTTPSampler.path">/mdes-server-1.2.5-SNAPSHOT/notifyTokenUpdated</stringProp>
+              <stringProp name="HTTPSampler.path">/mdes-api2-server-${serverVer}/notifyTokenUpdated</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1785,7 +2275,7 @@ INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_in
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-              <stringProp name="HTTPSampler.path">/bank-server-1.2.5-SNAPSHOT/tokenInfo</stringProp>
+              <stringProp name="HTTPSampler.path">/bank-server-${serverVer}/tokenInfo</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>

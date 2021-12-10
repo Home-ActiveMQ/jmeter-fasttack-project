@@ -91,7 +91,7 @@ vars.put(&quot;correlationID&quot;,String.valueOf(n));
               <stringProp name="scriptLanguage">groovy</stringProp>
             </JSR223Sampler>
             <hashTree/>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="clear: token_info, cardholder_verification_method" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="clear: token_info, cardholder_verification_method" enabled="false">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Callable Statement</stringProp>
               <stringProp name="query">DELETE FROM cardholder_verification_method WHERE token_ref_id=&apos;NotYetAssigned-D${correlationID}&apos;;
@@ -163,7 +163,7 @@ DELETE FROM token_info WHERE token_ref_id=&apos;DTC1MC0000171740bf9605c539fe4c41
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">192.168.1.71</stringProp>
+              <stringProp name="HTTPSampler.domain">192.168.1.115</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
@@ -239,7 +239,7 @@ if (response.decision == &quot;DECLINED&quot;) {
               </JSR223Assertion>
               <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="authorizeService &lt; cardholder_verification_method" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="authorizeService &lt; cardholder_verification_method" enabled="false">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
               <stringProp name="query">SELECT * FROM cardholder_verification_method WHERE token_ref_id=&apos;NotYetAssigned-D${correlationID}&apos;;</stringProp>
@@ -251,7 +251,7 @@ if (response.decision == &quot;DECLINED&quot;) {
               <stringProp name="resultSetHandler">Store as Object</stringProp>
             </JDBCSampler>
             <hashTree/>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="authorizeService (CONFIRM_PROVISIONING) &lt;" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="authorizeService (CONFIRM_PROVISIONING) &lt;" enabled="false">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
               <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;CONFIRM_PROVISIONING&apos; ORDER BY id DESC LIMIT 1;
@@ -289,7 +289,7 @@ if (!equalHistoryMsgRawIn) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="authorizeService (AVS1) &lt;" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="authorizeService (AVS1) &lt;" enabled="false">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
               <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;AVS1&apos; ORDER BY id DESC LIMIT 1;</stringProp>
@@ -326,7 +326,7 @@ if (!equalHistoryMsgRawIn) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="authorizeService &lt; token_info" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="authorizeService &lt; token_info" enabled="false">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="query">SELECT * FROM token_info WHERE token_ref_id=&apos;NotYetAssigned-D${correlationID}&apos;;</stringProp>
               <stringProp name="queryArguments"></stringProp>
@@ -430,7 +430,7 @@ if (tokenDigitizeDate==null) {
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">192.168.1.71</stringProp>
+              <stringProp name="HTTPSampler.domain">192.168.1.115</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
@@ -498,7 +498,7 @@ if (response.errorCode == &quot;INTERNAL_SERVICE_FAILURE&quot;){
               </JSR223Assertion>
               <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="deliverActivationCode (SEND_OTP) &lt;" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="deliverActivationCode (SEND_OTP) &lt;" enabled="false">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
               <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;SEND_OTP&apos; ORDER BY id DESC LIMIT 1;</stringProp>
@@ -535,7 +535,7 @@ if (!equalHistoryMsgRawIn) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="deliverActivationCode &lt; token_info" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="deliverActivationCode &lt; token_info" enabled="false">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
               <stringProp name="query">SELECT * FROM token_info WHERE token_ref_id=&apos;DTC1MC0000171740bf9605c539fe4c41834${correlationID}&apos;;
@@ -641,7 +641,7 @@ if (tokenPanInternalID==null) {
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">192.168.1.71</stringProp>
+              <stringProp name="HTTPSampler.domain">192.168.1.115</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
@@ -709,7 +709,7 @@ if (response.errorCode == &quot;INTERNAL_SERVICE_FAILURE&quot;){
               </JSR223Assertion>
               <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="notifyServiceActivated (CARD_TOKENIZED) &lt;" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="notifyServiceActivated (CARD_TOKENIZED) &lt;" enabled="false">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
               <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;CARD_TOKENIZED&apos; ORDER BY id DESC LIMIT 1;</stringProp>
@@ -746,7 +746,7 @@ if (!equalHistoryMsgRawIn) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="notifyServiceActivated (SEND_NOTIFICATION_TO_CUSTOMER) &lt;" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="notifyServiceActivated (SEND_NOTIFICATION_TO_CUSTOMER) &lt;" enabled="false">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
               <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;SEND_NOTIFICATION_TO_CUSTOMER&apos; ORDER BY id DESC LIMIT 1;
@@ -784,7 +784,7 @@ if (!equalHistoryMsgRawIn) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="notifyServiceActivated &lt; token_info (old)" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="notifyServiceActivated &lt; token_info (old)" enabled="false">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
               <stringProp name="query">SELECT * FROM token_info WHERE token_ref_id=&apos;NotYetAssigned-D${correlationID}&apos;;
@@ -810,7 +810,7 @@ if (!ResponseCode.equals(&quot;200&quot;) || 0 &lt; tokenSize) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="notifyServiceActivated &lt; token_info (new)" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="notifyServiceActivated &lt; token_info (new)" enabled="false">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
               <stringProp name="query">SELECT * FROM token_info WHERE token_ref_id=&apos;DTC1MC0000171740bf9605c539fe4c41834${correlationID}&apos;;
@@ -912,7 +912,7 @@ if (!equalTokenPanInternalID) {
                   </elementProp>
                 </collectionProp>
               </elementProp>
-              <stringProp name="HTTPSampler.domain">192.168.1.71</stringProp>
+              <stringProp name="HTTPSampler.domain">192.168.1.115</stringProp>
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
@@ -980,7 +980,7 @@ if (response.errorCode == &quot;INTERNAL_SERVICE_FAILURE&quot;){
               </JSR223Assertion>
               <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="notifyServiceActivated (TOKEN_STATUS_UPDATED) &lt;" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="notifyServiceActivated (TOKEN_STATUS_UPDATED) &lt;" enabled="false">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
               <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;TOKEN_STATUS_UPDATED&apos; ORDER BY id DESC LIMIT 1;</stringProp>
@@ -1017,7 +1017,7 @@ if (!equalHistoryMsgRawIn) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="notifyTokenUpdated &lt; token_info" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="notifyTokenUpdated &lt; token_info" enabled="false">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
               <stringProp name="query">SELECT * FROM token_info WHERE token_ref_id=&apos;DTC1MC0000171740bf9605c539fe4c41834${correlationID}&apos;;

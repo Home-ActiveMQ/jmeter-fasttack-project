@@ -18,11 +18,6 @@
             <stringProp name="Argument.value">~/tools/wildfly-10.1.0/standalone/log/fasttack</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="serverVer" elementType="Argument">
-            <stringProp name="Argument.name">serverVer</stringProp>
-            <stringProp name="Argument.value">1.5.3</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
         </collectionProp>
       </elementProp>
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
@@ -72,19 +67,19 @@
           </HeaderManager>
           <hashTree/>
           <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="PostgreSQL Connection Configuration" enabled="true">
-            <boolProp name="autocommit">true</boolProp>
-            <stringProp name="checkQuery"></stringProp>
-            <stringProp name="connectionAge">5000</stringProp>
             <stringProp name="dataSource">ft_al</stringProp>
-            <stringProp name="dbUrl">jdbc:postgresql://192.168.1.115:5432/ft_al</stringProp>
-            <stringProp name="driver">org.postgresql.Driver</stringProp>
-            <boolProp name="keepAlive">true</boolProp>
-            <stringProp name="password">ft</stringProp>
             <stringProp name="poolMax">0</stringProp>
             <stringProp name="timeout">10000</stringProp>
-            <stringProp name="transactionIsolation">DEFAULT</stringProp>
             <stringProp name="trimInterval">60000</stringProp>
+            <boolProp name="autocommit">true</boolProp>
+            <stringProp name="transactionIsolation">DEFAULT</stringProp>
+            <boolProp name="keepAlive">true</boolProp>
+            <stringProp name="connectionAge">5000</stringProp>
+            <stringProp name="checkQuery"></stringProp>
+            <stringProp name="dbUrl">jdbc:postgresql://192.168.1.115:5432/ft_al</stringProp>
+            <stringProp name="driver">org.postgresql.Driver</stringProp>
             <stringProp name="username">ft</stringProp>
+            <stringProp name="password">ft</stringProp>
           </JDBCDataSource>
           <hashTree/>
           <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="false">
@@ -106,7 +101,7 @@
               <stringProp name="filename"></stringProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="script">if (props.get(&quot;tokenReferenceID&quot;) == null){
-props.put(&quot;tokenReferenceID&quot;, Long.parseLong(vars.get(&quot;tokenReferenceID&quot;))); 	
+	props.put(&quot;tokenReferenceID&quot;, Long.parseLong(vars.get(&quot;tokenReferenceID&quot;))); 	
 }
 n = props.get(&quot;tokenReferenceID&quot;) + 1;
 vars.put(&quot;tokenReferenceID&quot;,String.valueOf(n)); 
@@ -131,7 +126,7 @@ DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE000${tokenReferenceID}&apo
             </JDBCSampler>
             <hashTree/>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller Get Cardholder Verification Methods" enabled="true">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Check Eligibility" enabled="false">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
@@ -161,39 +156,36 @@ DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE000${tokenReferenceID}&apo
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
             <hashTree/>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getCardHolderVerificationMethods" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="checkeligibility" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;&#xd;
-&lt;getCardHolderVerificationMethodsReq   xmlns=&quot;http://vnts.visa.com/tpcas/v1&quot;&gt;&#xd;
-  &lt;walletProviderMsgTracing&gt;&#xd;
-    &lt;tokenRequestorID&gt;40010030273&lt;/tokenRequestorID&gt;&#xd;
-    &lt;wpRequestId&gt;${requestID}&lt;/wpRequestId&gt;&#xd;
-    &lt;wpConversationId&gt;a7d044e7-754d-4cbc-951a-d636f359eb3c&lt;/wpConversationId&gt;&#xd;
-  &lt;/walletProviderMsgTracing&gt;&#xd;
-  &lt;walletAccountID&gt;6Gt02SAokOGBxPoKPuP6yVpV&lt;/walletAccountID&gt;&#xd;
-  &lt;lifeCycleTraceID&gt;${tokenReferenceID}&lt;/lifeCycleTraceID&gt;&#xd;
-  &lt;tokenReferenceID&gt;DNITHE000${tokenReferenceID}&lt;/tokenReferenceID&gt;&#xd;
-  &lt;panReferenceID&gt;V-3017192484534844832252&lt;/panReferenceID&gt;&#xd;
-  &lt;token&gt;4491028330000422&lt;/token&gt;&#xd;
-  &lt;deviceInfo&gt;&#xd;
-    &lt;secureElementID&gt;04312E7B342C80014328036811932950DA075B1C4DC45F7C&lt;/secureElementID&gt;&#xd;
-    &lt;deviceType&gt;1&lt;/deviceType&gt;&#xd;
-    &lt;deviceNumber&gt;380507534412&lt;/deviceNumber&gt;&#xd;
-    &lt;deviceName&gt;Samsung Galaxy S&lt;/deviceName&gt;&#xd;
-  &lt;/deviceInfo&gt;&#xd;
-  &lt;otpReason&gt;01&lt;/otpReason&gt;&#xd;
-  &lt;otpMaxReached&gt;false&lt;/otpMaxReached&gt;&#xd;
-  &lt;cardholderInfo&gt;&#xd;
-    &lt;version&gt;ws1&lt;/version&gt;&#xd;
-    &lt;encryptionKeyIndex&gt;1&lt;/encryptionKeyIndex&gt;&#xd;
-    &lt;encryptedData&gt;C246C268F4E6ECB4DD9E26AB00F5544687D1C48A3F7D4161ABD06678ED78EBD2&lt;/encryptedData&gt;&#xd;
-  &lt;/cardholderInfo&gt;&#xd;
-  &lt;extratag&gt;Value&lt;/extratag&gt;&#xd;
-&lt;/getCardHolderVerificationMethodsReq&gt; &#xd;
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;tokenRequestorID&quot;: &quot;40010030273&quot;,&#xd;
+  &quot;tokenReferenceID&quot;: &quot;DNITHE000${tokenReferenceID}&quot;,&#xd;
+  &quot;panSource&quot;: &quot;KEY_ENTERED&quot;,&#xd;
+  &quot;deviceInfo&quot;: {&#xd;
+    &quot;deviceID&quot;: &quot;04312E7B342C80014328036811932950DA075B1C4DC45F7C&quot;,&#xd;
+    &quot;deviceName&quot;: &quot;MY BEST PHONE&quot;,&#xd;
+    &quot;deviceNumber&quot;: &quot;380507534412&quot;,&#xd;
+    &quot;deviceLanguageCode&quot;: &quot;en&quot;,&#xd;
+    &quot;deviceIDType&quot;: &quot;SecureElement&quot;,&#xd;
+    &quot;deviceType&quot;: &quot;MOBILE_PHONE&quot;,&#xd;
+    &quot;osBuildID&quot;: &quot;TU84M&quot;,&#xd;
+    &quot;osVersion&quot;: &quot;8.1&quot;,&#xd;
+    &quot;osType&quot;: &quot;Android&quot;,&#xd;
+    &quot;deviceManufacturer&quot;: &quot;Samsung&quot;,&#xd;
+    &quot;deviceBrand&quot;: &quot;Nexus&quot;,&#xd;
+    &quot;deviceModel&quot;: &quot;ME571KL NA K009&quot;,&#xd;
+    &quot;deviceLocation&quot;: &quot;+37/-121&quot;,&#xd;
+    &quot;deviceIPAddressV4&quot;: &quot;10.0.1.1&quot;,&#xd;
+    &quot;locationSource&quot;: &quot;CELLULAR&quot;,&#xd;
+    &quot;tokenProtectionMethod&quot;: &quot;TRUSTED_EXECUTION_ENVIRONMENT&quot;&#xd;
+  },&#xd;
+  &quot;encryptedData&quot;: &quot;eyJhbGciOiJSUzI1NiIsIml2IjoiIiwidGFnIjoiIiwiZW5jIjoiIiwidHlwIjoiSk9TRSIsImtpZCI6IiIsImNoYW5uZWxTZWN1cml0eUNvbnRleHQiOiIifQ.ZXlKaGJHY2lPaUpTVTBFeFh6VWlMQ0pwZGlJNklpSXNJblJoWnlJNklpSXNJbVZ1WXlJNklrRXhNamhIUTAwaUxDSjBlWEFpT2lKS1QxTkZJaXdpYTJsa0lqb2lSVTFPVVVjeVJqWlBXakJWVlRGWVFqSklOMGN4TTB0alpHWlVia1ZEWlZwV1NHNXZlbTVxTWtaRWMyMWhaMlIxVVNJc0ltTm9ZVzV1Wld4VFpXTjFjbWwwZVVOdmJuUmxlSFFpT2lKU1UwRmZVRXRKSWl3aWFXRjBJam9pTVRVeE9UTTRNalk0T0NKOS5uZ2VwcHZENEFtTFJkd2RyLUg0RWZVTmxVRk9wc19VekkwcUV2aWwzUkpzck5qbjU5ZDdhSEk3WXNfRmdpS2ZiMmNMaDBpd0N3eFhpMFZXcUsyc2E1N2tDaVBBaHluVXRfbWZxd044WWpKMXBIT0d5bk80eE51MHFydDVHVG16X0daN3ZuWmxrY3FnSmlCTWdHSXA5RnVCbzZuN21yaVNrUmNKMlRha2ZFWnNLQldBWmZrc0ZlQzNjVHVqUGZEaVJNLU5ndkpjOFZDREJYOF9PRGRrRWVRWXBnZ2xIN2ZVVjQ5S0gwQzRUR2dBWnlOcXFIcEVnU0lwcVRDaE1vYWFtVncwMWZhTm53bjRlQklPSVNCeGg0aDQwVFdiRUtnWTBjX1MwZFRoM25UZDdDUFk4NElWWmVOVDNLXzFhTWlxVGx1UjNtQnNEVmVpOHBRMTh3Y0w2VGcuamVtemFYSnNnVUg1TVFzUS5kYXdKVXJQaWxWSjJvcEFxT19JcWRRTFNqSnRxUGFrbU16MU5mVENjQ0FlbTdkNTR1bFhzMl9zYlQxRXZrNVdsLXdYM0hqeXltVllpenJ4S1p1d3hiYzZfWjZfbVJSVzJCMlBfN19zd1d1bmp0WFVFaTAxVGhobHc2OGNFdjBGa0FtNnpsYmRlZnprQWdfbFV6SWxHaHRaNmtPY1FRMGF2ZkVSUkJXc3hTb0g0ZW5RdGZYZG92UWRiTGg4VGYzTS1VbEZiQ0hMWGdsQUl3Z1htSDJNSnR2YnFEd2JsWU55TFlCcXoxVXVLY1hiam9DN01meVVraGJfcU1sMmhxYXFwbFExVmt3LU1mSEptQmxSdGRRMmJRMjhlSGNvR09DOFFjTUw5dVZqdnJEbVc5OTdoTU9PZEVMRXBySjVxa2R4czZ6SFV6SGFUR1FaLUYwRGpaYjJZRXNJYnZUUjU1TEM0MHAtcExlTkJhSFpZWllBQ0M1MkMweXBGRlQ0QXBaTEp6a01TT0dHY2g5MFhYNE43UUlQQW4tSmdvTDljU0Q0bHlRUGJ0WVdJOXI0NEtwaGpEYXZ3OGM3TG9tN0pfUE91dnZfM0RLWTZ1WmplMXJkb0FhWGJzdm9WZUwtOHRJLWpTcXpscXBocFVWNVBySDc2TXdnTTFTWmhJVDVSbHVTYmUxSUEtSWp2RndrbGUtYVVtTEVTb1ZpdUZyVGVTV3JYb0VaSnFRS3lqMnFaUWowM05CaTgyMTBWRkRSWHAxQVJyYTlobTBLMDctcFkzUml2U09ScUlEaVhYd3RadWM5RFFZWmpWYmNXR0MzVGY1eHBpV1hrTXpnYUk5RTd0OVBkS1kyZ0k3aFhvMGVDZF9EWElCN2F1X29vVmJQRDg0ZkpwZjkyTjRXcDYtQ2ctdnRvZWk4ak1FRWhSRDJic04xQkh3SGxMWENvS3Y2dnFfeW44OFpiOFpmTjZodG50M29vM2xqYk9HNzVtZDRjOTFVWjJ4SW43YVFfdFMwWmVER0psWHRZOVlRNDFiNWJESTFmcFRoUk81b3ROcTdWTmtrVmY4TklXaGJTM09MRjlEZElESmtNMW9kY21oSGNVTE1SQ0UtNndqZ0llek9fV3MxV01QY0lBczRrNHZ3WEtGQmo1YXZKOEYyNm9lYXRlUnhmSjZ3a1BQZ2RpVU5ZOGtic0d0SHpNX3ZJTWJ5akFWaGVIT1VHR18xeTd1ZFRjYzFOMVJfOUNxZFBTSEU3WERreER3LnNZbl9EcEpmUWhLV1NZaDRXMnZUQlE.POTsq4Xy13Au0pbHg9chI71uKUNOdwoD62hei-UhAKOyu4M-roCnoA5Rkh_J8MdKKefBqJouIy3uzqMKqBxpf3ECHPgnnyVZs5BpNOimOmYc1bPW1gfc7FwW2Xg01acH3a1KEZCYwEQJQgWaJQ8W9uHujlIgslKsurm_5b0jMLr1PkJVu9Mrtg5vG5BjEPw_IExaT0Axy3v5v1y1uToJj3uJ1CgdsSfe9QCuJatmv559JU3bbj_Db5Xy4F1WesBfgM5gBX_75_NsnNtIzRAxzjnGoazqVpAZfBzHgqnGNibddq-1pcxwHZPl4slo0AZNAazi8NWXdwm_rOy_YOTGqw&quot;&#xd;
+}&#xd;
 </stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
@@ -203,31 +195,31 @@ DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE000${tokenReferenceID}&apo
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-              <stringProp name="HTTPSampler.path">/visa-vnts-server-${serverVer}/cardholderverificationmethods/v1</stringProp>
+              <stringProp name="HTTPSampler.path">/visa-api3-server-1.3.3/checkeligibility/v1</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
               <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
               <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
               <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
-              <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
             </HTTPSamplerProxy>
             <hashTree>
               <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
                 <collectionProp name="HeaderManager.headers">
-                  <elementProp name="" elementType="Header">
+                  <elementProp name="Content-Type" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
-                    <stringProp name="Header.value">application/xml</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
                   </elementProp>
-                  <elementProp name="" elementType="Header">
+                  <elementProp name="Accept" elementType="Header">
                     <stringProp name="Header.name">Accept</stringProp>
-                    <stringProp name="Header.value">application/xml</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
                   </elementProp>
                 </collectionProp>
               </HeaderManager>
               <hashTree/>
-              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="false">
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
                 <stringProp name="DurationAssertion.duration">10000</stringProp>
               </DurationAssertion>
               <hashTree/>
@@ -237,111 +229,57 @@ DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE000${tokenReferenceID}&apo
                 <stringProp name="filename"></stringProp>
                 <stringProp name="cacheKey">true</stringProp>
                 <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
-
-</stringProp>
+//vars.put(&quot;requestID&quot;,&quot;${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}&quot;); </stringProp>
               </JSR223PreProcessor>
               <hashTree/>
-              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="false">
-                <stringProp name="cacheKey">true</stringProp>
-                <stringProp name="filename"></stringProp>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
                 <stringProp name="parameters"></stringProp>
-                <stringProp name="script">def response =  new groovy.json.JsonSlurper().parse(prev.getResponseData())
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">def response =  new groovy.json.JsonSlurper().parse(prev.getResponseData());
 
-if (response.responseId != &quot;${requestID}&quot; ) {
+if (response.actionCode != &quot;00&quot; ) {
 	AssertionResult.setFailure(true)
-	AssertionResult.setFailureMessage(&quot;The responseID and requestID values not matched&quot;);
+	AssertionResult.setFailureMessage(&quot;Failure response actionCode = &apos;&quot; + response.actionCode + &quot;&apos;&quot;);
 }
 
-
-if (response.errorCode != null) {
-if (response.errorCode == &quot;INTERNAL_SERVICE_FAILURE&quot;){
-	AssertionResult.setFailure(true)
-	AssertionResult.setFailureMessage(&quot;The internal error occured&quot;);
-} else {
-	AssertionResult.setFailure(true)
-	AssertionResult.setFailureMessage(&quot;Unknown error occured&quot;);
-}
-return;
-}
-
-
-if (response.decision == &quot;DECLINED&quot;) {
-
-	AssertionResult.setFailure(true);
-	AssertionResult.setFailureMessage(&quot;Something is wrong. The decision is *****DECLINED*****&quot;);
+if (response.actionCode == &quot;00&quot; ) {
+	def profileID = response.cardMetadataInfo.profileID;
+	if (profileID!=null) {
+		props.put(&quot;profileID&quot;, profileID);
+	} else {
+		props.put(&quot;profileID&quot;, &quot;###_NOT_FOUND_PROFILEID_###&quot;);
+//		AssertionResult.setFailure(true);
+//		AssertionResult.setFailureMessage(&quot;Failure response cardMetadataInfo.profileID: is empty&quot;);
+	}
 }
 </stringProp>
-                <stringProp name="scriptLanguage">groovy</stringProp>
               </JSR223Assertion>
               <hashTree/>
-              <XPathExtractor guiclass="XPathExtractorGui" testclass="XPathExtractor" testname="XPath Extractor" enabled="true">
-                <stringProp name="XPathExtractor.default"></stringProp>
-                <stringProp name="XPathExtractor.refname">identifier</stringProp>
-                <stringProp name="XPathExtractor.matchNumber">-1</stringProp>
-                <stringProp name="XPathExtractor.xpathQuery">/getCardHolderVerificationMethodsRes/cardholderVerificationMethod[1]/identifier/text()</stringProp>
-                <boolProp name="XPathExtractor.validate">false</boolProp>
-                <boolProp name="XPathExtractor.tolerant">false</boolProp>
-                <boolProp name="XPathExtractor.namespace">false</boolProp>
-              </XPathExtractor>
-              <hashTree/>
-              <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="XPath Assertion" enabled="true">
-                <boolProp name="XPath.negate">false</boolProp>
-                <stringProp name="XPath.xpath">/getCardHolderVerificationMethodsRes/actionCode=&apos;00&apos;</stringProp>
-                <boolProp name="XPath.validate">false</boolProp>
-                <boolProp name="XPath.whitespace">false</boolProp>
-                <boolProp name="XPath.tolerant">false</boolProp>
-                <boolProp name="XPath.namespace">false</boolProp>
-              </XPathAssertion>
-              <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="getCardHolderVerificationMethods &lt; cardholder_verification_method" enabled="true">
-              <stringProp name="dataSource">ft_al</stringProp>
-              <stringProp name="query">SELECT * FROM cardholder_verification_method WHERE token_ref_id=&apos;DNITHE000${tokenReferenceID}&apos;;</stringProp>
-              <stringProp name="queryArguments"></stringProp>
-              <stringProp name="queryArgumentsTypes"></stringProp>
-              <stringProp name="queryTimeout"></stringProp>
-              <stringProp name="queryType">Select Statement</stringProp>
-              <stringProp name="resultSetHandler">Store as String</stringProp>
-              <stringProp name="resultVariable">cardholder_verification_method</stringProp>
-              <stringProp name="variableNames"></stringProp>
-            </JDBCSampler>
-            <hashTree/>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="cardholderverificationmethods (CONFIRM_PROVISIONING) &lt;" enabled="true">
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="checkeligibility (GET_CARD_INFO_SHORT) &lt;" enabled="true">
               <stringProp name="dataSource">ft_al</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
-              <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;CONFIRM_PROVISIONING&apos; ORDER BY id DESC LIMIT 1;
-</stringProp>
+              <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;GET_CARD_INFO_SHORT&apos; ORDER BY id DESC LIMIT 1;</stringProp>
               <stringProp name="queryArguments"></stringProp>
               <stringProp name="queryArgumentsTypes"></stringProp>
               <stringProp name="variableNames"></stringProp>
-              <stringProp name="resultVariable">msg_history.confirm_provisioning</stringProp>
+              <stringProp name="resultVariable">msg_history.get_card_info_short</stringProp>
               <stringProp name="queryTimeout"></stringProp>
               <stringProp name="resultSetHandler">Store as String</stringProp>
             </JDBCSampler>
             <hashTree>
               <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
-                <stringProp name="BeanShellAssertion.query">Object cvm = vars.getObject(&quot;cardholder_verification_method&quot;).get(0);
-Object history = vars.getObject(&quot;msg_history.confirm_provisioning&quot;).get(0);
+                <stringProp name="BeanShellAssertion.query">Object history = vars.getObject(&quot;msg_history.get_card_info_short&quot;).get(0);
 
-String cvmCorrelationId = cvm.get(&quot;correlation_id&quot;);
-String historyMsgRawIn = history.get(&quot;msg_raw_in&quot;);
+String profileID = props.get(&quot;profileID&quot;);
 String historyMsgRawOut = history.get(&quot;msg_raw_out&quot;);
 
-boolean equalHistoryMsgRawIn = historyMsgRawIn.contains(cvmCorrelationId);
-boolean equalHistoryMsgRawOut = historyMsgRawOut.contains(&quot;code&lt;/name&gt;&lt;value&gt;0&lt;/value&gt;&lt;/code&quot;);
-if (!equalHistoryMsgRawIn) {
+boolean equalHistoryMsgRawOut = historyMsgRawOut.contains(&quot;productConfigID&gt;&quot; + profileID + &quot;&lt;/productConfigID&quot;);
+if (!equalHistoryMsgRawOut) {
 	Failure = true;
-	FailureMessage = &quot;&apos;msg_raw_in&apos;: not found conversationId `&quot; + cvmCorrelationId;
-} else {
-	boolean equalInDeviceName = historyMsgRawIn.contains(&quot;\&quot;deviceName\&quot;:&quot;);
-	if (!equalInDeviceName) {
-		Failure = true;
-		FailureMessage = &quot;&apos;deviceName&apos;: &quot; + &quot;`&quot; + historyMsgRawIn + &quot;`&quot;;
-	}
-	if (!equalHistoryMsgRawOut) {
-		Failure = true;
-		FailureMessage = &quot;&apos;error_code&apos;: &quot; + &quot;`&quot; + historyMsgRawOut + &quot;`&quot;;
-	}
+	FailureMessage = &quot;&apos;msg_raw_out&apos;: not found productConfigID `&quot; + profileID + &quot;`&quot;;
 }
 </stringProp>
                 <stringProp name="BeanShellAssertion.filename"></stringProp>
@@ -350,74 +288,7 @@ if (!equalHistoryMsgRawIn) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="getCardHolderVerificationMethods &lt; token_info" enabled="true">
-              <stringProp name="dataSource">ft_al</stringProp>
-              <stringProp name="queryType">Select Statement</stringProp>
-              <stringProp name="query">SELECT * FROM token_info WHERE token_ref_id=&apos;DNITHE000${tokenReferenceID}&apos;;</stringProp>
-              <stringProp name="queryArguments"></stringProp>
-              <stringProp name="queryArgumentsTypes"></stringProp>
-              <stringProp name="variableNames"></stringProp>
-              <stringProp name="resultVariable">token_info</stringProp>
-              <stringProp name="queryTimeout"></stringProp>
-              <stringProp name="resultSetHandler">Store as String</stringProp>
-            </JDBCSampler>
-            <hashTree>
-              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
-                <stringProp name="BeanShellAssertion.query">int cvmSize = vars.getObject(&quot;cardholder_verification_method&quot;).size();
-if (!ResponseCode.equals(&quot;200&quot;) || cvmSize == 0) {
-	Failure = true;
-	FailureMessage = &quot;Count of rows &apos;cardholder_verification_method&apos;: &quot; + cvmSize;
-}
-
-int tokenSize = vars.getObject(&quot;token_info&quot;).size();
-if (!ResponseCode.equals(&quot;200&quot;) || tokenSize == 0) {
-	Failure = true;
-	FailureMessage = &quot;Count of rows &apos;token_info&apos;: &quot; + tokenSize;
-}
-
-Object cvm = vars.getObject(&quot;cardholder_verification_method&quot;).get(0);
-Object token = vars.getObject(&quot;token_info&quot;).get(0);
-
-String tokenRefId = token.get(&quot;token_ref_id&quot;);
-boolean equalTokenRefId = tokenRefId.equals(&quot;DNITHE000${tokenReferenceID}&quot;);
-if (!equalTokenRefId) {
-	Failure = true;
-	FailureMessage = &quot;&apos;token_ref_id&apos;: &quot; + tokenRefId;
-}
-
-String tokenStatus = token.get(&quot;token_status&quot;);
-if (tokenStatus!=null) {
-	Failure = true;
-	FailureMessage = &quot;&apos;token_status&apos;: is not empty&quot;;
-}
-
-String cvmPanInternalID = cvm.get(&quot;pan_internal_id&quot;);
-String tokenPanInternalID = token.get(&quot;pan_internal_id&quot;);
-boolean equalTokenPanInternalID = tokenPanInternalID.equals(cvmPanInternalID);
-if (!equalTokenPanInternalID) {
-	Failure = true;
-	FailureMessage = &quot;&apos;pan_internal_id&apos;: &quot; + cvmPanInternalID + &quot; = &quot; + tokenPanInternalID;
-}
-
-Date tokenStatusUpdate = token.get(&quot;token_status_update&quot;);
-if (tokenStatusUpdate!=null) {
-	Failure = true;
-	FailureMessage = &quot;&apos;token_status_update&apos;: is not empty&quot;;
-}
-
-Date tokenDigitizeDate = token.get(&quot;digitize_date&quot;);
-if (tokenDigitizeDate!=null) {
-	Failure = true;
-	FailureMessage = &quot;&apos;digitize_date&apos;: is not empty&quot;;
-}
-</stringProp>
-                <stringProp name="BeanShellAssertion.filename"></stringProp>
-                <stringProp name="BeanShellAssertion.parameters"></stringProp>
-                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
-              </BeanShellAssertion>
-              <hashTree/>
-            </hashTree>
-            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: vnts-server.log" enabled="false">
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-api3-server.log" enabled="false">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
               <stringProp name="SystemSampler.command">/bin/bash</stringProp>
@@ -430,7 +301,7 @@ if (tokenDigitizeDate!=null) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ${logDir}/vnts-server.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-api3-server.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -544,7 +415,389 @@ if (countStan != countStanResponse) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Send Pass Code" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller Get Cardholder Verification Methods" enabled="true">
+            <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="truncate: fasttack *.logs" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">truncate -s 0 ${logDir}/*.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="cardholderverificationmethods" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;tokenRequestorID&quot;: &quot;40010030273&quot;,&#xd;
+  &quot;tokenReferenceID&quot;: &quot;DNITHE000${tokenReferenceID}&quot;,&#xd;
+  &quot;clientWalletAccountID&quot;: &quot;6Gt02SAokOGBxPoKPuP6yVpV&quot;,&#xd;
+  &quot;panSource&quot;: &quot;KEY_ENTERED&quot;,&#xd;
+  &quot;otpReason&quot;: &quot;01&quot;,&#xd;
+  &quot;otpMaxReached&quot;: &quot;false&quot;,&#xd;
+  &quot;panReferenceID&quot;: &quot;V-3017192484534844832252&quot;,&#xd;
+  &quot;deviceInfo&quot;: {&#xd;
+    &quot;deviceID&quot;: &quot;04312E7B342C80014328036811932950DA075B1C4DC45F7C&quot;,&#xd;
+    &quot;deviceName&quot;: &quot;MY BEST PHONE&quot;,&#xd;
+    &quot;deviceNumber&quot;: &quot;380507534412&quot;,&#xd;
+    &quot;deviceLanguageCode&quot;: &quot;en&quot;,&#xd;
+    &quot;deviceIDType&quot;: &quot;SecureElement&quot;,&#xd;
+    &quot;deviceType&quot;: &quot;MOBILE_PHONE&quot;,&#xd;
+    &quot;osBuildID&quot;: &quot;TU84M&quot;,&#xd;
+    &quot;osVersion&quot;: &quot;8.1&quot;,&#xd;
+    &quot;osType&quot;: &quot;Android&quot;,&#xd;
+    &quot;deviceManufacturer&quot;: &quot;Samsung&quot;,&#xd;
+    &quot;deviceBrand&quot;: &quot;Nexus&quot;,&#xd;
+    &quot;deviceModel&quot;: &quot;ME571KL NA K009&quot;,&#xd;
+    &quot;deviceLocation&quot;: &quot;+37/-121&quot;,&#xd;
+    &quot;deviceIPAddressV4&quot;: &quot;10.0.1.1&quot;,&#xd;
+    &quot;locationSource&quot;: &quot;CELLULAR&quot;,&#xd;
+    &quot;tokenProtectionMethod&quot;: &quot;TRUSTED_EXECUTION_ENVIRONMENT&quot;&#xd;
+  },&#xd;
+  &quot;encryptedData&quot;: &quot;eyJhbGciOiJSUzI1NiIsIml2IjoiIiwidGFnIjoiIiwiZW5jIjoiIiwidHlwIjoiSk9TRSIsImtpZCI6IiIsImNoYW5uZWxTZWN1cml0eUNvbnRleHQiOiIifQ.ZXlKaGJHY2lPaUpTVTBFeFh6VWlMQ0pwZGlJNklpSXNJblJoWnlJNklpSXNJbVZ1WXlJNklrRXhNamhIUTAwaUxDSjBlWEFpT2lKS1QxTkZJaXdpYTJsa0lqb2lSVTFPVVVjeVJqWlBXakJWVlRGWVFqSklOMGN4TTB0alpHWlVia1ZEWlZwV1NHNXZlbTVxTWtaRWMyMWhaMlIxVVNJc0ltTm9ZVzV1Wld4VFpXTjFjbWwwZVVOdmJuUmxlSFFpT2lKU1UwRmZVRXRKSWl3aWFXRjBJam9pTVRVeE9UTTRNalk0T0NKOS5uZ2VwcHZENEFtTFJkd2RyLUg0RWZVTmxVRk9wc19VekkwcUV2aWwzUkpzck5qbjU5ZDdhSEk3WXNfRmdpS2ZiMmNMaDBpd0N3eFhpMFZXcUsyc2E1N2tDaVBBaHluVXRfbWZxd044WWpKMXBIT0d5bk80eE51MHFydDVHVG16X0daN3ZuWmxrY3FnSmlCTWdHSXA5RnVCbzZuN21yaVNrUmNKMlRha2ZFWnNLQldBWmZrc0ZlQzNjVHVqUGZEaVJNLU5ndkpjOFZDREJYOF9PRGRrRWVRWXBnZ2xIN2ZVVjQ5S0gwQzRUR2dBWnlOcXFIcEVnU0lwcVRDaE1vYWFtVncwMWZhTm53bjRlQklPSVNCeGg0aDQwVFdiRUtnWTBjX1MwZFRoM25UZDdDUFk4NElWWmVOVDNLXzFhTWlxVGx1UjNtQnNEVmVpOHBRMTh3Y0w2VGcuamVtemFYSnNnVUg1TVFzUS5kYXdKVXJQaWxWSjJvcEFxT19JcWRRTFNqSnRxUGFrbU16MU5mVENjQ0FlbTdkNTR1bFhzMl9zYlQxRXZrNVdsLXdYM0hqeXltVllpenJ4S1p1d3hiYzZfWjZfbVJSVzJCMlBfN19zd1d1bmp0WFVFaTAxVGhobHc2OGNFdjBGa0FtNnpsYmRlZnprQWdfbFV6SWxHaHRaNmtPY1FRMGF2ZkVSUkJXc3hTb0g0ZW5RdGZYZG92UWRiTGg4VGYzTS1VbEZiQ0hMWGdsQUl3Z1htSDJNSnR2YnFEd2JsWU55TFlCcXoxVXVLY1hiam9DN01meVVraGJfcU1sMmhxYXFwbFExVmt3LU1mSEptQmxSdGRRMmJRMjhlSGNvR09DOFFjTUw5dVZqdnJEbVc5OTdoTU9PZEVMRXBySjVxa2R4czZ6SFV6SGFUR1FaLUYwRGpaYjJZRXNJYnZUUjU1TEM0MHAtcExlTkJhSFpZWllBQ0M1MkMweXBGRlQ0QXBaTEp6a01TT0dHY2g5MFhYNE43UUlQQW4tSmdvTDljU0Q0bHlRUGJ0WVdJOXI0NEtwaGpEYXZ3OGM3TG9tN0pfUE91dnZfM0RLWTZ1WmplMXJkb0FhWGJzdm9WZUwtOHRJLWpTcXpscXBocFVWNVBySDc2TXdnTTFTWmhJVDVSbHVTYmUxSUEtSWp2RndrbGUtYVVtTEVTb1ZpdUZyVGVTV3JYb0VaSnFRS3lqMnFaUWowM05CaTgyMTBWRkRSWHAxQVJyYTlobTBLMDctcFkzUml2U09ScUlEaVhYd3RadWM5RFFZWmpWYmNXR0MzVGY1eHBpV1hrTXpnYUk5RTd0OVBkS1kyZ0k3aFhvMGVDZF9EWElCN2F1X29vVmJQRDg0ZkpwZjkyTjRXcDYtQ2ctdnRvZWk4ak1FRWhSRDJic04xQkh3SGxMWENvS3Y2dnFfeW44OFpiOFpmTjZodG50M29vM2xqYk9HNzVtZDRjOTFVWjJ4SW43YVFfdFMwWmVER0psWHRZOVlRNDFiNWJESTFmcFRoUk81b3ROcTdWTmtrVmY4TklXaGJTM09MRjlEZElESmtNMW9kY21oSGNVTE1SQ0UtNndqZ0llek9fV3MxV01QY0lBczRrNHZ3WEtGQmo1YXZKOEYyNm9lYXRlUnhmSjZ3a1BQZ2RpVU5ZOGtic0d0SHpNX3ZJTWJ5akFWaGVIT1VHR18xeTd1ZFRjYzFOMVJfOUNxZFBTSEU3WERreER3LnNZbl9EcEpmUWhLV1NZaDRXMnZUQlE.POTsq4Xy13Au0pbHg9chI71uKUNOdwoD62hei-UhAKOyu4M-roCnoA5Rkh_J8MdKKefBqJouIy3uzqMKqBxpf3ECHPgnnyVZs5BpNOimOmYc1bPW1gfc7FwW2Xg01acH3a1KEZCYwEQJQgWaJQ8W9uHujlIgslKsurm_5b0jMLr1PkJVu9Mrtg5vG5BjEPw_IExaT0Axy3v5v1y1uToJj3uJ1CgdsSfe9QCuJatmv559JU3bbj_Db5Xy4F1WesBfgM5gBX_75_NsnNtIzRAxzjnGoazqVpAZfBzHgqnGNibddq-1pcxwHZPl4slo0AZNAazi8NWXdwm_rOy_YOTGqw&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8080</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+              <stringProp name="HTTPSampler.path">/visa-api3-server-1.3.3/cardholderverificationmethods/v1</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+              <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+                <stringProp name="DurationAssertion.duration">10000</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+//vars.put(&quot;requestID&quot;,&quot;${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}&quot;); </stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="script">def response =  new groovy.json.JsonSlurper().parse(prev.getResponseData())
+
+if (response.actionCode != &quot;00&quot; ) {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Failure response actionCode = &apos;&quot; + response.actionCode + &quot;&apos;&quot;);
+}
+
+if (response.actionCode == &quot;00&quot; ) {
+	if (response.cardholderVerificationMethod[1].identifier != &quot;1&quot; ) {
+		AssertionResult.setFailure(true)
+		AssertionResult.setFailureMessage(&quot;Failure response identifier &apos;&quot; + response.cardholderVerificationMethod[1].identifier + &quot;&apos;&quot;);
+	}
+}
+</stringProp>
+                <stringProp name="scriptLanguage">groovy</stringProp>
+              </JSR223Assertion>
+              <hashTree/>
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+                <stringProp name="JSONPostProcessor.referenceNames">identifier</stringProp>
+                <stringProp name="JSONPostProcessor.jsonPathExprs">$.cardholderVerificationMethod[0].identifier</stringProp>
+                <stringProp name="JSONPostProcessor.match_numbers">0</stringProp>
+              </JSONPostProcessor>
+              <hashTree/>
+            </hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="getCardHolderVerificationMethods &lt; cardholder_verification_method" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT * FROM cardholder_verification_method WHERE token_ref_id=&apos;DNITHE000${tokenReferenceID}&apos;;</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">cardholder_verification_method</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree/>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="cardholderverificationmethods (CONFIRM_PROVISIONING) &lt;" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;CONFIRM_PROVISIONING&apos; ORDER BY id DESC LIMIT 1;
+</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">msg_history.confirm_provisioning</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">Object cvm = vars.getObject(&quot;cardholder_verification_method&quot;).get(0);
+Object history = vars.getObject(&quot;msg_history.confirm_provisioning&quot;).get(0);
+
+String cvmCorrelationId = cvm.get(&quot;correlation_id&quot;);
+String historyMsgRawIn = history.get(&quot;msg_raw_in&quot;);
+String historyMsgRawOut = history.get(&quot;msg_raw_out&quot;);
+
+boolean equalHistoryMsgRawIn = historyMsgRawIn.contains(cvmCorrelationId);
+boolean equalHistoryMsgRawOut = historyMsgRawOut.contains(&quot;code&lt;/name&gt;&lt;value&gt;0&lt;/value&gt;&lt;/code&quot;);
+if (!equalHistoryMsgRawIn) {
+	Failure = true;
+	FailureMessage = &quot;&apos;msg_raw_in&apos;: not found conversationId `&quot; + cvmCorrelationId;
+} else {
+	if (!equalHistoryMsgRawOut) {
+		Failure = true;
+		FailureMessage = &quot;&apos;error_code&apos;: &quot; + &quot;`&quot; + historyMsgRawOut + &quot;`&quot;;
+	}
+}
+</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="getCardHolderVerificationMethods &lt; token_info" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT * FROM token_info WHERE token_ref_id=&apos;DNITHE000${tokenReferenceID}&apos;;</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">token_info</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">int cvmSize = vars.getObject(&quot;cardholder_verification_method&quot;).size();
+if (!ResponseCode.equals(&quot;200&quot;) || cvmSize == 0) {
+	Failure = true;
+	FailureMessage = &quot;Count of rows &apos;cardholder_verification_method&apos;: &quot; + cvmSize;
+}
+
+int tokenSize = vars.getObject(&quot;token_info&quot;).size();
+if (!ResponseCode.equals(&quot;200&quot;) || tokenSize == 0) {
+	Failure = true;
+	FailureMessage = &quot;Count of rows &apos;token_info&apos;: &quot; + tokenSize;
+}
+
+Object cvm = vars.getObject(&quot;cardholder_verification_method&quot;).get(0);
+Object token = vars.getObject(&quot;token_info&quot;).get(0);
+
+String tokenRefId = token.get(&quot;token_ref_id&quot;);
+boolean equalTokenRefId = tokenRefId.equals(&quot;DNITHE000${tokenReferenceID}&quot;);
+if (!equalTokenRefId) {
+	Failure = true;
+	FailureMessage = &quot;&apos;token_ref_id&apos;: &quot; + tokenRefId;
+}
+
+String tokenStatus = token.get(&quot;token_status&quot;);
+if (tokenStatus!=null) {
+	Failure = true;
+	FailureMessage = &quot;&apos;token_status&apos;: is not empty&quot;;
+}
+
+String cvmPanInternalID = cvm.get(&quot;pan_internal_id&quot;);
+String tokenPanInternalID = token.get(&quot;pan_internal_id&quot;);
+boolean equalTokenPanInternalID = tokenPanInternalID.equals(cvmPanInternalID);
+if (!equalTokenPanInternalID) {
+	Failure = true;
+	FailureMessage = &quot;&apos;pan_internal_id&apos;: &quot; + cvmPanInternalID + &quot; = &quot; + tokenPanInternalID;
+}
+
+Date tokenStatusUpdate = token.get(&quot;token_status_update&quot;);
+if (tokenStatusUpdate!=null) {
+	Failure = true;
+	FailureMessage = &quot;&apos;token_status_update&apos;: is not empty&quot;;
+}
+
+Date tokenDigitizeDate = token.get(&quot;digitize_date&quot;);
+if (tokenDigitizeDate!=null) {
+	Failure = true;
+	FailureMessage = &quot;&apos;digitize_date&apos;: is not empty&quot;;
+}
+</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-api3-server.log" enabled="false">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-api3-server.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="false">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/core.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: bank-client.log" enabled="false">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/bank-client.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Send Pass Code" enabled="true">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
@@ -580,34 +833,22 @@ if (countStan != countStanResponse) {
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;&#xd;
-&lt;sendPasscodeReq xmlns=&quot;http://vnts.visa.com/tpcas/v1&quot;&gt;&#xd;
-    &lt;walletProviderMsgTracing&gt;&#xd;
-        &lt;tokenRequestorID&gt;40010030273&lt;/tokenRequestorID&gt;&#xd;
-        &lt;wpRequestId&gt;${requestID}&lt;/wpRequestId&gt;&#xd;
-    &lt;wpConversationId&gt;a7d044e7-754d-4cbc-951a-d636f359eb3c&lt;/wpConversationId&gt;&#xd;
-    &lt;/walletProviderMsgTracing&gt;&#xd;
-  &lt;walletAccountID&gt;6Gt02SAokOGBxPoKPuP6yVpV&lt;/walletAccountID&gt;&#xd;
-  &lt;lifeCycleTraceID&gt;${tokenReferenceID}&lt;/lifeCycleTraceID&gt;&#xd;
-    &lt;tokenReferenceID&gt;DNITHE000${tokenReferenceID}&lt;/tokenReferenceID&gt;&#xd;
-    &lt;panReferenceID&gt;V-3017192484534844832252&lt;/panReferenceID&gt;&#xd;
-    &lt;token&gt;4491028330000422&lt;/token&gt;&#xd;
-    &lt;deviceInfo&gt;&#xd;
-    &lt;secureElementID&gt;04312E7B342C80014328036811932950DA075B1C4DC45F7C&lt;/secureElementID&gt;&#xd;
-    &lt;deviceType&gt;1&lt;/deviceType&gt;&#xd;
-    &lt;deviceNumber&gt;8630&lt;/deviceNumber&gt;&#xd;
-    &lt;deviceName&gt;Samsung Galaxy S&lt;/deviceName&gt;&#xd;
-    &lt;/deviceInfo&gt;&#xd;
-    &lt;otpMethodIdentifier&gt;${identifier}&lt;/otpMethodIdentifier&gt;&#xd;
-    &lt;OTPCode&gt;363538&lt;/OTPCode&gt;&#xd;
-    &lt;OTPCodeExp&gt;2020-20-31T21:11:22.123Z&lt;/OTPCodeExp&gt;&#xd;
-    &lt;cardholderInfo&gt;&#xd;
-        &lt;version&gt;ws1&lt;/version&gt;&#xd;
-        &lt;encryptionKeyIndex&gt;1&lt;/encryptionKeyIndex&gt;&#xd;
-        &lt;encryptedData&gt;C246C268F4E6ECB4DD9E26AB00F5544687D1C48A3F7D4161ABD06678ED78EBD2&lt;/encryptedData&gt;&#xd;
-    &lt;/cardholderInfo&gt;&#xd;
-&lt;/sendPasscodeReq&gt;&#xd;
-</stringProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;tokenRequestorID&quot;: &quot;40010030273&quot;,&#xd;
+  &quot;tokenReferenceID&quot;: &quot;DNITHE000${tokenReferenceID}&quot;,&#xd;
+  &quot;panReferenceID&quot;: &quot;V-3017192484534844832252&quot;,&#xd;
+  &quot;clientWalletAccountID&quot;: &quot;6Gt02SAokOGBxPoKPuP6yVpV&quot;,&#xd;
+  &quot;otpMethodIdentifier&quot;: &quot;${identifier}&quot;,&#xd;
+  &quot;otpValue&quot;: &quot;363538&quot;,&#xd;
+  &quot;otpExpirationDate&quot;: &quot;2019-12-31T21:11:22.123Z&quot;,&#xd;
+  &quot;deviceInfo&quot;: {&#xd;
+    &quot;deviceID&quot;: &quot;04312E7B342C80014328036811932950DA075B1C4DC45F7C&quot;,&#xd;
+    &quot;deviceType&quot;: &quot;MOBILE_PHONE&quot;,&#xd;
+    &quot;deviceNumber&quot;: &quot;8630&quot;,&#xd;
+    &quot;deviceName&quot;: &quot;Samsung Galaxy S&quot;&#xd;
+  },&#xd;
+  &quot;encryptedData&quot;: &quot;eyJhbGciOiJSUzI1NiIsIml2IjoiIiwidGFnIjoiIiwiZW5jIjoiIiwidHlwIjoiSk9TRSIsImtpZCI6IiIsImNoYW5uZWxTZWN1cml0eUNvbnRleHQiOiIifQ.ZXlKaGJHY2lPaUpTVTBFeFh6VWlMQ0pwZGlJNklpSXNJblJoWnlJNklpSXNJbVZ1WXlJNklrRXhNamhIUTAwaUxDSjBlWEFpT2lKS1QxTkZJaXdpYTJsa0lqb2lSVTFPVVVjeVJqWlBXakJWVlRGWVFqSklOMGN4TTB0alpHWlVia1ZEWlZwV1NHNXZlbTVxTWtaRWMyMWhaMlIxVVNJc0ltTm9ZVzV1Wld4VFpXTjFjbWwwZVVOdmJuUmxlSFFpT2lKU1UwRmZVRXRKSWl3aWFXRjBJam9pTVRVeE9UTTRNalk0T0NKOS5uZ2VwcHZENEFtTFJkd2RyLUg0RWZVTmxVRk9wc19VekkwcUV2aWwzUkpzck5qbjU5ZDdhSEk3WXNfRmdpS2ZiMmNMaDBpd0N3eFhpMFZXcUsyc2E1N2tDaVBBaHluVXRfbWZxd044WWpKMXBIT0d5bk80eE51MHFydDVHVG16X0daN3ZuWmxrY3FnSmlCTWdHSXA5RnVCbzZuN21yaVNrUmNKMlRha2ZFWnNLQldBWmZrc0ZlQzNjVHVqUGZEaVJNLU5ndkpjOFZDREJYOF9PRGRrRWVRWXBnZ2xIN2ZVVjQ5S0gwQzRUR2dBWnlOcXFIcEVnU0lwcVRDaE1vYWFtVncwMWZhTm53bjRlQklPSVNCeGg0aDQwVFdiRUtnWTBjX1MwZFRoM25UZDdDUFk4NElWWmVOVDNLXzFhTWlxVGx1UjNtQnNEVmVpOHBRMTh3Y0w2VGcuamVtemFYSnNnVUg1TVFzUS5kYXdKVXJQaWxWSjJvcEFxT19JcWRRTFNqSnRxUGFrbU16MU5mVENjQ0FlbTdkNTR1bFhzMl9zYlQxRXZrNVdsLXdYM0hqeXltVllpenJ4S1p1d3hiYzZfWjZfbVJSVzJCMlBfN19zd1d1bmp0WFVFaTAxVGhobHc2OGNFdjBGa0FtNnpsYmRlZnprQWdfbFV6SWxHaHRaNmtPY1FRMGF2ZkVSUkJXc3hTb0g0ZW5RdGZYZG92UWRiTGg4VGYzTS1VbEZiQ0hMWGdsQUl3Z1htSDJNSnR2YnFEd2JsWU55TFlCcXoxVXVLY1hiam9DN01meVVraGJfcU1sMmhxYXFwbFExVmt3LU1mSEptQmxSdGRRMmJRMjhlSGNvR09DOFFjTUw5dVZqdnJEbVc5OTdoTU9PZEVMRXBySjVxa2R4czZ6SFV6SGFUR1FaLUYwRGpaYjJZRXNJYnZUUjU1TEM0MHAtcExlTkJhSFpZWllBQ0M1MkMweXBGRlQ0QXBaTEp6a01TT0dHY2g5MFhYNE43UUlQQW4tSmdvTDljU0Q0bHlRUGJ0WVdJOXI0NEtwaGpEYXZ3OGM3TG9tN0pfUE91dnZfM0RLWTZ1WmplMXJkb0FhWGJzdm9WZUwtOHRJLWpTcXpscXBocFVWNVBySDc2TXdnTTFTWmhJVDVSbHVTYmUxSUEtSWp2RndrbGUtYVVtTEVTb1ZpdUZyVGVTV3JYb0VaSnFRS3lqMnFaUWowM05CaTgyMTBWRkRSWHAxQVJyYTlobTBLMDctcFkzUml2U09ScUlEaVhYd3RadWM5RFFZWmpWYmNXR0MzVGY1eHBpV1hrTXpnYUk5RTd0OVBkS1kyZ0k3aFhvMGVDZF9EWElCN2F1X29vVmJQRDg0ZkpwZjkyTjRXcDYtQ2ctdnRvZWk4ak1FRWhSRDJic04xQkh3SGxMWENvS3Y2dnFfeW44OFpiOFpmTjZodG50M29vM2xqYk9HNzVtZDRjOTFVWjJ4SW43YVFfdFMwWmVER0psWHRZOVlRNDFiNWJESTFmcFRoUk81b3ROcTdWTmtrVmY4TklXaGJTM09MRjlEZElESmtNMW9kY21oSGNVTE1SQ0UtNndqZ0llek9fV3MxV01QY0lBczRrNHZ3WEtGQmo1YXZKOEYyNm9lYXRlUnhmSjZ3a1BQZ2RpVU5ZOGtic0d0SHpNX3ZJTWJ5akFWaGVIT1VHR18xeTd1ZFRjYzFOMVJfOUNxZFBTSEU3WERreER3LnNZbl9EcEpmUWhLV1NZaDRXMnZUQlE.POTsq4Xy13Au0pbHg9chI71uKUNOdwoD62hei-UhAKOyu4M-roCnoA5Rkh_J8MdKKefBqJouIy3uzqMKqBxpf3ECHPgnnyVZs5BpNOimOmYc1bPW1gfc7FwW2Xg01acH3a1KEZCYwEQJQgWaJQ8W9uHujlIgslKsurm_5b0jMLr1PkJVu9Mrtg5vG5BjEPw_IExaT0Axy3v5v1y1uToJj3uJ1CgdsSfe9QCuJatmv559JU3bbj_Db5Xy4F1WesBfgM5gBX_75_NsnNtIzRAxzjnGoazqVpAZfBzHgqnGNibddq-1pcxwHZPl4slo0AZNAazi8NWXdwm_rOy_YOTGqw&quot;&#xd;
+}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -616,7 +857,7 @@ if (countStan != countStanResponse) {
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-              <stringProp name="HTTPSampler.path">/visa-vnts-server-${serverVer}/sendpasscode/v1</stringProp>
+              <stringProp name="HTTPSampler.path">/visa-api3-server-1.2.5-SNAPSHOT/sendpasscode/v1</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -631,11 +872,11 @@ if (countStan != countStanResponse) {
                 <collectionProp name="HeaderManager.headers">
                   <elementProp name="" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
-                    <stringProp name="Header.value">application/xml</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
                   </elementProp>
                   <elementProp name="" elementType="Header">
                     <stringProp name="Header.name">Accept</stringProp>
-                    <stringProp name="Header.value">application/xml</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
                   </elementProp>
                 </collectionProp>
               </HeaderManager>
@@ -650,21 +891,25 @@ if (countStan != countStanResponse) {
                 <stringProp name="filename"></stringProp>
                 <stringProp name="cacheKey">true</stringProp>
                 <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
-
-</stringProp>
+//vars.put(&quot;requestID&quot;,&quot;${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}&quot;); </stringProp>
               </JSR223PreProcessor>
               <hashTree/>
-              <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="XPath Assertion" enabled="true">
-                <boolProp name="XPath.negate">false</boolProp>
-                <stringProp name="XPath.xpath">/sendPasscodeRes/actionCode=&apos;00&apos;</stringProp>
-                <boolProp name="XPath.validate">false</boolProp>
-                <boolProp name="XPath.whitespace">false</boolProp>
-                <boolProp name="XPath.tolerant">false</boolProp>
-                <boolProp name="XPath.namespace">false</boolProp>
-              </XPathAssertion>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">def response =  new groovy.json.JsonSlurper().parse(prev.getResponseData())
+
+if (response.actionCode != &quot;00&quot; ) {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Failure response actionCode = &apos;&quot; + response.actionCode + &quot;&apos;&quot;);
+}
+</stringProp>
+              </JSR223Assertion>
               <hashTree/>
             </hashTree>
-            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: vnts-server.log" enabled="false">
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-api3-server.log" enabled="false">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
               <stringProp name="SystemSampler.command">/bin/bash</stringProp>
@@ -677,7 +922,7 @@ if (countStan != countStanResponse) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ${logDir}/vnts-server.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-api3-server.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -786,7 +1031,7 @@ if (!equalHistoryMsgRawIn) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="truncate: fasttack *.logs" enabled="false">
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="truncate: fasttack *.logs" enabled="true">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
               <stringProp name="SystemSampler.command">/bin/bash</stringProp>
@@ -810,40 +1055,28 @@ if (!equalHistoryMsgRawIn) {
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
             <hashTree/>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="sendpasscode (01)" enabled="false">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="sendpasscode (01)" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;&#xd;
-&lt;sendPasscodeReq xmlns=&quot;http://vnts.visa.com/tpcas/v1&quot;&gt;&#xd;
-    &lt;walletProviderMsgTracing&gt;&#xd;
-        &lt;tokenRequestorID&gt;40010030273&lt;/tokenRequestorID&gt;&#xd;
-        &lt;wpRequestId&gt;${requestID}&lt;/wpRequestId&gt;&#xd;
-    &lt;wpConversationId&gt;a7d044e7-754d-4cbc-951a-d636f359eb3c&lt;/wpConversationId&gt;&#xd;
-    &lt;/walletProviderMsgTracing&gt;&#xd;
-  &lt;walletAccountID&gt;6Gt02SAokOGBxPoKPuP6yVpV&lt;/walletAccountID&gt;&#xd;
-  &lt;lifeCycleTraceID&gt;${tokenReferenceID}&lt;/lifeCycleTraceID&gt;&#xd;
-    &lt;tokenReferenceID&gt;DNITHE000${tokenReferenceID}&lt;/tokenReferenceID&gt;&#xd;
-    &lt;panReferenceID&gt;V-3017192484534844832252&lt;/panReferenceID&gt;&#xd;
-    &lt;token&gt;4491028330000422&lt;/token&gt;&#xd;
-    &lt;deviceInfo&gt;&#xd;
-    &lt;secureElementID&gt;04312E7B342C80014328036811932950DA075B1C4DC45F7C&lt;/secureElementID&gt;&#xd;
-    &lt;deviceType&gt;1&lt;/deviceType&gt;&#xd;
-    &lt;deviceNumber&gt;8630&lt;/deviceNumber&gt;&#xd;
-    &lt;deviceName&gt;Samsung Galaxy S&lt;/deviceName&gt;&#xd;
-    &lt;/deviceInfo&gt;&#xd;
-    &lt;otpMethodIdentifier&gt;12345&lt;/otpMethodIdentifier&gt;&#xd;
-    &lt;OTPCode&gt;363538&lt;/OTPCode&gt;&#xd;
-    &lt;OTPCodeExp&gt;2019-12-31T21:11:22.123Z&lt;/OTPCodeExp&gt;&#xd;
-    &lt;cardholderInfo&gt;&#xd;
-        &lt;version&gt;ws1&lt;/version&gt;&#xd;
-        &lt;encryptionKeyIndex&gt;1&lt;/encryptionKeyIndex&gt;&#xd;
-        &lt;encryptedData&gt;C246C268F4E6ECB4DD9E26AB00F5544687D1C48A3F7D4161ABD06678ED78EBD2&lt;/encryptedData&gt;&#xd;
-    &lt;/cardholderInfo&gt;&#xd;
-&lt;/sendPasscodeReq&gt;&#xd;
-</stringProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;tokenRequestorID&quot;: &quot;40010030273&quot;,&#xd;
+  &quot;tokenReferenceID&quot;: &quot;DNITHE000${tokenReferenceID}&quot;,&#xd;
+  &quot;panReferenceID&quot;: &quot;V-3017192484534844832252&quot;,&#xd;
+  &quot;clientWalletAccountID&quot;: &quot;6Gt02SAokOGBxPoKPuP6yVpV&quot;,&#xd;
+  &quot;otpMethodIdentifier&quot;: &quot;12345&quot;,&#xd;
+  &quot;otpValue&quot;: &quot;363538&quot;,&#xd;
+  &quot;otpExpirationDate&quot;: &quot;2019-12-31T21:11:22.123Z&quot;,&#xd;
+  &quot;deviceInfo&quot;: {&#xd;
+    &quot;deviceID&quot;: &quot;04312E7B342C80014328036811932950DA075B1C4DC45F7C&quot;,&#xd;
+    &quot;deviceType&quot;: &quot;MOBILE_PHONE&quot;,&#xd;
+    &quot;deviceNumber&quot;: &quot;8630&quot;,&#xd;
+    &quot;deviceName&quot;: &quot;Samsung Galaxy S&quot;&#xd;
+  },&#xd;
+  &quot;encryptedData&quot;: &quot;eyJhbGciOiJSUzI1NiIsIml2IjoiIiwidGFnIjoiIiwiZW5jIjoiIiwidHlwIjoiSk9TRSIsImtpZCI6IiIsImNoYW5uZWxTZWN1cml0eUNvbnRleHQiOiIifQ.ZXlKaGJHY2lPaUpTVTBFeFh6VWlMQ0pwZGlJNklpSXNJblJoWnlJNklpSXNJbVZ1WXlJNklrRXhNamhIUTAwaUxDSjBlWEFpT2lKS1QxTkZJaXdpYTJsa0lqb2lSVTFPVVVjeVJqWlBXakJWVlRGWVFqSklOMGN4TTB0alpHWlVia1ZEWlZwV1NHNXZlbTVxTWtaRWMyMWhaMlIxVVNJc0ltTm9ZVzV1Wld4VFpXTjFjbWwwZVVOdmJuUmxlSFFpT2lKU1UwRmZVRXRKSWl3aWFXRjBJam9pTVRVeE9UTTRNalk0T0NKOS5uZ2VwcHZENEFtTFJkd2RyLUg0RWZVTmxVRk9wc19VekkwcUV2aWwzUkpzck5qbjU5ZDdhSEk3WXNfRmdpS2ZiMmNMaDBpd0N3eFhpMFZXcUsyc2E1N2tDaVBBaHluVXRfbWZxd044WWpKMXBIT0d5bk80eE51MHFydDVHVG16X0daN3ZuWmxrY3FnSmlCTWdHSXA5RnVCbzZuN21yaVNrUmNKMlRha2ZFWnNLQldBWmZrc0ZlQzNjVHVqUGZEaVJNLU5ndkpjOFZDREJYOF9PRGRrRWVRWXBnZ2xIN2ZVVjQ5S0gwQzRUR2dBWnlOcXFIcEVnU0lwcVRDaE1vYWFtVncwMWZhTm53bjRlQklPSVNCeGg0aDQwVFdiRUtnWTBjX1MwZFRoM25UZDdDUFk4NElWWmVOVDNLXzFhTWlxVGx1UjNtQnNEVmVpOHBRMTh3Y0w2VGcuamVtemFYSnNnVUg1TVFzUS5kYXdKVXJQaWxWSjJvcEFxT19JcWRRTFNqSnRxUGFrbU16MU5mVENjQ0FlbTdkNTR1bFhzMl9zYlQxRXZrNVdsLXdYM0hqeXltVllpenJ4S1p1d3hiYzZfWjZfbVJSVzJCMlBfN19zd1d1bmp0WFVFaTAxVGhobHc2OGNFdjBGa0FtNnpsYmRlZnprQWdfbFV6SWxHaHRaNmtPY1FRMGF2ZkVSUkJXc3hTb0g0ZW5RdGZYZG92UWRiTGg4VGYzTS1VbEZiQ0hMWGdsQUl3Z1htSDJNSnR2YnFEd2JsWU55TFlCcXoxVXVLY1hiam9DN01meVVraGJfcU1sMmhxYXFwbFExVmt3LU1mSEptQmxSdGRRMmJRMjhlSGNvR09DOFFjTUw5dVZqdnJEbVc5OTdoTU9PZEVMRXBySjVxa2R4czZ6SFV6SGFUR1FaLUYwRGpaYjJZRXNJYnZUUjU1TEM0MHAtcExlTkJhSFpZWllBQ0M1MkMweXBGRlQ0QXBaTEp6a01TT0dHY2g5MFhYNE43UUlQQW4tSmdvTDljU0Q0bHlRUGJ0WVdJOXI0NEtwaGpEYXZ3OGM3TG9tN0pfUE91dnZfM0RLWTZ1WmplMXJkb0FhWGJzdm9WZUwtOHRJLWpTcXpscXBocFVWNVBySDc2TXdnTTFTWmhJVDVSbHVTYmUxSUEtSWp2RndrbGUtYVVtTEVTb1ZpdUZyVGVTV3JYb0VaSnFRS3lqMnFaUWowM05CaTgyMTBWRkRSWHAxQVJyYTlobTBLMDctcFkzUml2U09ScUlEaVhYd3RadWM5RFFZWmpWYmNXR0MzVGY1eHBpV1hrTXpnYUk5RTd0OVBkS1kyZ0k3aFhvMGVDZF9EWElCN2F1X29vVmJQRDg0ZkpwZjkyTjRXcDYtQ2ctdnRvZWk4ak1FRWhSRDJic04xQkh3SGxMWENvS3Y2dnFfeW44OFpiOFpmTjZodG50M29vM2xqYk9HNzVtZDRjOTFVWjJ4SW43YVFfdFMwWmVER0psWHRZOVlRNDFiNWJESTFmcFRoUk81b3ROcTdWTmtrVmY4TklXaGJTM09MRjlEZElESmtNMW9kY21oSGNVTE1SQ0UtNndqZ0llek9fV3MxV01QY0lBczRrNHZ3WEtGQmo1YXZKOEYyNm9lYXRlUnhmSjZ3a1BQZ2RpVU5ZOGtic0d0SHpNX3ZJTWJ5akFWaGVIT1VHR18xeTd1ZFRjYzFOMVJfOUNxZFBTSEU3WERreER3LnNZbl9EcEpmUWhLV1NZaDRXMnZUQlE.POTsq4Xy13Au0pbHg9chI71uKUNOdwoD62hei-UhAKOyu4M-roCnoA5Rkh_J8MdKKefBqJouIy3uzqMKqBxpf3ECHPgnnyVZs5BpNOimOmYc1bPW1gfc7FwW2Xg01acH3a1KEZCYwEQJQgWaJQ8W9uHujlIgslKsurm_5b0jMLr1PkJVu9Mrtg5vG5BjEPw_IExaT0Axy3v5v1y1uToJj3uJ1CgdsSfe9QCuJatmv559JU3bbj_Db5Xy4F1WesBfgM5gBX_75_NsnNtIzRAxzjnGoazqVpAZfBzHgqnGNibddq-1pcxwHZPl4slo0AZNAazi8NWXdwm_rOy_YOTGqw&quot;&#xd;
+}</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -852,7 +1085,7 @@ if (!equalHistoryMsgRawIn) {
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-              <stringProp name="HTTPSampler.path">/visa-vnts-server-${serverVer}/sendpasscode/v1</stringProp>
+              <stringProp name="HTTPSampler.path">/visa-api3-server-1.2.5-SNAPSHOT/sendpasscode/v1</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -865,13 +1098,13 @@ if (!equalHistoryMsgRawIn) {
             <hashTree>
               <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
                 <collectionProp name="HeaderManager.headers">
-                  <elementProp name="" elementType="Header">
+                  <elementProp name="Content-Type" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
-                    <stringProp name="Header.value">application/xml</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
                   </elementProp>
-                  <elementProp name="" elementType="Header">
+                  <elementProp name="Accept" elementType="Header">
                     <stringProp name="Header.name">Accept</stringProp>
-                    <stringProp name="Header.value">application/xml</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
                   </elementProp>
                 </collectionProp>
               </HeaderManager>
@@ -880,17 +1113,32 @@ if (!equalHistoryMsgRawIn) {
                 <stringProp name="DurationAssertion.duration">10000</stringProp>
               </DurationAssertion>
               <hashTree/>
-              <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="XPath Assertion" enabled="true">
-                <boolProp name="XPath.negate">false</boolProp>
-                <stringProp name="XPath.xpath">/sendPasscodeRes/actionCode=&apos;01&apos;</stringProp>
-                <boolProp name="XPath.validate">false</boolProp>
-                <boolProp name="XPath.whitespace">false</boolProp>
-                <boolProp name="XPath.tolerant">false</boolProp>
-                <boolProp name="XPath.namespace">false</boolProp>
-              </XPathAssertion>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+
+</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="JSR223 Assertion" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">def response =  new groovy.json.JsonSlurper().parse(prev.getResponseData())
+
+if (response.actionCode != &quot;01&quot; ) {
+	AssertionResult.setFailure(true)
+	AssertionResult.setFailureMessage(&quot;Failure response actionCode = &apos;&quot; + response.actionCode + &quot;&apos;&quot;);
+}
+</stringProp>
+              </JSR223Assertion>
               <hashTree/>
             </hashTree>
-            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: vnts-server.log" enabled="false">
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-api3-server.log" enabled="false">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
               <stringProp name="SystemSampler.command">/bin/bash</stringProp>
@@ -903,7 +1151,7 @@ if (!equalHistoryMsgRawIn) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ${logDir}/vnts-server.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-api3-server.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -975,7 +1223,7 @@ if (countStan != countStanResponse) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Create Notification" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Create Notification" enabled="true">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
@@ -1005,129 +1253,46 @@ if (countStan != countStanResponse) {
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
             <hashTree/>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TOKEN_CREATED" enabled="false">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TOKEN_CREATED" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="" elementType="HTTPArgument">
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.value">{&#xd;
-  &quot;panReferenceID&quot;: &quot;V-3017192484534844832252&quot;,&#xd;
-  &quot;walletAccountEmailAddressHash&quot;: &quot;19F6683D83B8A5236E6A9599EB167D46E593ECBCF4717225415EB9F5A8256272&quot;,&#xd;
-  &quot;clientWalletAccountID&quot;: &quot;uGrOxzwW2ghVx1nuoC2Fnwko&quot;,&#xd;
-  &quot;panSource&quot;: &quot;KEY_ENTERED&quot;,&#xd;
-  &quot;encryptedData&quot;: &quot;eyJhbGciOiJSUzI1NiIsIml2IjoiIiwidGFnIjoiIiwiZW5jIjoiIiwidHlwIjoiSk9TRSIsImtpZCI6IiIsImNoYW5uZWxTZWN1cml0eUNvbnRleHQiOiIifQ.ZXlKaGJHY2lPaUpTVTBFeFh6VWlMQ0pwZGlJNklpSXNJblJoWnlJNklpSXNJbVZ1WXlJNklrRXhNamhIUTAwaUxDSjBlWEFpT2lKS1QxTkZJaXdpYTJsa0lqb2lSVTFPVVVjeVJqWlBXakJWVlRGWVFqSklOMGN4TTB0alpHWlVia1ZEWlZwV1NHNXZlbTVxTWtaRWMyMWhaMlIxVVNJc0ltTm9ZVzV1Wld4VFpXTjFjbWwwZVVOdmJuUmxlSFFpT2lKU1UwRmZVRXRKSWl3aWFXRjBJam9pTVRVeE9UTTRNalk0T0NKOS5uZ2VwcHZENEFtTFJkd2RyLUg0RWZVTmxVRk9wc19VekkwcUV2aWwzUkpzck5qbjU5ZDdhSEk3WXNfRmdpS2ZiMmNMaDBpd0N3eFhpMFZXcUsyc2E1N2tDaVBBaHluVXRfbWZxd044WWpKMXBIT0d5bk80eE51MHFydDVHVG16X0daN3ZuWmxrY3FnSmlCTWdHSXA5RnVCbzZuN21yaVNrUmNKMlRha2ZFWnNLQldBWmZrc0ZlQzNjVHVqUGZEaVJNLU5ndkpjOFZDREJYOF9PRGRrRWVRWXBnZ2xIN2ZVVjQ5S0gwQzRUR2dBWnlOcXFIcEVnU0lwcVRDaE1vYWFtVncwMWZhTm53bjRlQklPSVNCeGg0aDQwVFdiRUtnWTBjX1MwZFRoM25UZDdDUFk4NElWWmVOVDNLXzFhTWlxVGx1UjNtQnNEVmVpOHBRMTh3Y0w2VGcuamVtemFYSnNnVUg1TVFzUS5kYXdKVXJQaWxWSjJvcEFxT19JcWRRTFNqSnRxUGFrbU16MU5mVENjQ0FlbTdkNTR1bFhzMl9zYlQxRXZrNVdsLXdYM0hqeXltVllpenJ4S1p1d3hiYzZfWjZfbVJSVzJCMlBfN19zd1d1bmp0WFVFaTAxVGhobHc2OGNFdjBGa0FtNnpsYmRlZnprQWdfbFV6SWxHaHRaNmtPY1FRMGF2ZkVSUkJXc3hTb0g0ZW5RdGZYZG92UWRiTGg4VGYzTS1VbEZiQ0hMWGdsQUl3Z1htSDJNSnR2YnFEd2JsWU55TFlCcXoxVXVLY1hiam9DN01meVVraGJfcU1sMmhxYXFwbFExVmt3LU1mSEptQmxSdGRRMmJRMjhlSGNvR09DOFFjTUw5dVZqdnJEbVc5OTdoTU9PZEVMRXBySjVxa2R4czZ6SFV6SGFUR1FaLUYwRGpaYjJZRXNJYnZUUjU1TEM0MHAtcExlTkJhSFpZWllBQ0M1MkMweXBGRlQ0QXBaTEp6a01TT0dHY2g5MFhYNE43UUlQQW4tSmdvTDljU0Q0bHlRUGJ0WVdJOXI0NEtwaGpEYXZ3OGM3TG9tN0pfUE91dnZfM0RLWTZ1WmplMXJkb0FhWGJzdm9WZUwtOHRJLWpTcXpscXBocFVWNVBySDc2TXdnTTFTWmhJVDVSbHVTYmUxSUEtSWp2RndrbGUtYVVtTEVTb1ZpdUZyVGVTV3JYb0VaSnFRS3lqMnFaUWowM05CaTgyMTBWRkRSWHAxQVJyYTlobTBLMDctcFkzUml2U09ScUlEaVhYd3RadWM5RFFZWmpWYmNXR0MzVGY1eHBpV1hrTXpnYUk5RTd0OVBkS1kyZ0k3aFhvMGVDZF9EWElCN2F1X29vVmJQRDg0ZkpwZjkyTjRXcDYtQ2ctdnRvZWk4ak1FRWhSRDJic04xQkh3SGxMWENvS3Y2dnFfeW44OFpiOFpmTjZodG50M29vM2xqYk9HNzVtZDRjOTFVWjJ4SW43YVFfdFMwWmVER0psWHRZOVlRNDFiNWJESTFmcFRoUk81b3ROcTdWTmtrVmY4TklXaGJTM09MRjlEZElESmtNMW9kY21oSGNVTE1SQ0UtNndqZ0llek9fV3MxV01QY0lBczRrNHZ3WEtGQmo1YXZKOEYyNm9lYXRlUnhmSjZ3a1BQZ2RpVU5ZOGtic0d0SHpNX3ZJTWJ5akFWaGVIT1VHR18xeTd1ZFRjYzFOMVJfOUNxZFBTSEU3WERreER3LnNZbl9EcEpmUWhLV1NZaDRXMnZUQlE.POTsq4Xy13Au0pbHg9chI71uKUNOdwoD62hei-UhAKOyu4M-roCnoA5Rkh_J8MdKKefBqJouIy3uzqMKqBxpf3ECHPgnnyVZs5BpNOimOmYc1bPW1gfc7FwW2Xg01acH3a1KEZCYwEQJQgWaJQ8W9uHujlIgslKsurm_5b0jMLr1PkJVu9Mrtg5vG5BjEPw_IExaT0Axy3v5v1y1uToJj3uJ1CgdsSfe9QCuJatmv559JU3bbj_Db5Xy4F1WesBfgM5gBX_75_NsnNtIzRAxzjnGoazqVpAZfBzHgqnGNibddq-1pcxwHZPl4slo0AZNAazi8NWXdwm_rOy_YOTGqw&quot;,&#xd;
-  &quot;deviceInfo&quot;: {&#xd;
-    &quot;deviceID&quot;: &quot;oUL7aJtruSi4rUO_WyMe1oF3&quot;,&#xd;
-    &quot;deviceLanguageCode&quot;: &quot;eng&quot;,&#xd;
-    &quot;osType&quot;: &quot;ANDROID&quot;,&#xd;
-    &quot;osVersion&quot;: &quot;5.1.1&quot;,&#xd;
-    &quot;deviceType&quot;: &quot;MOBILEPHONE_OR_TABLET&quot;,&#xd;
-    &quot;deviceManufacturer&quot;: &quot;samsung&quot;,&#xd;
-    &quot;deviceBrand&quot;: &quot;samsung&quot;,&#xd;
-    &quot;deviceModel&quot;: &quot;SM-J500FN&quot;,&#xd;
-    &quot;deviceName&quot;: &quot;samsung - SM-J500FN&quot;,&#xd;
-    &quot;deviceIPAddressV4&quot;: &quot;91.197.217.52&quot;,&#xd;
-    &quot;tokenProtectionMethod&quot;: &quot;SOFTWARE&quot;&#xd;
-  },&#xd;
-  &quot;messageReasonCode&quot;: &quot;3700&quot;,&#xd;
-  &quot;actionCode&quot;: &quot;00&quot;,&#xd;
-  &quot;termsAndConditions&quot;: {&#xd;
-    &quot;id&quot;: &quot;73208cd0469c4e08a8b8b3c72b41ae13&quot;,&#xd;
-    &quot;date&quot;: &quot;2018-03-19T10:44:46.321+0000&quot;&#xd;
-  },&#xd;
-  &quot;dateTimeOfEvent&quot;: &quot;2018-03-19T10:44:47.123Z&quot;&#xd;
-}</stringProp>
-                    <stringProp name="Argument.metadata">=</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </elementProp>
-              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
-              <stringProp name="HTTPSampler.port">8080</stringProp>
-              <stringProp name="HTTPSampler.protocol">http</stringProp>
-              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-              <stringProp name="HTTPSampler.path">/visa-vtis-server-${serverVer}/tokenRequestors/40010030273/tokens/DNITHE000${tokenReferenceID}/tokenChanged?eventType=TOKEN_CREATED&amp;eventID=${requestID}</stringProp>
-              <stringProp name="HTTPSampler.method">POST</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
-              <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
-            </HTTPSamplerProxy>
-            <hashTree>
-              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
-                <collectionProp name="HeaderManager.headers">
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Content-Type</stringProp>
-                    <stringProp name="Header.value">application/json</stringProp>
-                  </elementProp>
-                  <elementProp name="" elementType="Header">
-                    <stringProp name="Header.name">Accept</stringProp>
-                    <stringProp name="Header.value">application/json</stringProp>
-                  </elementProp>
-                </collectionProp>
-              </HeaderManager>
-              <hashTree/>
-              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
-                <stringProp name="DurationAssertion.duration">10000</stringProp>
-              </DurationAssertion>
-              <hashTree/>
-              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
-                <stringProp name="scriptLanguage">groovy</stringProp>
-                <stringProp name="parameters"></stringProp>
-                <stringProp name="filename"></stringProp>
-                <stringProp name="cacheKey">true</stringProp>
-                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
-
-</stringProp>
-              </JSR223PreProcessor>
-              <hashTree/>
-              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
-                <collectionProp name="Asserion.test_strings">
-                  <stringProp name="49586">200</stringProp>
-                </collectionProp>
-                <stringProp name="Assertion.custom_message"></stringProp>
-                <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
-                <boolProp name="Assertion.assume_success">false</boolProp>
-                <intProp name="Assertion.test_type">16</intProp>
-              </ResponseAssertion>
-              <hashTree/>
-            </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TOKEN_CREATED (deviceLanguageCode=eng)" enabled="true">
-              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
-                <collectionProp name="Arguments.arguments">
-                  <elementProp name="" elementType="HTTPArgument">
-                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                    <stringProp name="Argument.value">{&#xd;
-&quot;panReferenceID&quot;:&quot;V-5180702149300000000011&quot;,&#xd;
-&quot;walletAccountEmailAddressHash&quot;:&quot;3D53EEB00F3E95E5C9C7C55875FC1723E9C8D8C9980C02F84A88065B96B1BFAA&quot;,&#xd;
-&quot;clientWalletAccountID&quot;:&quot;3D53EEB00F3400000000000000000011&quot;,&#xd;
+&#xd;
+&quot;panReferenceID&quot;:&quot;V-3017192484534844832252&quot;,&#xd;
+&#xd;
+&quot;walletAccountEmailAddressHash&quot;:&quot;19F6683D83B8A5236E6A9599EB167D46E593ECBCF4717225415EB9F5A8256272&quot;,&#xd;
+&#xd;
+&quot;clientWalletAccountID&quot;:&quot;uGrOxzwW2ghVx1nuoC2Fnwko&quot;,&#xd;
+&#xd;
 &quot;panSource&quot;:&quot;KEY_ENTERED&quot;,&#xd;
+&#xd;
 &quot;encryptedData&quot;:&quot;eyJhbGciOiJSUzI1NiIsIml2IjoiIiwidGFnIjoiIiwiZW5jIjoiIiwidHlwIjoiSk9TRSIsImtpZCI6IiIsImNoYW5uZWxTZWN1cml0eUNvbnRleHQiOiIifQ.ZXlKaGJHY2lPaUpTVTBFeFh6VWlMQ0pwZGlJNklpSXNJblJoWnlJNklpSXNJbVZ1WXlJNklrRXhNamhIUTAwaUxDSjBlWEFpT2lKS1QxTkZJaXdpYTJsa0lqb2lSVTFPVVVjeVJqWlBXakJWVlRGWVFqSklOMGN4TTB0alpHWlVia1ZEWlZwV1NHNXZlbTVxTWtaRWMyMWhaMlIxVVNJc0ltTm9ZVzV1Wld4VFpXTjFjbWwwZVVOdmJuUmxlSFFpT2lKU1UwRmZVRXRKSWl3aWFXRjBJam9pTVRVeE9UTTRNalk0T0NKOS5uZ2VwcHZENEFtTFJkd2RyLUg0RWZVTmxVRk9wc19VekkwcUV2aWwzUkpzck5qbjU5ZDdhSEk3WXNfRmdpS2ZiMmNMaDBpd0N3eFhpMFZXcUsyc2E1N2tDaVBBaHluVXRfbWZxd044WWpKMXBIT0d5bk80eE51MHFydDVHVG16X0daN3ZuWmxrY3FnSmlCTWdHSXA5RnVCbzZuN21yaVNrUmNKMlRha2ZFWnNLQldBWmZrc0ZlQzNjVHVqUGZEaVJNLU5ndkpjOFZDREJYOF9PRGRrRWVRWXBnZ2xIN2ZVVjQ5S0gwQzRUR2dBWnlOcXFIcEVnU0lwcVRDaE1vYWFtVncwMWZhTm53bjRlQklPSVNCeGg0aDQwVFdiRUtnWTBjX1MwZFRoM25UZDdDUFk4NElWWmVOVDNLXzFhTWlxVGx1UjNtQnNEVmVpOHBRMTh3Y0w2VGcuamVtemFYSnNnVUg1TVFzUS5kYXdKVXJQaWxWSjJvcEFxT19JcWRRTFNqSnRxUGFrbU16MU5mVENjQ0FlbTdkNTR1bFhzMl9zYlQxRXZrNVdsLXdYM0hqeXltVllpenJ4S1p1d3hiYzZfWjZfbVJSVzJCMlBfN19zd1d1bmp0WFVFaTAxVGhobHc2OGNFdjBGa0FtNnpsYmRlZnprQWdfbFV6SWxHaHRaNmtPY1FRMGF2ZkVSUkJXc3hTb0g0ZW5RdGZYZG92UWRiTGg4VGYzTS1VbEZiQ0hMWGdsQUl3Z1htSDJNSnR2YnFEd2JsWU55TFlCcXoxVXVLY1hiam9DN01meVVraGJfcU1sMmhxYXFwbFExVmt3LU1mSEptQmxSdGRRMmJRMjhlSGNvR09DOFFjTUw5dVZqdnJEbVc5OTdoTU9PZEVMRXBySjVxa2R4czZ6SFV6SGFUR1FaLUYwRGpaYjJZRXNJYnZUUjU1TEM0MHAtcExlTkJhSFpZWllBQ0M1MkMweXBGRlQ0QXBaTEp6a01TT0dHY2g5MFhYNE43UUlQQW4tSmdvTDljU0Q0bHlRUGJ0WVdJOXI0NEtwaGpEYXZ3OGM3TG9tN0pfUE91dnZfM0RLWTZ1WmplMXJkb0FhWGJzdm9WZUwtOHRJLWpTcXpscXBocFVWNVBySDc2TXdnTTFTWmhJVDVSbHVTYmUxSUEtSWp2RndrbGUtYVVtTEVTb1ZpdUZyVGVTV3JYb0VaSnFRS3lqMnFaUWowM05CaTgyMTBWRkRSWHAxQVJyYTlobTBLMDctcFkzUml2U09ScUlEaVhYd3RadWM5RFFZWmpWYmNXR0MzVGY1eHBpV1hrTXpnYUk5RTd0OVBkS1kyZ0k3aFhvMGVDZF9EWElCN2F1X29vVmJQRDg0ZkpwZjkyTjRXcDYtQ2ctdnRvZWk4ak1FRWhSRDJic04xQkh3SGxMWENvS3Y2dnFfeW44OFpiOFpmTjZodG50M29vM2xqYk9HNzVtZDRjOTFVWjJ4SW43YVFfdFMwWmVER0psWHRZOVlRNDFiNWJESTFmcFRoUk81b3ROcTdWTmtrVmY4TklXaGJTM09MRjlEZElESmtNMW9kY21oSGNVTE1SQ0UtNndqZ0llek9fV3MxV01QY0lBczRrNHZ3WEtGQmo1YXZKOEYyNm9lYXRlUnhmSjZ3a1BQZ2RpVU5ZOGtic0d0SHpNX3ZJTWJ5akFWaGVIT1VHR18xeTd1ZFRjYzFOMVJfOUNxZFBTSEU3WERreER3LnNZbl9EcEpmUWhLV1NZaDRXMnZUQlE.POTsq4Xy13Au0pbHg9chI71uKUNOdwoD62hei-UhAKOyu4M-roCnoA5Rkh_J8MdKKefBqJouIy3uzqMKqBxpf3ECHPgnnyVZs5BpNOimOmYc1bPW1gfc7FwW2Xg01acH3a1KEZCYwEQJQgWaJQ8W9uHujlIgslKsurm_5b0jMLr1PkJVu9Mrtg5vG5BjEPw_IExaT0Axy3v5v1y1uToJj3uJ1CgdsSfe9QCuJatmv559JU3bbj_Db5Xy4F1WesBfgM5gBX_75_NsnNtIzRAxzjnGoazqVpAZfBzHgqnGNibddq-1pcxwHZPl4slo0AZNAazi8NWXdwm_rOy_YOTGqw&quot;,&#xd;
 &quot;deviceInfo&quot;:{&#xd;
-&quot;deviceID&quot;:&quot;ABCDEF010101000000000000000000000000000000000011&quot;,&#xd;
+&quot;deviceID&quot;:&quot;oUL7aJtruSi4rUO_WyMe1oF3&quot;,&#xd;
 &quot;deviceLanguageCode&quot;:&quot;eng&quot;,&#xd;
-&quot;deviceType&quot;:&quot;MOBILE_PHONE&quot;,&#xd;
-&quot;deviceName&quot;:&quot;TC11&quot;,&#xd;
-&quot;osType&quot;:&quot;IOS&quot;,&#xd;
-&quot;osVersion&quot;:&quot;7.0&quot;,&#xd;
-&quot;deviceManufacturer&quot;:&quot;Apple&quot;,&#xd;
-&quot;deviceBrand&quot;:&quot;Apple&quot;,&#xd;
-&quot;deviceModel&quot;:&quot;iPhoneY&quot;,&#xd;
-&quot;deviceLocation&quot;:&quot;+51.51/-0.14&quot;,&#xd;
-&quot;deviceIPAddressV4&quot;:&quot;127.0.0.1&quot;,&#xd;
-&quot;tokenProtectionMethod&quot;:&quot;&quot; &#xd;
+&quot;osType&quot;:&quot;ANDROID&quot;,&#xd;
+&quot;osVersion&quot;:&quot;5.1.1&quot;,&#xd;
+&quot;deviceType&quot;:&quot;MOBILEPHONE_OR_TABLET&quot;,&#xd;
+&quot;deviceManufacturer&quot;:&quot;samsung&quot;,&#xd;
+&quot;deviceBrand&quot;:&quot;samsung&quot;,&#xd;
+&quot;deviceModel&quot;:&quot;SM-J500FN&quot;,&#xd;
+&quot;deviceName&quot;:&quot;samsung - SM-J500FN&quot;,&#xd;
+&quot;deviceIPAddressV4&quot;:&quot;91.197.217.52&quot;,&#xd;
+&quot;tokenProtectionMethod&quot;:&quot;SOFTWARE&quot;&#xd;
 },&#xd;
+&#xd;
 &quot;messageReasonCode&quot;:&quot;3700&quot;,&#xd;
+&quot;actionCode&quot;:&quot;00&quot;,&#xd;
+&#xd;
 &quot;termsAndConditions&quot;:{&#xd;
-&quot;id&quot;:&quot;773febb55da5453aa25a40b56fd4e07e&quot;,&#xd;
-&quot;date&quot;:&quot;2019-04-05T13:59:13.666+0000&quot; &#xd;
+&quot;id&quot;:&quot;73208cd0469c4e08a8b8b3c72b41ae13&quot;,&#xd;
+&quot;date&quot;:&quot;2018-03-19T10:44:46.321+0000&quot;&#xd;
 },&#xd;
-&quot;dateTimeOfEvent&quot;:&quot;2019-04-05T14:08:13.000Z&quot;,&#xd;
-&quot;actionCode&quot;:&quot;85&quot; &#xd;
+&#xd;
+&quot;dateTimeOfEvent&quot;:&quot;2018-03-19T10:44:47.123Z&quot;&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
@@ -1137,7 +1302,7 @@ if (countStan != countStanResponse) {
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-              <stringProp name="HTTPSampler.path">/visa-vtis-server-${serverVer}/tokenRequestors/40010030273/tokens/DNITHE000${tokenReferenceID}/tokenChanged?eventType=TOKEN_CREATED&amp;eventID=${requestID}</stringProp>
+              <stringProp name="HTTPSampler.path">/visa-api3-server-1.2.5-SNAPSHOT/tokenRequestors/40010030273/tokens/DNITHE000${tokenReferenceID}/tokenChanged?eventType=TOKEN_CREATED&amp;eventID=${requestID}</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1170,9 +1335,8 @@ if (countStan != countStanResponse) {
                 <stringProp name="parameters"></stringProp>
                 <stringProp name="filename"></stringProp>
                 <stringProp name="cacheKey">true</stringProp>
-                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
-
-</stringProp>
+                <stringProp name="script">//vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+vars.put(&quot;requestID&quot;,&quot;${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}&quot;);</stringProp>
               </JSR223PreProcessor>
               <hashTree/>
               <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
@@ -1351,7 +1515,7 @@ if (tokenDigitizeDate==null) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: vtis-server.log" enabled="false">
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-api3-server.log" enabled="false">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
               <stringProp name="SystemSampler.command">/bin/bash</stringProp>
@@ -1364,7 +1528,7 @@ if (tokenDigitizeDate==null) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ${logDir}/vtis-server.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-api3-server.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1478,7 +1642,7 @@ if (countStan != countStanResponse) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Notification - 3701" enabled="false">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Notification - 3701" enabled="true">
             <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
@@ -1508,7 +1672,7 @@ if (countStan != countStanResponse) {
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
             <hashTree/>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TOKEN_STATUS_UPDATED ( Inquiry )" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="TOKEN_STATUS_UPDATED" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -1531,7 +1695,7 @@ if (countStan != countStanResponse) {
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-              <stringProp name="HTTPSampler.path">/visa-vtis-server-${serverVer}/tokenRequestors/40010030273/tokens/DNITHE000${tokenReferenceID}/tokenChanged?eventType=TOKEN_STATUS_UPDATED&amp;eventID=${requestID}</stringProp>
+              <stringProp name="HTTPSampler.path">/visa-api3-server-1.3.3/v2/tokenRequestors/40010030273/tokens/DNITHE000${tokenReferenceID}/tokenChanged?eventType=TOKEN_STATUS_UPDATED&amp;eventID=${requestID}</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1564,9 +1728,8 @@ if (countStan != countStanResponse) {
                 <stringProp name="parameters"></stringProp>
                 <stringProp name="filename"></stringProp>
                 <stringProp name="cacheKey">true</stringProp>
-                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
-
-</stringProp>
+                <stringProp name="script">//vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+vars.put(&quot;requestID&quot;,&quot;${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}&quot;);</stringProp>
               </JSR223PreProcessor>
               <hashTree/>
               <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
@@ -1664,7 +1827,7 @@ if (tokenStatusUpdate==null) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: vtis-server.log" enabled="true">
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-api3-server.log" enabled="false">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
               <stringProp name="SystemSampler.command">/bin/bash</stringProp>
@@ -1677,7 +1840,7 @@ if (tokenStatusUpdate==null) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ${logDir}/vtis-server.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-api3-server.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -1706,7 +1869,7 @@ if (countStan != countStanResponse) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="true">
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="false">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
               <stringProp name="SystemSampler.command">/bin/bash</stringProp>
@@ -1748,7 +1911,7 @@ if (countStan != countStanResponse) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: bank-client.log" enabled="true">
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: bank-client.log" enabled="false">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
               <stringProp name="SystemSampler.command">/bin/bash</stringProp>
@@ -1858,7 +2021,7 @@ INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_in
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-              <stringProp name="HTTPSampler.path">/bank-server-${serverVer}/tokenInfo</stringProp>
+              <stringProp name="HTTPSampler.path">/bank-server-1.3.3/tokenInfo</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1871,7 +2034,7 @@ INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_in
             <hashTree>
               <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
                 <collectionProp name="HeaderManager.headers">
-                  <elementProp name="Content-Type" elementType="Header">
+                  <elementProp name="" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">application/xml</stringProp>
                   </elementProp>
@@ -1892,18 +2055,18 @@ INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_in
                 <stringProp name="filename"></stringProp>
                 <stringProp name="cacheKey">true</stringProp>
                 <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
-
-</stringProp>
+//vars.put(&quot;requestID&quot;,&quot;${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}&quot;);</stringProp>
               </JSR223PreProcessor>
               <hashTree/>
-              <XPathAssertion guiclass="XPathAssertionGui" testclass="XPathAssertion" testname="XPath Assertion" enabled="true">
-                <boolProp name="XPath.negate">false</boolProp>
-                <stringProp name="XPath.xpath">/TokenInfoResponse/code=&apos;0&apos;</stringProp>
-                <boolProp name="XPath.validate">false</boolProp>
-                <boolProp name="XPath.whitespace">false</boolProp>
-                <boolProp name="XPath.tolerant">false</boolProp>
-                <boolProp name="XPath.namespace">false</boolProp>
-              </XPathAssertion>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="49586">200</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message"></stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">16</intProp>
+              </ResponseAssertion>
               <hashTree/>
             </hashTree>
             <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="tokenInfo (DELETED_FROM_CONSUMER_APP) ?" enabled="true">
@@ -2068,7 +2231,7 @@ if (countStan != countStanResponse) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-client.log" enabled="true">
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-api3-client.log" enabled="true">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
               <stringProp name="SystemSampler.command">/bin/bash</stringProp>
@@ -2081,7 +2244,336 @@ if (countStan != countStanResponse) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ${logDir}/visa-client.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-api3-client.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Token Lifecycle" enabled="false">
+            <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="token_info:  DNITHE000302000000000005" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Callable Statement</stringProp>
+              <stringProp name="query">DELETE FROM token_info WHERE token_ref_id=&apos;DNITHE000302000000000005&apos;;
+INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_internal_guid, pan_ref_id, masked_pan, masked_token, token_expdate, lifecycle_trace_id, pan_source, active_token_count, token_type, token_status, digitize_date, token_status_update, customer_id, customer_phone, ips, client_wallet_account_id, bin, reminder_period, tokenization_path, wp_device_score, wp_account_score, wp_phonenumber_score, wp_reason_codes, clr_tokenization_standard_ver, deleted_from_app) VALUES (&apos;DNITHE000302000000000005&apos;, &apos;40010030273&apos;, &apos;CardID00000000000004&apos;, &apos;CardID4&apos;, &apos;V-4200000000000000000090&apos;, &apos;410232_0006&apos;, &apos;455136_0027&apos;, &apos;2015-12-31&apos;, &apos;302000000000001&apos;, &apos;K&apos;, &apos;1&apos;, &apos;S&apos;, &apos;A&apos;, &apos;2015-04-03 17:01:18.123000&apos;, &apos;2015-04-03 17:01:18.123000&apos;, &apos;C0000001&apos;, &apos;0631234567&apos;, &apos;V&apos;, &apos;99E99E18984EB39C439FEBFBC6AC924C&apos;, null, null, null, null, null, null, null, null, null);</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable"></stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree/>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="truncate: fasttack *.logs" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">truncate -s 0 ${logDir}/*.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree/>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="tokenLifecycle ( LifeCycle )" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;requestId&quot;: &quot;${requestID}&quot;,&#xd;
+  &quot;tokenRefId&quot;: &quot;DNITHE000302000000000005&quot;,&#xd;
+  &quot;tokenRequestorId&quot;: &quot;40010030273&quot;,&#xd;
+  &quot;ips&quot;: &quot;V&quot;,&#xd;
+  &quot;action&quot;: &quot;Deactivate&quot;,&#xd;
+  &quot;reasonCode&quot;: &quot;Device lost&quot;,&#xd;
+  &quot;commentText&quot;: &quot;Delete bla bla bla&quot;,&#xd;
+  &quot;auditInfo&quot;: {&#xd;
+    &quot;userId&quot;: &quot;operator&quot;,&#xd;
+    &quot;userName&quot;: &quot;Testovenko&quot;&#xd;
+  }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8080</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+              <stringProp name="HTTPSampler.path">/bank-server-1.3.2/tokenLifecycle</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout">10</stringProp>
+              <stringProp name="HTTPSampler.response_timeout">15000</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+                <stringProp name="DurationAssertion.duration">10000</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+//vars.put(&quot;requestID&quot;,&quot;${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}&quot;);</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="49586">200</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message"></stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">16</intProp>
+              </ResponseAssertion>
+              <hashTree/>
+            </hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="tokenLifecycle (TOKEN_LIFECYCLE) &lt;" enabled="false">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT * FROM msg_history WHERE msg_type=&apos;TOKEN_LIFECYCLE&apos; ORDER BY id DESC LIMIT 1;</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">msg_history.token_status_updated</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">Object history = vars.getObject(&quot;msg_history.token_status_updated&quot;).get(0);
+
+String tokenRefId = &quot;DNITHE000302000000000005&quot;;
+String historyMsgRawIn = history.get(&quot;msg_raw_in&quot;);
+String historyMsgRawOut = history.get(&quot;msg_raw_out&quot;);
+
+boolean equalHistoryMsgRawIn = historyMsgRawIn.contains(tokenRefId);
+boolean equalHistoryMsgRawOut = historyMsgRawOut.contains(&quot;actionCode&gt;00&lt;/actionCode&quot;);
+if (!equalHistoryMsgRawIn) {
+	Failure = true;
+	FailureMessage = &quot;&apos;msg_raw_in&apos;: not found tokenRefId `&quot; + tokenRefId + &quot;`&quot;;
+} else {
+	if (!equalHistoryMsgRawOut) {
+		Failure = true;
+		FailureMessage = &quot;&apos;error_code&apos;: &quot; + &quot;`&quot; + historyMsgRawOut + &quot;`&quot;;
+	}
+}
+</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="tokenLifecycle &lt; token_info" enabled="true">
+              <stringProp name="dataSource">ft_al</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT * FROM token_info WHERE token_ref_id=&apos;DNITHE000302000000000005&apos;;</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">token_info</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">int tokenSize = vars.getObject(&quot;token_info&quot;).size();
+if (!ResponseCode.equals(&quot;200&quot;) || tokenSize == 0) {
+	Failure = true;
+	FailureMessage = &quot;Count of rows: &quot; + tokenSize;
+}
+
+Object token = vars.getObject(&quot;token_info&quot;).get(0);
+
+String tokenRefId = token.get(&quot;token_ref_id&quot;);
+boolean equalTokenRefId = tokenRefId.equals(&quot;DNITHE000302000000000005&quot;);
+if (!equalTokenRefId) {
+	Failure = true;
+	FailureMessage = &quot;&apos;token_ref_id&apos;: &quot; + tokenRefId;
+}
+
+String tokenStatus = token.get(&quot;token_status&quot;);
+boolean equalTokenStatus = tokenStatus.equals(&quot;D&quot;);
+if (!equalTokenStatus) {
+	Failure = true;
+	FailureMessage = &quot;&apos;token_status&apos;: &quot; + tokenStatus;
+}
+
+Date tokenStatusUpdate = token.get(&quot;token_status_update&quot;);
+if (tokenStatusUpdate==null) {
+	Failure = true;
+	FailureMessage = &quot;&apos;token_status_update&apos;: is empty&quot;;
+}
+</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: bank-server.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/bank-server.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: core.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/core.log</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments"/>
+              </elementProp>
+              <stringProp name="SystemSampler.directory"></stringProp>
+            </SystemSampler>
+            <hashTree>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell Assertion" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.apache.commons.lang.StringUtils;
+
+String requestId = vars.get(&quot;requestID&quot;);
+String response = SampleResult.getResponseDataAsString();
+int countStan = StringUtils.countMatches(response, &quot;STAN: &apos;&quot;);
+int countStanResponse = StringUtils.countMatches(response, &quot;STAN: &apos;&quot; + requestId + &quot;&apos;&quot;);
+
+if (countStan != countStanResponse) {
+	Failure = true;
+	FailureMessage = response;
+}</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-api3-client.log" enabled="true">
+              <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
+              <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
+              <stringProp name="SystemSampler.command">/bin/bash</stringProp>
+              <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">-c</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                  <elementProp name="/bin/bash" elementType="Argument">
+                    <stringProp name="Argument.name">/bin/bash</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-api3-client.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -2155,7 +2647,7 @@ INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_in
               <stringProp name="SystemSampler.directory"></stringProp>
             </SystemSampler>
             <hashTree/>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="tokenUpdate ( LifeCycle 3721/3720 )" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="tokenUpdate ( LifeCycle=3721 3720/3721 )" enabled="false">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -2186,7 +2678,7 @@ INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_in
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-              <stringProp name="HTTPSampler.path">/bank-server-${serverVer}/tokenUpdate</stringProp>
+              <stringProp name="HTTPSampler.path">/bank-server-1.2.5-SNAPSHOT/tokenUpdate</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -2199,7 +2691,7 @@ INSERT INTO token_info (token_ref_id, tokenrequestor_id, pan_internal_id, pan_in
             <hashTree>
               <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
                 <collectionProp name="HeaderManager.headers">
-                  <elementProp name="Content-Type" elementType="Header">
+                  <elementProp name="" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">application/json</stringProp>
                   </elementProp>
@@ -2239,7 +2731,7 @@ if (response.code != &quot;0&quot; ) {
               </JSR223Assertion>
               <hashTree/>
             </hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="tokenUpdate ( LifeCycle 3721/3720 )" enabled="false">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="tokenUpdate ( LifeCycle=3721 3720/3721 )" enabled="true">
               <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
               <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                 <collectionProp name="Arguments.arguments">
@@ -2273,7 +2765,7 @@ if (response.code != &quot;0&quot; ) {
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-              <stringProp name="HTTPSampler.path">/bank-server-${serverVer}/tokenUpdate</stringProp>
+              <stringProp name="HTTPSampler.path">/bank-server-1.3.2/tokenUpdate</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -2286,7 +2778,7 @@ if (response.code != &quot;0&quot; ) {
             <hashTree>
               <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
                 <collectionProp name="HeaderManager.headers">
-                  <elementProp name="Content-Type" elementType="Header">
+                  <elementProp name="" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">application/json</stringProp>
                   </elementProp>
@@ -2357,7 +2849,7 @@ if (response.code != &quot;0&quot; ) {
               <stringProp name="HTTPSampler.port">8080</stringProp>
               <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-              <stringProp name="HTTPSampler.path">/bank-server-${serverVer}/tokenUpdate</stringProp>
+              <stringProp name="HTTPSampler.path">/bank-server-1.2.5-SNAPSHOT/tokenUpdate</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -2370,7 +2862,7 @@ if (response.code != &quot;0&quot; ) {
             <hashTree>
               <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
                 <collectionProp name="HeaderManager.headers">
-                  <elementProp name="Content-Type" elementType="Header">
+                  <elementProp name="" elementType="Header">
                     <stringProp name="Header.name">Content-Type</stringProp>
                     <stringProp name="Header.value">application/json</stringProp>
                   </elementProp>
@@ -2469,17 +2961,24 @@ if (!ResponseCode.equals(&quot;200&quot;) || tokenSize == 0) {
 
 Object token = vars.getObject(&quot;token_info&quot;).get(0);
 
+String tokenRefId = token.get(&quot;token_ref_id&quot;);
+boolean equalTokenRefId = tokenRefId.equals(&quot;DNITHE000302000000000005&quot;);
+if (!equalTokenRefId) {
+	Failure = true;
+	FailureMessage = &quot;&apos;token_ref_id&apos;: &quot; + tokenRefId;
+}
+
 String tokenStatus = token.get(&quot;token_status&quot;);
-boolean equalTokenStatus = tokenStatus.equals(&quot;I&quot;);
+boolean equalTokenStatus = tokenStatus.equals(&quot;D&quot;);
 if (!equalTokenStatus) {
 	Failure = true;
 	FailureMessage = &quot;&apos;token_status&apos;: &quot; + tokenStatus;
 }
 
-String tokenDeletedFromApp = token.get(&quot;deleted_from_app&quot;);
-if (tokenDeletedFromApp!=&quot;true&quot;) {
+Date tokenStatusUpdate = token.get(&quot;token_status_update&quot;);
+if (tokenStatusUpdate==null) {
 	Failure = true;
-	FailureMessage = &quot;&apos;deleted_from_app&apos;: &quot; + tokenDeletedFromApp;
+	FailureMessage = &quot;&apos;token_status_update&apos;: is empty&quot;;
 }
 </stringProp>
                 <stringProp name="BeanShellAssertion.filename"></stringProp>
@@ -2572,7 +3071,7 @@ if (countStan != countStanResponse) {
               </BeanShellAssertion>
               <hashTree/>
             </hashTree>
-            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-client.log" enabled="true">
+            <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="less: visa-api3-client.log" enabled="true">
               <boolProp name="SystemSampler.checkReturnCode">false</boolProp>
               <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
               <stringProp name="SystemSampler.command">/bin/bash</stringProp>
@@ -2585,7 +3084,7 @@ if (countStan != countStanResponse) {
                   </elementProp>
                   <elementProp name="/bin/bash" elementType="Argument">
                     <stringProp name="Argument.name">/bin/bash</stringProp>
-                    <stringProp name="Argument.value">less ${logDir}/visa-client.log</stringProp>
+                    <stringProp name="Argument.value">less ${logDir}/visa-api3-client.log</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
                   </elementProp>
                 </collectionProp>
@@ -2612,6 +3111,250 @@ if (countStan != countStanResponse) {
                 <stringProp name="BeanShellAssertion.parameters"></stringProp>
                 <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
               </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller for Visa Client API-3" enabled="false">
+            <stringProp name="IfController.condition">${JMeterThread.last_sample_ok}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Token Lifecycle" enabled="false">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;operatorID&quot;: &quot;Operator1&quot;,&#xd;
+  &quot;operationReason&quot;: &quot;Lost Phone&quot;,&#xd;
+  &quot;operationType&quot;: &quot;SUSPEND&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8091</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+              <stringProp name="HTTPSampler.path">/vtis/v1/tokenRequestors/40010030273/tokens/DNITHE000${tokenReferenceID}/lifecycle?apiKey=1111111111111111</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Content-Type" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+                <stringProp name="DurationAssertion.duration">10000</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+//vars.put(&quot;requestID&quot;,&quot;${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}&quot;); </stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PAN Lifecycle" enabled="false">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;operatorID&quot;: &quot;Operator1&quot;,&#xd;
+  &quot;operationReason&quot;: &quot;Replacement due to lost card&quot;,&#xd;
+  &quot;operationReasonCode&quot;: &quot;ACCOUNT_UPDATE&quot;,&#xd;
+  &quot;operationType&quot;: &quot;ACCOUNT_UPDATE&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8091</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+              <stringProp name="HTTPSampler.path">/vtis/v1/pan/lifecycle?apiKey=1111111111111111</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Content-Type" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+                <stringProp name="DurationAssertion.duration">10000</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+//vars.put(&quot;requestID&quot;,&quot;${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}&quot;); </stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Token Inquiry" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;panReferenceID&quot;: &quot;V-4200000000000000000090&quot;,&#xd;
+  &quot;tokenReferenceID&quot;: &quot;DNITHE400000000000000832&quot;,&#xd;
+  &quot;tokenRequestorID&quot;: &quot;40000000000&quot;,&#xd;
+  &quot;clientWalletAccountID&quot;: &quot;99E99E18984EB39C439FEBFBC6AC924C&quot;,&#xd;
+  &quot;entityOfLastAction&quot;: &quot;TOKEN_REQUESTOR&quot;,&#xd;
+  &quot;panSource&quot;: &quot;KEY_ENTERED&quot;,&#xd;
+  &quot;consumerEntryMode&quot;: &quot;KEY_ENTERED&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8090</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+              <stringProp name="HTTPSampler.path">/vtis/v1/tokenRequestors/40010030273/tokens/DNITHE000302000000000010/details?apiKey=111111111111111111111</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Content-Type" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+                <stringProp name="DurationAssertion.duration">10000</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+//vars.put(&quot;requestID&quot;,&quot;${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}&quot;); </stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Token Inquiry by PAN" enabled="false">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;panReferenceID&quot;: &quot;V-4200000000000000000090&quot;,&#xd;
+  &quot;tokenReferenceID&quot;: &quot;DNITHE400000000000000832&quot;,&#xd;
+  &quot;tokenRequestorID&quot;: &quot;40000000000&quot;,&#xd;
+  &quot;clientWalletAccountID&quot;: &quot;99E99E18984EB39C439FEBFBC6AC924C&quot;,&#xd;
+  &quot;entityOfLastAction&quot;: &quot;TOKEN_REQUESTOR&quot;,&#xd;
+  &quot;panSource&quot;: &quot;KEY_ENTERED&quot;,&#xd;
+  &quot;consumerEntryMode&quot;: &quot;KEY_ENTERED&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain">${serverUrl}</stringProp>
+              <stringProp name="HTTPSampler.port">8091</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+              <stringProp name="HTTPSampler.path">/vtis/v1/pan/retrieveTokenInfo?apiKey=222222222222222</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Content-Type" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="Duration Assertion" enabled="true">
+                <stringProp name="DurationAssertion.duration">10000</stringProp>
+              </DurationAssertion>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">vars.put(&quot;requestID&quot;,&quot;${__UUID()}&quot;); 
+//vars.put(&quot;requestID&quot;,&quot;${__RandomString(32, abcdefghijklmnopqrstuvwxyz0123456789)}&quot;); </stringProp>
+              </JSR223PreProcessor>
               <hashTree/>
             </hashTree>
           </hashTree>
