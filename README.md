@@ -159,3 +159,8 @@ JMeter Maven Test Automation
 * https://www.ubik-ingenierie.com/blog/best-practice-using-jmeter-assertions
 * `Properties of Response Assertion in JMeter` https://jmetervn.com/2016/11/29/properties-of-response-assertion-in-jmeter
 * `JSR223 with Groovy: Variables (Part 1)` https://jmetervn.com/2016/12/05/jsr223-with-groovy-variables-part-1
+
+
+---
+
+[GitHub * Personal access tokens](https://mail.google.com/mail/u/0/#inbox/KtbxLwgswrfxtLZJbFzLlPHzglccGQBXXV)
